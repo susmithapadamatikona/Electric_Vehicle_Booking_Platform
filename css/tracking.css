@@ -1,0 +1,483 @@
+/* ==========================================================================
+   EVRide — tracking.css
+   Live trip tracking page.
+   ========================================================================== */
+
+.track-layout {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: var(--s-6);
+    align-items: start;
+}
+
+.track-map {
+    height: calc(100vh - var(--nav-h) - 140px);
+    min-height: 520px;
+    border-radius: var(--r-xl);
+    overflow: hidden;
+    border: 1px solid var(--border);
+    position: relative;
+    background: var(--card-bg);
+}
+
+/* Floating status banner over the map */
+.track-banner {
+    position: absolute;
+    top: var(--s-4);
+    left: var(--s-4);
+    right: var(--s-4);
+    z-index: 450;
+    display: flex;
+    align-items: center;
+    gap: var(--s-4);
+    padding: var(--s-4) var(--s-5);
+    background: rgba(11, 21, 28, 0.94);
+    backdrop-filter: blur(18px) saturate(150%);
+    -webkit-backdrop-filter: blur(18px) saturate(150%);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--r-lg);
+    box-shadow: var(--shadow-lg);
+}
+
+.track-banner-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: rgba(0, 200, 255, 0.12);
+    color: var(--electric-blue);
+    flex-shrink: 0;
+    position: relative;
+}
+
+.track-banner-icon i, .track-banner-icon svg { width: 21px; height: 21px; }
+
+.track-banner-body { flex: 1; min-width: 0; }
+
+.track-banner-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 3px;
+}
+
+.track-banner-sub {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.track-banner-eta {
+    text-align: right;
+    flex-shrink: 0;
+    padding-left: var(--s-4);
+    border-left: 1px solid var(--border);
+}
+
+.track-banner-eta strong {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    color: var(--primary);
+    letter-spacing: -0.04em;
+    line-height: 1;
+}
+
+.track-banner-eta span {
+    font-size: 0.71rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+/* Map controls cluster */
+.track-map-controls {
+    position: absolute;
+    bottom: var(--s-4);
+    right: var(--s-4);
+    z-index: 450;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-2);
+}
+
+.track-map-btn {
+    width: 42px;
+    height: 42px;
+    border-radius: var(--r-sm);
+    display: grid;
+    place-items: center;
+    background: rgba(11, 21, 28, 0.94);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    box-shadow: var(--shadow-md);
+    transition: all var(--t-base) var(--ease);
+}
+
+.track-map-btn:hover { color: var(--primary); border-color: var(--primary); }
+.track-map-btn.active { background: var(--electric-gradient); color: #04231A; border-color: transparent; }
+.track-map-btn i, .track-map-btn svg { width: 18px; height: 18px; }
+
+/* --------------------------------------------------------------------------
+   Side panel
+   -------------------------------------------------------------------------- */
+.track-panel {
+    position: sticky;
+    top: calc(var(--nav-h) + 20px);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-4);
+    max-height: calc(100vh - var(--nav-h) - 40px);
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+/* Vehicle card */
+.track-vehicle {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+}
+
+.track-vehicle-media {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    background: var(--card-light);
+}
+
+.track-vehicle-media img { width: 100%; height: 100%; object-fit: cover; }
+
+.track-vehicle-media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 45%, rgba(5, 11, 16, 0.9) 100%);
+}
+
+.track-vehicle-overlay {
+    position: absolute;
+    bottom: var(--s-4);
+    left: var(--s-5);
+    right: var(--s-5);
+    z-index: 1;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--s-3);
+}
+
+.track-vehicle-overlay strong {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    color: var(--white);
+    letter-spacing: -0.025em;
+}
+
+.track-vehicle-overlay span { font-size: 0.77rem; color: var(--text-secondary); }
+
+/* Live stats grid */
+.track-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border-top: 1px solid var(--border);
+}
+
+.track-stat {
+    background: var(--card-bg);
+    padding: var(--s-4);
+    text-align: center;
+}
+
+.track-stat-k {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.track-stat-k i, .track-stat-k svg { width: 12px; height: 12px; }
+
+.track-stat-v {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    color: var(--text-primary);
+    letter-spacing: -0.035em;
+    font-variant-numeric: tabular-nums;
+    line-height: 1.1;
+}
+
+.track-stat-v small { font-size: 0.75rem; color: var(--text-muted); font-weight: 400; }
+
+/* Trip progress */
+.trip-progress {
+    padding: var(--s-5);
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+}
+
+.trip-route {
+    display: flex;
+    align-items: center;
+    gap: var(--s-3);
+    margin-bottom: var(--s-4);
+}
+
+.trip-route-end { flex: 1; min-width: 0; }
+.trip-route-end small {
+    display: block;
+    font-size: 0.67rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-weight: 600;
+    margin-bottom: 3px;
+}
+.trip-route-end strong {
+    display: block;
+    font-size: 0.87rem;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.trip-route-end.right { text-align: right; }
+
+.trip-route-arrow {
+    color: var(--primary);
+    flex-shrink: 0;
+}
+
+.trip-route-arrow i, .trip-route-arrow svg { width: 18px; height: 18px; }
+
+/* The progress track with a moving car glyph */
+.trip-track {
+    position: relative;
+    height: 6px;
+    border-radius: var(--r-full);
+    background: rgba(255, 255, 255, 0.07);
+    margin-block: var(--s-6) var(--s-4);
+}
+
+.trip-track-fill {
+    height: 100%;
+    border-radius: var(--r-full);
+    background: var(--electric-gradient);
+    transition: width 1.8s linear;
+    position: relative;
+}
+
+.trip-car {
+    position: absolute;
+    top: 50%;
+    width: 30px;
+    height: 30px;
+    margin-left: -15px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: var(--card-bg);
+    border: 2px solid var(--primary);
+    color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(0, 230, 118, 0.15), var(--shadow-md);
+    transform: translateY(-50%);
+    transition: left 1.8s linear;
+    z-index: 2;
+}
+
+.trip-car i, .trip-car svg { width: 14px; height: 14px; }
+
+.trip-milestones {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+/* Phase timeline */
+.phase-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.phase {
+    display: flex;
+    gap: var(--s-3);
+    position: relative;
+}
+
+.phase-marker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+    width: 22px;
+}
+
+.phase-dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    border: 2px solid var(--border-strong);
+    background: var(--card-bg);
+    margin-top: 5px;
+    flex-shrink: 0;
+    transition: all var(--t-base) var(--ease);
+}
+
+.phase.done .phase-dot {
+    background: var(--primary);
+    border-color: var(--primary);
+}
+
+.phase.current .phase-dot {
+    border-color: var(--primary);
+    background: var(--primary);
+    box-shadow: 0 0 0 4px rgba(0, 230, 118, 0.2);
+}
+
+.phase-line {
+    width: 2px;
+    flex: 1;
+    background: var(--border);
+    margin-block: 3px;
+    min-height: 26px;
+    transition: background var(--t-base) var(--ease);
+}
+
+.phase.done .phase-line { background: var(--primary); }
+
+.phase-body { flex: 1; min-width: 0; padding-bottom: var(--s-5); }
+.phase:last-child .phase-body { padding-bottom: 0; }
+
+.phase-body strong {
+    display: block;
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    transition: color var(--t-base) var(--ease);
+}
+
+.phase.done .phase-body strong,
+.phase.current .phase-body strong { color: var(--text-primary); }
+
+.phase-body span { font-size: 0.76rem; color: var(--text-muted); }
+
+.phase.current .phase-body strong::after {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--primary);
+    margin-left: 8px;
+    animation: blink 1.6s var(--ease) infinite;
+}
+
+/* Driver / contact card */
+.driver-card {
+    display: flex;
+    align-items: center;
+    gap: var(--s-4);
+    padding: var(--s-5);
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+}
+
+.driver-card-body { flex: 1; min-width: 0; }
+.driver-card-body strong { display: block; font-size: 0.93rem; color: var(--text-primary); }
+.driver-card-body span { font-size: 0.78rem; color: var(--text-muted); }
+
+/* SOS band */
+.sos-band {
+    display: flex;
+    align-items: center;
+    gap: var(--s-4);
+    padding: var(--s-4) var(--s-5);
+    background: rgba(239, 68, 68, 0.07);
+    border: 1px solid rgba(239, 68, 68, 0.28);
+    border-radius: var(--r-lg);
+}
+
+.sos-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: rgba(239, 68, 68, 0.14);
+    color: #FF8A8A;
+    flex-shrink: 0;
+}
+
+.sos-icon i, .sos-icon svg { width: 19px; height: 19px; }
+
+/* Charging suggestion inline card */
+.charge-suggest {
+    display: flex;
+    align-items: center;
+    gap: var(--s-4);
+    padding: var(--s-4) var(--s-5);
+    background: rgba(0, 200, 255, 0.06);
+    border: 1px solid rgba(0, 200, 255, 0.25);
+    border-radius: var(--r-lg);
+}
+
+/* --------------------------------------------------------------------------
+   Trip completed state
+   -------------------------------------------------------------------------- */
+.trip-complete {
+    text-align: center;
+    padding: var(--s-10) var(--s-6);
+}
+
+.trip-complete-icon {
+    width: 84px;
+    height: 84px;
+    margin: 0 auto var(--s-5);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: rgba(0, 230, 118, 0.12);
+    border: 2px solid var(--primary);
+    color: var(--primary);
+}
+
+.trip-complete-icon i, .trip-complete-icon svg { width: 38px; height: 38px; }
+
+.trip-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: var(--s-4);
+    margin-block: var(--s-8);
+}
+
+.trip-summary-cell {
+    padding: var(--s-4);
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid var(--border-faint);
+    border-radius: var(--r-md);
+}
+
+.trip-summary-cell strong {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    letter-spacing: -0.035em;
+}
+
+.trip-summary-cell span { font-size: 0.75rem; color: var(--text-muted); }

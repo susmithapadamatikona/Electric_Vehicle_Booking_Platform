@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Explore Electric Vehicles — Live Availability | EVRide</title>
+    <meta name="description" content="Browse every electric vehicle in the EVRide fleet with live battery level, real remaining range and current location. Filter by type, brand, price, range and availability.">
+    <meta name="theme-color" content="#050B10">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/vehicles.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <link rel="icon" href="assets/images/favicon.png" type="image/png">
+</head>
+<body>
+<div class="preloader" id="preloader" role="status" aria-live="polite" aria-label="Loading">
+    <div class="preloader-inner">
+        <img src="assets/images/stackly-whitish_blue-logo.webp" alt="Stackly"
+             class="preloader-logo" width="320" height="132">
+        <div class="preloader-bar"></div>
+    </div>
+</div>
+
+
+<div id="navSlot"></div>
+
+<main id="main">
+
+    <!-- Page header -->
+    <header class="page-head">
+        <div class="orb orb-green" style="width:520px;height:520px;top:-60%;right:-6%" aria-hidden="true"></div>
+        <div class="container">
+            <nav class="crumbs" aria-label="Breadcrumb">
+                <a href="index.html">Home</a>
+                <i data-lucide="chevron-right"></i>
+                <span class="current">Explore EVs</span>
+            </nav>
+            <h1 class="page-head-title">Explore electric vehicles</h1>
+            <p class="page-head-sub">
+                Every vehicle below reports its battery, range and location live. What you
+                see is the state of the car right now — not a listing from last week.
+            </p>
+
+            <div class="flex gap-4 mt-6 flex-wrap items-center">
+                <span class="live-tag">Live inventory</span>
+                <span class="text-muted" style="font-size:.85rem">
+                    <strong class="text-green mono" id="headAvail">—</strong> available ·
+                    <strong class="text-primary mono" id="headTotal">—</strong> total in fleet
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <section class="section" style="padding-top:var(--s-10)">
+        <div class="container">
+            <div class="explore-layout">
+
+                <!-- ==================== FILTERS ==================== -->
+                <aside class="filters" id="filterPanel" aria-label="Filter vehicles">
+                    <div class="filters-head">
+                        <h4><i data-lucide="sliders-horizontal"></i> Filters</h4>
+                        <div class="flex gap-2 items-center">
+                            <button class="btn-link" style="font-size:.78rem" id="clearFilters">Clear all</button>
+                            <button class="modal-close" id="filterClose" aria-label="Close filters" style="display:none">
+                                <i data-lucide="x"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="filters-body">
+                        <!-- Keyword -->
+                        <div class="filter-group">
+                            <div class="input-icon">
+                                <i data-lucide="search"></i>
+                                <input type="search" class="input" id="fQuery" placeholder="Search model or brand" aria-label="Search vehicles">
+                            </div>
+                        </div>
+
+                        <!-- Availability -->
+                        <div class="filter-group">
+                            <div class="filter-title">Availability <i data-lucide="chevron-down"></i></div>
+                            <div class="filter-options">
+                                <label class="switch">
+                                    <input type="checkbox" id="fAvailable">
+                                    <span style="font-size:.86rem">Available right now</span>
+                                </label>
+                                <div class="field-hint">Hides vehicles on trip, charging or in maintenance.</div>
+                            </div>
+                        </div>
+
+                        <!-- Vehicle type -->
+                        <div class="filter-group">
+                            <div class="filter-title">Vehicle Type <i data-lucide="chevron-down"></i></div>
+                            <div class="filter-options" id="fCategories"></div>
+                        </div>
+
+                        <!-- Brand -->
+                        <div class="filter-group">
+                            <div class="filter-title">Brand <i data-lucide="chevron-down"></i></div>
+                            <div class="filter-options scroll" id="fBrands"></div>
+                        </div>
+
+                        <!-- Price -->
+                        <div class="filter-group">
+                            <div class="filter-title">Price per Day <i data-lucide="chevron-down"></i></div>
+                            <div class="filter-options">
+                                <div class="range-vals">
+                                    <span id="fPriceMinLabel">₹0</span>
+                                    <span id="fPriceMaxLabel">₹25,000</span>
+                                </div>
+                                <input type="range" class="range" id="fPriceMax" min="1000" max="25000" step="500" value="25000" aria-label="Maximum price per day">
+                                <div class="filter-chips">
+                                    <button class="chip" data-price="3000">Under ₹3,000</button>
+                                    <button class="chip" data-price="6000">Under ₹6,000</button>
+                                    <button class="chip" data-price="12000">Under ₹12,000</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Range -->
+                        <div class="filter-group">
+                            <div class="filter-title">Minimum Range <i data-lucide="chevron-down"></i></div>
+                            <div class="filter-options">
+                                <div class="range-vals">
+                                    <span>0 km</span>
+                                    <span id="fRangeLabel">Any</span>
+                                </div>
+                                <input type="range" class="range" id="fRange" min="0" max="800" step="50" value="0" aria-label="Minimum range in kilometres">
+                            </div>
+                        </div>
+
+                        <!-- Battery -->
+                        <div class="filter-group">
+                            <div class="filter-title">Minimum Battery <i data-lucide="chevron-down"></i></div>
+                            <div class="filter-options">
+                                <div class="range-vals">
+                                    <span>0%</span>
+                                    <span id="fBatteryLabel">Any</span>
+                                </div>
+                                <input type="range" class="range" id="fBattery" min="0" max="100" step="10" value="0" aria-label="Minimum battery percentage">
+                            </div>
+                        </div>
+
+                        <!-- Seats -->
+                        <div class="filter-group">
+                            <div class="filter-title">Seating Capacity <i data-lucide="chevron-down"></i></div>
+                            <div class="filter-options">
+                                <div class="filter-chips" id="fSeats"></div>
+                            </div>
+                        </div>
+
+                        <!-- Drive -->
+                        <div class="filter-group">
+                            <div class="filter-title">Drive Type <i data-lucide="chevron-down"></i></div>
+                            <div class="filter-options">
+                                <div class="filter-chips" id="fDrive"></div>
+                            </div>
+                        </div>
+
+                        <!-- Charging port -->
+                        <div class="filter-group">
+                            <div class="filter-title">Charging Port <i data-lucide="chevron-down"></i></div>
+                            <div class="filter-options">
+                                <div class="filter-chips" id="fConnectors"></div>
+                            </div>
+                        </div>
+
+                        <!-- Rating -->
+                        <div class="filter-group">
+                            <div class="filter-title">Rating <i data-lucide="chevron-down"></i></div>
+                            <div class="filter-options">
+                                <div class="filter-chips" id="fRating">
+                                    <button class="chip" data-rating="4.8">4.8+ ★</button>
+                                    <button class="chip" data-rating="4.5">4.5+ ★</button>
+                                    <button class="chip" data-rating="4">4.0+ ★</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="filters-foot">
+                        <button class="btn btn-primary btn-block" id="applyFilters">
+                            Show <span id="filterResultCount">0</span> vehicles
+                        </button>
+                    </div>
+                </aside>
+
+                <!-- ==================== RESULTS ==================== -->
+                <div>
+                    <div class="results-bar">
+                        <div class="results-count">
+                            <strong id="resultCount">0</strong> vehicles found
+                        </div>
+
+                        <div class="results-tools">
+                            <button class="btn btn-secondary btn-sm filter-trigger" id="filterOpen">
+                                <i data-lucide="sliders-horizontal"></i> Filters
+                                <span class="badge badge-solid" id="filterBadge" hidden>0</span>
+                            </button>
+
+                            <label class="sr-only" for="sortBy">Sort vehicles by</label>
+                            <select class="select" id="sortBy">
+                                <option value="recommended">Recommended</option>
+                                <option value="price-asc">Price: Low to High</option>
+                                <option value="price-desc">Price: High to Low</option>
+                                <option value="range">Longest Range</option>
+                                <option value="battery">Highest Battery</option>
+                                <option value="distance">Nearest First</option>
+                                <option value="rating">Top Rated</option>
+                                <option value="newest">Newest</option>
+                            </select>
+
+                            <div class="segment" role="group" aria-label="View mode">
+                                <button data-view="grid" class="active" aria-label="Grid view"><i data-lucide="layout-grid"></i></button>
+                                <button data-view="list" aria-label="List view"><i data-lucide="list"></i></button>
+                                <button data-view="map" aria-label="Map view"><i data-lucide="map"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="active-filters" id="activeFilters"></div>
+
+                    <!-- Map view -->
+                    <div id="mapView" hidden>
+                        <div class="map map-lg" id="exploreMap">
+                            <div class="map-legend">
+                                <h6>Vehicle Status</h6>
+                                <ul>
+                                    <li><span class="legend-dot available"></span> Available</li>
+                                    <li><span class="legend-dot on_trip"></span> On Trip</li>
+                                    <li><span class="legend-dot charging"></span> Charging</li>
+                                    <li><span class="legend-dot reserved"></span> Reserved</li>
+                                    <li><span class="legend-dot maintenance"></span> Maintenance</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Grid / list view -->
+                    <div class="v-grid" id="vehicleGrid"></div>
+
+                    <div class="pagination" id="pagination"></div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Compare bar -->
+    <div class="compare-bar" id="compareBar">
+        <div class="container">
+            <div class="compare-inner">
+                <strong style="font-size:.9rem;white-space:nowrap">Compare <span id="compareCount">0</span> of 3</strong>
+                <div class="compare-items" id="compareItems"></div>
+                <div class="flex gap-2">
+                    <button class="btn btn-secondary btn-sm" id="compareClear">Clear</button>
+                    <button class="btn btn-primary btn-sm" id="compareGo">
+                        <i data-lucide="git-compare"></i> Compare
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<div id="footerSlot"></div>
+
+<!-- Compare modal -->
+<div class="modal-backdrop" id="compareModal">
+    <div class="modal modal-lg" role="dialog" aria-modal="true" aria-labelledby="compareTitle">
+        <div class="modal-head">
+            <div>
+                <h4 class="modal-title" id="compareTitle">Compare vehicles</h4>
+                <p class="modal-sub">Side by side, with live battery and range</p>
+            </div>
+            <button class="modal-close" data-modal-close aria-label="Close"><i data-lucide="x"></i></button>
+        </div>
+        <div class="modal-body" id="compareBody"></div>
+    </div>
+</div>
+
+<div class="scrim" id="filterScrim"></div>
+
+<script src="assets/vendor/lucide.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script type="module" src="js/explore.js"></script>
+
+</body>
+</html>

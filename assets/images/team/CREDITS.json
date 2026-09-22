@@ -1,0 +1,52 @@
+{
+  "nikhil-varma": {
+    "name": "Nikhil Varma",
+    "source": "https://unsplash.com/photos/photo-1507003211169-0a1dd7228f2d",
+    "licence": "Unsplash License"
+  },
+  "aditi-raghavan": {
+    "name": "Aditi Raghavan",
+    "source": "https://unsplash.com/photos/photo-1580489944761-15a19d654956",
+    "licence": "Unsplash License"
+  },
+  "suresh-iyengar": {
+    "name": "Suresh Iyengar",
+    "source": "https://unsplash.com/photos/photo-1472099645785-5658abf4ff4e",
+    "licence": "Unsplash License"
+  },
+  "leela-krishnan": {
+    "name": "Leela Krishnan",
+    "source": "https://unsplash.com/photos/photo-1573496359142-b8d87734a5a2",
+    "licence": "Unsplash License"
+  },
+  "danish-qureshi": {
+    "name": "Danish Qureshi",
+    "source": "https://unsplash.com/photos/photo-1500648767791-00dcc994a43e",
+    "licence": "Unsplash License"
+  },
+  "rhea-fernandes": {
+    "name": "Rhea Fernandes",
+    "source": "https://unsplash.com/photos/photo-1438761681033-6461ffad8d80",
+    "licence": "Unsplash License"
+  },
+  "manoj-pillai": {
+    "name": "Manoj Pillai",
+    "source": "https://unsplash.com/photos/photo-1531427186611-ecfd6d936c79",
+    "licence": "Unsplash License"
+  },
+  "tara-sengupta": {
+    "name": "Tara Sengupta",
+    "source": "https://unsplash.com/photos/photo-1544005313-94ddf0286df2",
+    "licence": "Unsplash License"
+  },
+  "vikram-shetty": {
+    "name": "Vikram Shetty",
+    "source": "https://unsplash.com/photos/photo-1633332755192-727a05c4013d",
+    "licence": "Unsplash License"
+  },
+  "ananya-bose": {
+    "name": "Ananya Bose",
+    "source": "https://unsplash.com/photos/photo-1607746882042-944635dfe10e",
+    "licence": "Unsplash License"
+  }
+}

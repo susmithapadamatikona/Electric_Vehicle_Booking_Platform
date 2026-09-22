@@ -1,0 +1,534 @@
+/* ==========================================================================
+   EVRide — auth.css
+   Login, register, forgot password and the 404 page.
+   ========================================================================== */
+
+.auth-body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.auth-layout {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 100vh;
+}
+
+/* --------------------------------------------------------------------------
+   1. VISUAL PANEL
+   -------------------------------------------------------------------------- */
+.auth-visual {
+    position: relative;
+    background: var(--hero-gradient);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: var(--s-10);
+    isolation: isolate;
+}
+
+.auth-visual::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.022) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.022) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse 80% 70% at 50% 45%, #000 10%, transparent 72%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 45%, #000 10%, transparent 72%);
+    z-index: -1;
+}
+
+.auth-visual-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(110px);
+    pointer-events: none;
+    z-index: -1;
+}
+
+.auth-visual-top {
+    position: relative;
+    z-index: 1;
+}
+
+.auth-visual-mid {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    text-align: center;
+    padding-block: var(--s-8);
+}
+
+.auth-car {
+    width: 100%;
+    max-width: 440px;
+    margin-bottom: var(--s-8);
+    filter: drop-shadow(0 26px 44px rgba(0, 0, 0, 0.55));
+    border-radius: var(--r-xl);
+    overflow: hidden;
+}
+
+.auth-car img { width: 100%; height: auto; display: block; }
+
+.auth-headline {
+    font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+    line-height: 1.2;
+    margin-bottom: var(--s-4);
+    max-width: 440px;
+}
+
+.auth-sub {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    max-width: 400px;
+    line-height: 1.75;
+}
+
+/* Rotating testimonial */
+.auth-quote {
+    position: relative;
+    z-index: 1;
+    padding: var(--s-5);
+    background: var(--glass);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+    max-width: 460px;
+}
+
+.auth-quote-text {
+    font-size: 0.9rem;
+    line-height: 1.75;
+    color: var(--text-secondary);
+    margin-bottom: var(--s-4);
+    min-height: 68px;
+    transition: opacity var(--t-slow) var(--ease);
+}
+
+.auth-quote-foot {
+    display: flex;
+    align-items: center;
+    gap: var(--s-3);
+}
+
+.auth-quote-foot strong {
+    display: block;
+    font-size: 0.87rem;
+    color: var(--text-primary);
+}
+
+.auth-quote-foot span { font-size: 0.76rem; color: var(--text-muted); }
+
+/* Trust stats along the bottom */
+.auth-stats {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    gap: var(--s-8);
+    flex-wrap: wrap;
+    margin-top: var(--s-8);
+}
+
+.auth-stat strong {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    letter-spacing: -0.035em;
+}
+
+.auth-stat span { font-size: 0.78rem; color: var(--text-muted); }
+
+/* --------------------------------------------------------------------------
+   2. FORM PANEL
+   -------------------------------------------------------------------------- */
+.auth-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: var(--s-10) var(--s-8);
+    background: var(--primary-bg);
+    overflow-y: auto;
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 440px;
+    margin-inline: auto;
+}
+
+.auth-card-head {
+    margin-bottom: var(--s-8);
+}
+
+.auth-card-head h1 {
+    font-size: clamp(1.7rem, 3vw, 2.1rem);
+    margin-bottom: var(--s-3);
+}
+
+.auth-card-head p {
+    font-size: 0.93rem;
+    color: var(--text-secondary);
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-5);
+}
+
+.auth-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s-4);
+}
+
+.auth-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-4);
+    flex-wrap: wrap;
+}
+
+.auth-foot {
+    margin-top: var(--s-8);
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.auth-foot a { color: var(--primary); font-weight: 600; }
+.auth-foot a:hover { text-decoration: underline; }
+
+/* Social buttons */
+.social-auth {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s-3);
+}
+
+.social-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px 18px;
+    border-radius: var(--r-sm);
+    background: var(--glass);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    font-size: 0.88rem;
+    font-weight: 600;
+    transition: all var(--t-base) var(--ease);
+}
+
+.social-btn:hover {
+    border-color: var(--border-strong);
+    background: var(--glass-strong);
+    transform: translateY(-2px);
+}
+
+.social-btn svg { width: 17px; height: 17px; flex-shrink: 0; }
+
+/* Password field with reveal toggle */
+.password-field { position: relative; }
+
+.password-toggle {
+    position: absolute;
+    right: 13px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 30px;
+    height: 30px;
+    display: grid;
+    place-items: center;
+    color: var(--text-muted);
+    border-radius: var(--r-xs);
+    transition: color var(--t-base) var(--ease);
+    z-index: 2;
+}
+
+.password-toggle:hover { color: var(--primary); }
+.password-toggle i, .password-toggle svg { width: 16px; height: 16px; }
+
+.password-field .input { padding-right: 46px; }
+
+/* Strength meter */
+.strength {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    margin-top: 2px;
+}
+
+.strength-bars {
+    display: flex;
+    gap: 4px;
+}
+
+.strength-bar {
+    flex: 1;
+    height: 3px;
+    border-radius: var(--r-full);
+    background: rgba(255, 255, 255, 0.08);
+    transition: background var(--t-base) var(--ease);
+}
+
+.strength-bar.on-weak   { background: var(--danger); }
+.strength-bar.on-fair   { background: var(--warning); }
+.strength-bar.on-good   { background: var(--electric-blue); }
+.strength-bar.on-strong { background: var(--primary); }
+
+.strength-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-3);
+}
+
+.strength-label strong { font-weight: 600; }
+.strength-label .weak   { color: #FF8A8A; }
+.strength-label .fair   { color: var(--warning); }
+.strength-label .good   { color: var(--electric-blue); }
+.strength-label .strong { color: var(--primary); }
+
+/* Password requirement checklist */
+.pw-reqs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 7px;
+    margin-top: var(--s-2);
+}
+
+.pw-req {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    transition: color var(--t-base) var(--ease);
+}
+
+.pw-req i, .pw-req svg {
+    width: 12px;
+    height: 12px;
+    flex-shrink: 0;
+    opacity: 0.4;
+    transition: all var(--t-base) var(--ease);
+}
+
+.pw-req.met { color: var(--primary); }
+.pw-req.met i, .pw-req.met svg { opacity: 1; }
+
+/* Account type picker */
+.role-picker {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--s-3);
+}
+
+.role-opt {
+    padding: var(--s-4) var(--s-3);
+    border-radius: var(--r-md);
+    border: 1.5px solid var(--border);
+    background: rgba(255, 255, 255, 0.02);
+    text-align: center;
+    cursor: pointer;
+    transition: all var(--t-base) var(--ease);
+}
+
+.role-opt:hover { border-color: var(--border-strong); }
+
+.role-opt.selected {
+    border-color: var(--primary);
+    background: rgba(0, 230, 118, 0.07);
+}
+
+.role-opt-icon {
+    width: 38px;
+    height: 38px;
+    margin: 0 auto 9px;
+    border-radius: var(--r-sm);
+    display: grid;
+    place-items: center;
+    background: var(--glass);
+    color: var(--text-muted);
+    transition: all var(--t-base) var(--ease);
+}
+
+.role-opt.selected .role-opt-icon {
+    background: rgba(0, 230, 118, 0.14);
+    color: var(--primary);
+}
+
+.role-opt-icon i, .role-opt-icon svg { width: 17px; height: 17px; }
+
+.role-opt strong {
+    display: block;
+    font-size: 0.83rem;
+    color: var(--text-primary);
+    margin-bottom: 2px;
+}
+
+.role-opt span { font-size: 0.7rem; color: var(--text-muted); line-height: 1.4; }
+
+/* Success overlay after registration */
+.auth-success {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-modal);
+    background: rgba(5, 11, 16, 0.95);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: var(--s-5);
+}
+
+.auth-success.show { display: flex; }
+
+.auth-success-box {
+    text-align: center;
+    max-width: 420px;
+}
+
+.auth-success-icon {
+    width: 96px;
+    height: 96px;
+    margin: 0 auto var(--s-6);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: rgba(0, 230, 118, 0.12);
+    border: 2px solid var(--primary);
+    box-shadow: 0 0 48px rgba(0, 230, 118, 0.3);
+}
+
+.auth-success-icon svg { width: 44px; height: 44px; color: var(--primary); }
+
+/* OTP input row */
+.otp-row {
+    display: flex;
+    gap: var(--s-3);
+    justify-content: center;
+}
+
+.otp-input {
+    width: 52px;
+    height: 60px;
+    text-align: center;
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.035);
+    border: 1.5px solid var(--border);
+    border-radius: var(--r-md);
+    transition: all var(--t-base) var(--ease);
+}
+
+.otp-input:focus {
+    border-color: var(--primary);
+    background: rgba(0, 230, 118, 0.05);
+    box-shadow: 0 0 0 3px rgba(0, 230, 118, 0.12);
+    outline: none;
+}
+
+.otp-input.filled { border-color: var(--primary); }
+
+/* --------------------------------------------------------------------------
+   3. 404 PAGE
+   -------------------------------------------------------------------------- */
+.error-page {
+    /* Full height: this page has no site header to subtract. */
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: var(--s-16) var(--s-6);
+    position: relative;
+    overflow: hidden;
+}
+
+.error-code {
+    font-family: var(--font-display);
+    font-size: clamp(6rem, 18vw, 12rem);
+    font-weight: 700;
+    line-height: 0.9;
+    letter-spacing: -0.06em;
+    background: var(--electric-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: var(--s-5);
+    position: relative;
+}
+
+/* Brand mark above the illustration. `.logo` is a flex row, so centre it
+   here rather than relying on the section's text-align. */
+.error-logo {
+    display: inline-flex;
+    justify-content: center;
+    margin-bottom: var(--s-10);
+}
+
+.error-logo .logo-img { height: 54px; }
+
+.error-battery {
+    width: min(320px, 80vw);
+    margin: 0 auto var(--s-8);
+}
+
+.error-actions {
+    display: flex;
+    gap: var(--s-3);
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: var(--s-8);
+}
+
+.error-links {
+    display: flex;
+    gap: var(--s-5);
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: var(--s-10);
+    padding-top: var(--s-8);
+    border-top: 1px solid var(--border);
+}
+
+.error-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: var(--s-4);
+    border-radius: var(--r-md);
+    color: var(--text-secondary);
+    transition: all var(--t-base) var(--ease);
+    min-width: 96px;
+}
+
+.error-link:hover {
+    background: var(--glass);
+    color: var(--primary);
+    transform: translateY(-3px);
+}
+
+.error-link i, .error-link svg { width: 22px; height: 22px; }
+.error-link span { font-size: 0.82rem; font-weight: 600; }

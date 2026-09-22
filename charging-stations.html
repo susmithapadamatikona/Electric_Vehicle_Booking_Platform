@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Find EV Charging Stations — Live Availability | EVRide</title>
+    <meta name="description" content="Find EV charging stations near you with live bay availability, charging speeds, connector types and price per kWh. Reserve a slot in advance.">
+    <meta name="theme-color" content="#050B10">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/vehicles.css">
+    <link rel="stylesheet" href="css/charging.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <link rel="icon" href="assets/images/favicon.png" type="image/png">
+</head>
+<body>
+<div class="preloader" id="preloader" role="status" aria-live="polite" aria-label="Loading">
+    <div class="preloader-inner">
+        <img src="assets/images/stackly-whitish_blue-logo.webp" alt="Stackly"
+             class="preloader-logo" width="320" height="132">
+        <div class="preloader-bar"></div>
+    </div>
+</div>
+
+
+<div id="navSlot"></div>
+
+<main id="main">
+
+    <header class="page-head" style="padding-bottom:var(--s-8)">
+        <div class="orb orb-blue" style="width:560px;height:560px;top:-70%;right:-8%" aria-hidden="true"></div>
+        <div class="container-wide">
+            <nav class="crumbs" aria-label="Breadcrumb">
+                <a href="index.html">Home</a>
+                <i data-lucide="chevron-right"></i>
+                <span class="current">Charging Stations</span>
+            </nav>
+            <h1 class="page-head-title">Charging network</h1>
+            <p class="page-head-sub">
+                Live bay availability across 2,400+ points. Reserve ahead, navigate there,
+                and start charging from your phone.
+            </p>
+
+            <div class="flex gap-5 mt-6 flex-wrap items-center">
+                <span class="live-tag">Live availability</span>
+                <span class="text-muted" style="font-size:.85rem">
+                    <strong class="text-green mono" id="statAvail">—</strong> bays free ·
+                    <strong class="text-primary mono" id="statTotal">—</strong> total ·
+                    <strong class="text-blue mono" id="statStations">—</strong> stations
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <section style="padding-block:var(--s-6) var(--s-16)">
+        <div class="container-wide">
+            <div class="charge-layout">
+
+                <!-- ============ LIST ============ -->
+                <div class="charge-list-panel">
+                    <div class="charge-search">
+                        <div class="input-icon mb-3">
+                            <i data-lucide="search"></i>
+                            <input type="search" class="input" id="csSearch"
+                                   placeholder="Search by area, station or operator" aria-label="Search stations">
+                        </div>
+
+                        <button class="btn btn-secondary btn-sm btn-block" id="useLocation">
+                            <i data-lucide="crosshair"></i> Use my current location
+                        </button>
+
+                        <div class="charge-filters">
+                            <button class="chip active" data-cf="all">All</button>
+                            <button class="chip" data-cf="available">Available now</button>
+                            <button class="chip" data-cf="fast">Fast charging</button>
+                            <button class="chip" data-cf="dc">DC charger</button>
+                            <button class="chip" data-cf="ac">AC charger</button>
+                            <button class="chip" data-cf="24h">Open 24/7</button>
+                        </div>
+
+                        <div class="flex items-center justify-between gap-3 mt-4">
+                            <span class="text-muted" style="font-size:.82rem">
+                                <strong class="text-primary" id="csCount">0</strong> stations
+                            </span>
+                            <select class="select" id="csSort" style="width:auto;padding:7px 32px 7px 12px;font-size:.8rem">
+                                <option value="distance">Nearest first</option>
+                                <option value="available">Most available</option>
+                                <option value="speed">Fastest</option>
+                                <option value="price">Cheapest</option>
+                                <option value="rating">Top rated</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="charge-results" id="csResults"></div>
+                </div>
+
+                <!-- ============ MAP ============ -->
+                <div class="charge-map-panel" id="csMap">
+                    <div class="map-legend">
+                        <h6>Station status</h6>
+                        <ul>
+                            <li><span class="legend-dot available"></span> Bays available</li>
+                            <li><span class="legend-dot reserved"></span> All bays busy</li>
+                            <li><span class="legend-dot maintenance"></span> Offline</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Info band -->
+    <section class="section section-alt">
+        <div class="container">
+            <div class="section-head centered" data-reveal>
+                <span class="eyebrow centered blue">Charging Explained</span>
+                <h2 class="section-title">Which charger do you need?</h2>
+                <p class="section-sub">
+                    Charging speed depends on the connector, the charger and what your car can accept.
+                    Here's the short version.
+                </p>
+            </div>
+
+            <div class="grid grid-3 gap-5">
+                <div class="card card-hover" data-reveal>
+                    <div class="stat-icon mb-4"><i data-lucide="plug"></i></div>
+                    <h4 class="mb-2">AC — up to 22 kW</h4>
+                    <p style="font-size:.88rem;color:var(--text-secondary);line-height:1.7">
+                        Slow and cheap. Best overnight or while you're parked for hours.
+                        A typical 60 kWh pack takes 6–9 hours from near empty.
+                    </p>
+                    <div class="mt-4 flex gap-2 flex-wrap">
+                        <span class="badge badge-muted">Type 2</span>
+                        <span class="badge badge-muted">₹11–14 / kWh</span>
+                    </div>
+                </div>
+
+                <div class="card card-hover" data-reveal data-reveal-delay="80">
+                    <div class="stat-icon blue mb-4"><i data-lucide="plug-zap"></i></div>
+                    <h4 class="mb-2">DC Fast — 50–150 kW</h4>
+                    <p style="font-size:.88rem;color:var(--text-secondary);line-height:1.7">
+                        The everyday workhorse. Roughly 10% to 80% in 30–50 minutes —
+                        long enough for a coffee, short enough not to derail a trip.
+                    </p>
+                    <div class="mt-4 flex gap-2 flex-wrap">
+                        <span class="badge badge-blue">CCS2</span>
+                        <span class="badge badge-blue">CHAdeMO</span>
+                        <span class="badge badge-muted">₹15–18 / kWh</span>
+                    </div>
+                </div>
+
+                <div class="card card-hover" data-reveal data-reveal-delay="160">
+                    <div class="stat-icon purple mb-4"><i data-lucide="zap"></i></div>
+                    <h4 class="mb-2">Hyperhub — up to 350 kW</h4>
+                    <p style="font-size:.88rem;color:var(--text-secondary);line-height:1.7">
+                        For 800-volt cars like the IONIQ 5, EV6 and Taycan: 10% to 80% in
+                        about 18 minutes. Slower cars still charge at their own peak rate.
+                    </p>
+                    <div class="mt-4 flex gap-2 flex-wrap">
+                        <span class="badge badge-purple">800V ready</span>
+                        <span class="badge badge-muted">₹20–24 / kWh</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<div id="footerSlot"></div>
+
+<script src="assets/vendor/lucide.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script type="module" src="js/charging.js"></script>
+
+</body>
+</html>

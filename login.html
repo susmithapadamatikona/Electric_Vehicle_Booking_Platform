@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Log in | EVRide</title>
+    <meta name="description" content="Sign in to your EVRide account to book electric vehicles, track trips and manage charging.">
+    <meta name="theme-color" content="#050B10">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <link rel="icon" href="assets/images/favicon.png" type="image/png">
+</head>
+<body class="auth-body">
+<div class="preloader" id="preloader" role="status" aria-live="polite" aria-label="Loading">
+    <div class="preloader-inner">
+        <img src="assets/images/stackly-whitish_blue-logo.webp" alt="Stackly"
+             class="preloader-logo" width="320" height="132">
+        <div class="preloader-bar"></div>
+    </div>
+</div>
+
+
+<div class="auth-layout">
+
+    <!-- ============ VISUAL ============ -->
+    <aside class="auth-visual">
+        <div class="auth-visual-orb orb-green" style="width:520px;height:520px;top:-16%;right:-12%;background:rgba(0,230,118,.2)"></div>
+        <div class="auth-visual-orb orb-blue" style="width:420px;height:420px;bottom:-14%;left:-10%;background:rgba(0,200,255,.15)"></div>
+
+        <div class="auth-visual-top">
+            <a href="index.html" class="logo" aria-label="Stackly home">
+                <img src="assets/images/stackly-whitish_blue-logo.webp" alt="Stackly"
+                     class="logo-img" width="320" height="132">
+            </a>
+        </div>
+
+        <div class="auth-visual-mid">
+            <div class="auth-car float-ev">
+                <img src="https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&amp;fit=crop&amp;w=900&amp;q=80"
+                     alt="Premium electric vehicle" data-fallback="EVRide EV" width="900" height="600">
+            </div>
+            <h2 class="auth-headline">Welcome back to the future of mobility</h2>
+            <p class="auth-sub">
+                Your bookings, live trips and charging sessions are exactly where you left them.
+            </p>
+        </div>
+
+        <div>
+            <div class="auth-quote">
+                <p class="auth-quote-text" id="quoteText">
+                    Delivery to my apartment gate, spotless car, 94% battery. Returned it four days
+                    later through the app in about forty seconds.
+                </p>
+                <div class="auth-quote-foot">
+                    <div class="avatar avatar-sm" id="quoteAvatar">PI</div>
+                    <div>
+                        <strong id="quoteName">Priya Iyer</strong>
+                        <span id="quoteRole">Software Engineer, Whitefield</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="auth-stats">
+                <div class="auth-stat"><strong>18.5K+</strong><span>Electric vehicles</span></div>
+                <div class="auth-stat"><strong>2,400+</strong><span>Charging points</span></div>
+                <div class="auth-stat"><strong>4.9★</strong><span>Average rating</span></div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- ============ FORM ============ -->
+    <main class="auth-panel" id="main">
+        <div class="auth-card">
+            <div class="flex justify-between items-center mb-8">
+                <a href="index.html" class="btn-link" style="font-size:.85rem">
+                    <i data-lucide="arrow-left"></i> Back to site
+                </a>
+                <span class="text-muted" style="font-size:.84rem">
+                    New here? <a href="register.html" class="text-green" style="font-weight:600">Create account</a>
+                </span>
+            </div>
+
+            <div class="auth-card-head">
+                <h1>Log in to EVRide</h1>
+                <p>Enter your details to pick up where you left off.</p>
+            </div>
+
+            <div class="card-glass mb-6" style="padding:14px 16px;display:flex;gap:11px;align-items:flex-start">
+                <i data-lucide="info" style="width:16px;height:16px;color:var(--electric-blue);flex-shrink:0;margin-top:2px"></i>
+                <div style="font-size:.82rem;line-height:1.6">
+                    <strong class="text-primary">Demo mode</strong> — no account needed. Enter
+                    anything, choose a role below and you are in.
+                </div>
+            </div>
+
+            <form class="auth-form" id="loginForm" novalidate>
+                <div class="field">
+                    <label class="label" for="loginEmail">Email address</label>
+                    <div class="input-icon">
+                        <i data-lucide="mail"></i>
+                        <input type="text" class="input" id="loginEmail" placeholder="you@example.com"
+                               autocomplete="email">
+                    </div>
+                    <span class="field-error">
+                        <i data-lucide="alert-circle" style="width:12px;height:12px"></i> Enter a valid email address
+                    </span>
+                </div>
+
+                <div class="field">
+                    <label class="label" for="loginPassword">Password</label>
+                    <div class="password-field">
+                        <div class="input-icon">
+                            <i data-lucide="lock"></i>
+                            <input type="password" class="input" id="loginPassword" placeholder="••••••••"
+                                   autocomplete="current-password">
+                        </div>
+                        <button type="button" class="password-toggle" data-toggle-pw="loginPassword"
+                                aria-label="Show password">
+                            <i data-lucide="eye"></i>
+                        </button>
+                    </div>
+                    <span class="field-error">
+                        <i data-lucide="alert-circle" style="width:12px;height:12px"></i> Password must be at least 6 characters
+                    </span>
+                </div>
+
+                <div class="field">
+                    <label class="label" for="loginRole">Sign in as</label>
+                    <div class="input-icon">
+                        <i data-lucide="user-cog"></i>
+                        <select class="select" id="loginRole">
+                            <option value="customer">Customer — book and track EVs</option>
+                            <option value="driver">Driver / Owner — manage your vehicles</option>
+                            <option value="fleet">Fleet Manager — oversee the fleet</option>
+                            <option value="admin">Admin — platform console</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="auth-meta">
+                    <label class="check">
+                        <input type="checkbox" id="rememberMe" checked>
+                        <span>Remember me</span>
+                    </label>
+                    <a href="404.html" class="btn-link" style="font-size:.85rem">Forgot password?</a>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-lg btn-block" id="loginBtn">
+                    <i data-lucide="log-in"></i> Log in
+                </button>
+            </form>
+
+            <div class="divider-text">or continue with</div>
+
+            <div class="social-auth">
+                <button class="social-btn" data-social="google">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/>
+                        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.65l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84A11 11 0 0 0 12 23z"/>
+                        <path fill="#FBBC05" d="M5.84 14.11a6.6 6.6 0 0 1 0-4.22V7.05H2.18a11 11 0 0 0 0 9.9l3.66-2.84z"/>
+                        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1a11 11 0 0 0-9.82 6.05l3.66 2.84c.87-2.6 3.3-4.51 6.16-4.51z"/>
+                    </svg>
+                    Google
+                </button>
+                <button class="social-btn" data-social="apple">
+                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M17.05 12.54c-.02-2.3 1.88-3.4 1.96-3.46-1.07-1.56-2.73-1.78-3.32-1.8-1.41-.14-2.76.83-3.48.83-.72 0-1.83-.81-3-.79-1.54.02-2.96.9-3.75 2.28-1.6 2.78-.41 6.89 1.15 9.14.76 1.1 1.67 2.34 2.86 2.29 1.15-.05 1.58-.74 2.97-.74 1.38 0 1.78.74 3 .72 1.24-.02 2.02-1.12 2.78-2.23.88-1.28 1.24-2.52 1.26-2.58-.03-.01-2.41-.93-2.43-3.66zM14.8 5.2c.63-.77 1.06-1.83.94-2.9-.91.04-2.01.61-2.67 1.37-.59.68-1.1 1.76-.96 2.8 1.01.08 2.05-.52 2.69-1.27z"/>
+                    </svg>
+                    Apple
+                </button>
+            </div>
+
+            <div class="auth-foot">
+                Don't have an account? <a href="register.html">Create one free</a>
+            </div>
+        </div>
+    </main>
+
+</div>
+
+<script src="assets/vendor/lucide.min.js"></script>
+<script type="module" src="js/auth.js"></script>
+
+</body>
+</html>

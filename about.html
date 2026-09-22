@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>About EVRide | Our Mission &amp; Story</title>
+    <meta name="description" content="EVRide is building India's intelligent electric mobility platform — 18,500+ EVs, 2,400+ charging points and one connected system.">
+    <meta name="theme-color" content="#050B10">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/vehicles.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/pages.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <link rel="icon" href="assets/images/favicon.png" type="image/png">
+</head>
+<body>
+<div class="preloader" id="preloader" role="status" aria-live="polite" aria-label="Loading">
+    <div class="preloader-inner">
+        <img src="assets/images/stackly-whitish_blue-logo.webp" alt="Stackly"
+             class="preloader-logo" width="320" height="132">
+        <div class="preloader-bar"></div>
+    </div>
+</div>
+
+
+<div id="navSlot"></div>
+
+<main id="main">
+
+    <!-- Hero -->
+    <section class="section" style="padding-top:calc(var(--nav-h) + var(--s-16));position:relative;overflow:hidden">
+        <div class="orb orb-green" style="width:600px;height:600px;top:-35%;left:-10%" aria-hidden="true"></div>
+        <div class="orb orb-blue" style="width:480px;height:480px;bottom:-30%;right:-8%" aria-hidden="true"></div>
+
+        <div class="container">
+            <div class="about-hero">
+                <div data-reveal="left">
+                    <span class="eyebrow">About EVRide</span>
+                    <h1 style="font-size:clamp(2.2rem,4.6vw,3.4rem);margin-bottom:24px">
+                        We're removing every excuse <span class="text-gradient">not to drive electric</span>
+                    </h1>
+                    <p style="font-size:1.05rem;color:var(--text-secondary);line-height:1.8;margin-bottom:24px">
+                        Range anxiety. Charger roulette. Opaque rental pricing. The reasons people
+                        give for staying with petrol are real problems — and every one of them is
+                        a software problem as much as a hardware one.
+                    </p>
+                    <p style="font-size:1.05rem;color:var(--text-secondary);line-height:1.8">
+                        EVRide exists to solve them in one connected system: honest live range,
+                        reservable charging, transparent pricing and a car that shows up charged
+                        when it said it would.
+                    </p>
+                </div>
+
+                <div data-reveal="right">
+                    <img src="https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&amp;fit=crop&amp;w=900&amp;q=80"
+                         alt="EVRide electric vehicle at a charging hub"
+                         data-fallback="EVRide Fleet"
+                         style="width:100%;border-radius:28px;border:1px solid var(--border)">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact numbers -->
+    <section class="section" style="padding-top:0">
+        <div class="container">
+            <div class="corp-metric-band" data-reveal>
+                <div class="corp-metric">
+                    <strong><span data-count="18500" data-compact="true">0</span>+</strong>
+                    <span>Electric vehicles</span>
+                </div>
+                <div class="corp-metric">
+                    <strong><span data-count="2400" data-compact="true">0</span>+</strong>
+                    <span>Charging points</span>
+                </div>
+                <div class="corp-metric">
+                    <strong><span data-count="245">0</span>K</strong>
+                    <span>Trips completed</span>
+                </div>
+                <div class="corp-metric">
+                    <strong><span data-count="1.8" data-decimals="1">0</span>M kg</strong>
+                    <span>CO₂ avoided</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission -->
+    <section class="section section-alt" id="sustainability">
+        <div class="container">
+            <div class="section-head centered" data-reveal>
+                <span class="eyebrow centered">Our mission</span>
+                <h2 class="section-title">Make the electric option the easy option</h2>
+                <p class="section-sub">
+                    Transport is roughly 14% of India's emissions. We think the fastest way to
+                    move that number isn't persuading people to care — it's making electric
+                    simply better to use than the alternative.
+                </p>
+            </div>
+
+            <div class="value-grid">
+                <article class="card card-hover" data-reveal>
+                    <div class="feat-icon mb-4"><i data-lucide="eye"></i></div>
+                    <h4 class="mb-2">Honest by default</h4>
+                    <p style="font-size:.89rem;color:var(--text-secondary);line-height:1.75">
+                        We publish live range, not lab figures. Prices include tax. If a car is
+                        at 62%, the app says 62% — even when a rounder number would sell better.
+                    </p>
+                </article>
+
+                <article class="card card-hover" data-reveal data-reveal-delay="70">
+                    <div class="feat-icon blue mb-4"><i data-lucide="zap"></i></div>
+                    <h4 class="mb-2">Charging is part of the product</h4>
+                    <p style="font-size:.89rem;color:var(--text-secondary);line-height:1.75">
+                        A rental company that ignores charging has solved half the problem. We
+                        run our own network and integrate partner sites so one app covers the trip.
+                    </p>
+                </article>
+
+                <article class="card card-hover" data-reveal data-reveal-delay="140">
+                    <div class="feat-icon purple mb-4"><i data-lucide="leaf"></i></div>
+                    <h4 class="mb-2">Measured, not claimed</h4>
+                    <p style="font-size:.89rem;color:var(--text-secondary);line-height:1.75">
+                        Every CO₂ figure we publish is computed per trip from real distance and
+                        the grid mix at the time — audited annually, never estimated upward.
+                    </p>
+                </article>
+
+                <article class="card card-hover" data-reveal>
+                    <div class="feat-icon mb-4"><i data-lucide="users"></i></div>
+                    <h4 class="mb-2">Owners share the upside</h4>
+                    <p style="font-size:.89rem;color:var(--text-secondary);line-height:1.75">
+                        A third of our fleet belongs to individuals who list their EVs with us.
+                        They keep 82% of every booking and control their own pricing.
+                    </p>
+                </article>
+
+                <article class="card card-hover" data-reveal data-reveal-delay="70">
+                    <div class="feat-icon blue mb-4"><i data-lucide="shield-check"></i></div>
+                    <h4 class="mb-2">Safety isn't an add-on</h4>
+                    <p style="font-size:.89rem;color:var(--text-secondary);line-height:1.75">
+                        Insurance and roadside assistance are included on every booking, not sold
+                        as an upsell at the counter when you have no leverage.
+                    </p>
+                </article>
+
+                <article class="card card-hover" data-reveal data-reveal-delay="140">
+                    <div class="feat-icon purple mb-4"><i data-lucide="sun"></i></div>
+                    <h4 class="mb-2">Clean energy, actually</h4>
+                    <p style="font-size:.89rem;color:var(--text-secondary);line-height:1.75">
+                        72% of the electricity across our network is renewable, through direct
+                        PPAs rather than unbundled certificates. Target is 100% by 2028.
+                    </p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline -->
+    <section class="section">
+        <div class="container">
+            <div class="section-head centered" data-reveal>
+                <span class="eyebrow centered">Our story</span>
+                <h2 class="section-title">From one borrowed hatchback to a national network</h2>
+            </div>
+
+            <div style="max-width:760px;margin-inline:auto">
+                <div class="timeline" data-reveal>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2021</div>
+                        <h4>A frustrating weekend in Coorg</h4>
+                        <p>
+                            Our founders rented an EV for a weekend trip and spent four hours
+                            hunting for a working charger. The car was fine. Everything around
+                            the car was broken.
+                        </p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2022</div>
+                        <h4>Twelve cars, one spreadsheet</h4>
+                        <p>
+                            EVRide launched in Indiranagar with twelve vehicles and a booking
+                            system held together by a shared sheet. The first 500 trips taught us
+                            more than a year of planning had.
+                        </p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2023</div>
+                        <h4>The charging network begins</h4>
+                        <p>
+                            We stopped waiting for infrastructure to arrive and built our own —
+                            eight sites across Bengaluru, then partnerships that took the usable
+                            network past 600 points.
+                        </p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2024</div>
+                        <h4>Owners join the fleet</h4>
+                        <p>
+                            Individual EV owners began listing their cars. Supply grew four times
+                            in a year without us buying a single extra vehicle, and owners started
+                            earning from an asset that used to sit idle.
+                        </p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2025</div>
+                        <h4>Corporate and real-time telemetry</h4>
+                        <p>
+                            Live vehicle data went platform-wide, and the corporate product
+                            launched with 140 business accounts in its first nine months.
+                        </p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2026</div>
+                        <h4>Fourteen cities and counting</h4>
+                        <p>
+                            18,500 vehicles, 2,400 charging points, and 1.8 million kilograms of
+                            CO₂ that never made it into the air. Two more cities land this quarter.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team -->
+    <section class="section section-alt">
+        <div class="container">
+            <div class="section-head centered" data-reveal>
+                <span class="eyebrow centered">The team</span>
+                <h2 class="section-title">Who's building this</h2>
+                <p class="section-sub">
+                    Engineers, operators and energy people who got tired of waiting for someone
+                    else to fix it.
+                </p>
+            </div>
+
+            <div class="team-grid" id="teamGrid"></div>
+        </div>
+    </section>
+
+    <!-- Careers -->
+    <section class="section" id="careers">
+        <div class="container">
+            <div class="section-head spread" data-reveal>
+                <div class="section-head-text">
+                    <span class="eyebrow">Careers</span>
+                    <h2 class="section-title">Come build the grid we all need</h2>
+                    <p class="section-sub">
+                        Remote-friendly, Bengaluru-headquartered. We hire for judgement over
+                        pedigree and pay at the top of the local band.
+                    </p>
+                </div>
+                <a href="contact.html" class="btn btn-secondary">
+                    See all roles <i data-lucide="arrow-right"></i>
+                </a>
+            </div>
+
+            <div class="grid grid-2 gap-4" id="jobGrid"></div>
+        </div>
+    </section>
+
+    <!-- Press -->
+    <section class="section section-alt" id="press">
+        <div class="container">
+            <div class="section-head centered" data-reveal>
+                <span class="eyebrow centered">Press &amp; blog</span>
+                <h2 class="section-title">Latest from EVRide</h2>
+            </div>
+
+            <div class="grid grid-3 gap-5" id="pressGrid"></div>
+        </div>
+    </section>
+
+    <section class="section" style="padding-top:0">
+        <div class="container">
+            <div class="cta-band" data-reveal="zoom">
+                <div class="cta-inner">
+                    <h2 class="cta-title">Try it before you believe us</h2>
+                    <p class="cta-sub">
+                        40% off your first booking with code <strong class="text-green mono">EVRIDEFIRST</strong>.
+                    </p>
+                    <div class="cta-actions">
+                        <a href="404.html" class="btn btn-primary btn-lg">
+                            <i data-lucide="zap"></i> Book an EV
+                        </a>
+                        <a href="404.html" class="btn btn-secondary btn-lg">Get in touch</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<div id="footerSlot"></div>
+
+<script src="assets/vendor/lucide.min.js"></script>
+<script type="module" src="js/about.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Vehicles | Fleet Console | Stackly</title>
+    <meta name="description" content="Real-time EV fleet operations — vehicle status, battery health, utilisation, assignments and maintenance in one console.">
+    <meta name="theme-color" content="#050B10">
+    <meta name="robots" content="noindex">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/vehicles.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <link rel="icon" href="assets/images/favicon.png" type="image/png">
+</head>
+<body class="dash-body">
+<div class="preloader" id="preloader" role="status" aria-live="polite" aria-label="Loading">
+    <div class="preloader-inner">
+        <img src="assets/images/stackly-whitish_blue-logo.webp" alt="Stackly"
+             class="preloader-logo" width="320" height="132">
+        <div class="preloader-bar"></div>
+    </div>
+</div>
+
+
+<div class="dash-layout">
+    <div id="sidebarSlot"></div>
+
+    <div class="dash-main">
+        <div id="topbarSlot"></div>
+
+        <div class="dash-content">
+
+<section data-dash-section="vehicles">
+                <div class="dash-page-head">
+                    <div>
+                        <h1>Fleet vehicles</h1>
+                        <p>Every EV with live battery, location, status and health.</p>
+                    </div>
+                    <div class="flex gap-3 flex-wrap">
+                        <button class="btn btn-secondary" id="exportVehicles">
+                            <i data-lucide="download"></i> Export CSV
+                        </button>
+                        <button class="btn btn-primary" id="addVehicle">
+                            <i data-lucide="plus"></i> Add vehicle
+                        </button>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-head">
+                        <div class="flex gap-3 items-center flex-wrap" style="flex:1">
+                            <div class="input-icon" style="max-width:280px;flex:1">
+                                <i data-lucide="search"></i>
+                                <input type="search" class="input" id="fleetSearch" placeholder="Search vehicle, plate or driver">
+                            </div>
+                            <select class="select" id="fleetStatusFilter" style="width:auto;min-width:150px">
+                                <option value="">All statuses</option>
+                                <option value="available">Available</option>
+                                <option value="on_trip">On trip</option>
+                                <option value="charging">Charging</option>
+                                <option value="reserved">Reserved</option>
+                                <option value="maintenance">Maintenance</option>
+                            </select>
+                        </div>
+                        <span class="text-muted" style="font-size:.85rem">
+                            <strong class="text-primary" id="fleetRowCount">0</strong> vehicles
+                        </span>
+                    </div>
+                    <div class="panel-body flush">
+                        <div class="table-wrap" style="border:none;border-radius:0">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Vehicle</th>
+                                        <th>Driver / Owner</th>
+                                        <th>Battery</th>
+                                        <th>Range</th>
+                                        <th>Location</th>
+                                        <th>Status</th>
+                                        <th>Health</th>
+                                        <th>Updated</th>
+                                        <th style="text-align:right">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="fleetTable"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="panel-foot">
+                        <span class="text-muted" style="font-size:.82rem" id="fleetFootNote"></span>
+                        <span class="live-tag">Auto-refreshing</span>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+</div>
+
+<script src="assets/vendor/lucide.min.js"></script>
+<script type="module" src="js/fleet.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Users | Admin Console | Stackly</title>
+    <meta name="description" content="EVRide platform administration — users, fleet, bookings, charging network, payments and live operations.">
+    <meta name="theme-color" content="#050B10">
+    <meta name="robots" content="noindex">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/vehicles.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <link rel="icon" href="assets/images/favicon.png" type="image/png">
+</head>
+<body class="dash-body">
+<div class="preloader" id="preloader" role="status" aria-live="polite" aria-label="Loading">
+    <div class="preloader-inner">
+        <img src="assets/images/stackly-whitish_blue-logo.webp" alt="Stackly"
+             class="preloader-logo" width="320" height="132">
+        <div class="preloader-bar"></div>
+    </div>
+</div>
+
+
+<div class="dash-layout">
+    <div id="sidebarSlot"></div>
+
+    <div class="dash-main">
+        <div id="topbarSlot"></div>
+
+        <div class="dash-content">
+
+<section data-dash-section="users">
+                <div class="dash-page-head">
+                    <div>
+                        <h1>Users</h1>
+                        <p>Customers, owners, drivers and administrators.</p>
+                    </div>
+                    <button class="btn btn-primary" id="inviteUser">
+                        <i data-lucide="user-plus"></i> Invite user
+                    </button>
+                </div>
+
+                <div class="dash-grid-4" id="userStats"></div>
+
+                <div class="panel">
+                    <div class="panel-head">
+                        <div class="table-toolbar">
+                            <div class="input-icon" style="max-width:280px;flex:1">
+                                <i data-lucide="search"></i>
+                                <input type="search" class="input" id="userSearch" placeholder="Search name or email">
+                            </div>
+                            <select class="select" id="roleFilter" style="width:auto;min-width:140px">
+                                <option value="">All roles</option>
+                                <option value="customer">Customer</option>
+                                <option value="owner">EV Owner</option>
+                                <option value="driver">Driver</option>
+                                <option value="admin">Admin</option>
+                            </select>
+                        </div>
+                        <span class="text-muted" style="font-size:.85rem">
+                            <strong class="text-primary" id="userCount">0</strong> users
+                        </span>
+                    </div>
+                    <div class="panel-body flush">
+                        <div class="table-wrap" style="border:none;border-radius:0">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>User</th><th>Role</th><th>Bookings</th>
+                                        <th>Spend</th><th>Joined</th><th>Status</th>
+                                        <th style="text-align:right">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="usersTable"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+</div>
+
+<script src="assets/vendor/lucide.min.js"></script>
+<script type="module" src="js/admin.js"></script>
+
+</body>
+</html>

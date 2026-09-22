@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Reserve a Charging Slot | EVRide</title>
+    <meta name="description" content="Reserve an EV charging bay up to seven days in advance. Pick your station, charger type, date and time slot.">
+    <meta name="theme-color" content="#050B10">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/vehicles.css">
+    <link rel="stylesheet" href="css/booking.css">
+    <link rel="stylesheet" href="css/charging.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <link rel="icon" href="assets/images/favicon.png" type="image/png">
+</head>
+<body>
+<div class="preloader" id="preloader" role="status" aria-live="polite" aria-label="Loading">
+    <div class="preloader-inner">
+        <img src="assets/images/stackly-whitish_blue-logo.webp" alt="Stackly"
+             class="preloader-logo" width="320" height="132">
+        <div class="preloader-bar"></div>
+    </div>
+</div>
+
+
+<div id="navSlot"></div>
+
+<main id="main">
+
+    <header class="page-head" style="padding-bottom:var(--s-8)">
+        <div class="container">
+            <nav class="crumbs" aria-label="Breadcrumb">
+                <a href="index.html">Home</a>
+                <i data-lucide="chevron-right"></i>
+                <a href="charging-stations.html">Charging</a>
+                <i data-lucide="chevron-right"></i>
+                <span class="current">Reserve a Slot</span>
+            </nav>
+            <h1 class="page-head-title">Reserve a charging slot</h1>
+            <p class="page-head-sub">
+                Hold a bay up to seven days ahead. We keep it for fifteen minutes past your
+                slot start, and the ₹40 fee comes straight off your session cost.
+            </p>
+        </div>
+    </header>
+
+    <section class="section" style="padding-top:var(--s-10)">
+        <div class="container">
+            <div class="booking-layout">
+
+                <div class="booking-panel">
+                    <div class="booking-panel-head">
+                        <h2>Slot details</h2>
+                        <p>Choose where, when and which vehicle you're charging.</p>
+                    </div>
+
+                    <div class="booking-panel-body">
+
+                        <!-- Station -->
+                        <div class="bk-section">
+                            <div class="bk-section-title"><i data-lucide="zap"></i> Charging station</div>
+                            <div class="field">
+                                <label class="sr-only" for="resStation">Charging station</label>
+                                <select class="select" id="resStation"></select>
+                            </div>
+                            <div class="card-glass mt-4" id="stationPreview"></div>
+                        </div>
+
+                        <!-- Charger type -->
+                        <div class="bk-section">
+                            <div class="bk-section-title"><i data-lucide="plug"></i> Charger type</div>
+                            <div class="filter-chips" id="chargerTypes"></div>
+                        </div>
+
+                        <!-- Vehicle -->
+                        <div class="bk-section">
+                            <div class="bk-section-title"><i data-lucide="car"></i> Which vehicle?</div>
+                            <div class="field">
+                                <label class="sr-only" for="resVehicle">Vehicle</label>
+                                <select class="select" id="resVehicle"></select>
+                            </div>
+                            <div class="flex gap-4 mt-4 flex-wrap items-center" id="vehiclePreview"></div>
+                        </div>
+
+                        <!-- Date -->
+                        <div class="bk-section">
+                            <div class="bk-section-title"><i data-lucide="calendar"></i> Date</div>
+                            <div class="date-strip" id="dateStrip"></div>
+                        </div>
+
+                        <!-- Time slots -->
+                        <div class="bk-section">
+                            <div class="bk-section-title"><i data-lucide="clock"></i> Start time</div>
+                            <div class="slot-grid" id="slotGrid"></div>
+                            <div class="slot-legend">
+                                <span><span class="slot-swatch free"></span> Available</span>
+                                <span><span class="slot-swatch taken"></span> Fully booked</span>
+                                <span><span class="slot-swatch sel"></span> Your selection</span>
+                            </div>
+                        </div>
+
+                        <!-- Duration -->
+                        <div class="bk-section">
+                            <div class="bk-section-title"><i data-lucide="hourglass"></i> How long?</div>
+                            <div class="filter-chips" id="durationChips">
+                                <button class="chip" data-dur="30">30 min</button>
+                                <button class="chip active" data-dur="45">45 min</button>
+                                <button class="chip" data-dur="60">1 hour</button>
+                                <button class="chip" data-dur="90">1.5 hours</button>
+                                <button class="chip" data-dur="120">2 hours</button>
+                            </div>
+                            <p class="field-hint mt-3" id="durationHint"></p>
+                        </div>
+
+                        <!-- Target charge -->
+                        <div class="bk-section">
+                            <div class="bk-section-title"><i data-lucide="battery-charging"></i> Target charge</div>
+                            <div class="range-vals mb-2">
+                                <span id="socFrom">From —</span>
+                                <span id="socTo">To 80%</span>
+                            </div>
+                            <input type="range" class="range" id="targetSoc" min="50" max="100" step="5" value="80"
+                                   aria-label="Target state of charge">
+                            <p class="field-hint mt-2">
+                                Charging above 80% is much slower on DC. For a quick top-up, 80% is the sweet spot.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="booking-panel-foot">
+                        <a href="charging-stations.html" class="btn btn-secondary">
+                            <i data-lucide="arrow-left"></i> Back to stations
+                        </a>
+                        <button class="btn btn-primary btn-lg" id="reserveSlot">
+                            <i data-lucide="calendar-check"></i> Reserve Charging Slot
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Summary -->
+                <aside class="booking-summary-panel">
+                    <div class="bsp-body">
+                        <div class="bsp-title">Reservation summary</div>
+                        <div class="meta-list" id="resSummary"></div>
+
+                        <div class="divider"></div>
+
+                        <div class="bsp-title">Estimated cost</div>
+                        <div class="bsp-prices" id="resCost"></div>
+
+                        <div class="bsp-total">
+                            <span class="k">Estimated total</span>
+                            <span class="v" id="resTotal">—</span>
+                        </div>
+
+                        <p class="text-muted" style="font-size:.76rem;margin-top:10px;line-height:1.6">
+                            You're billed for the energy actually delivered. The estimate assumes
+                            your car charges at its normal rate for this station.
+                        </p>
+                    </div>
+
+                    <div class="trust-strip">
+                        <div class="trust-row"><i data-lucide="clock"></i> Bay held 15 min past slot start</div>
+                        <div class="trust-row"><i data-lucide="rotate-ccw"></i> Free cancellation up to 1 hour before</div>
+                        <div class="trust-row"><i data-lucide="receipt"></i> ₹40 fee credited to your session</div>
+                    </div>
+                </aside>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Existing reservations -->
+    <section class="section section-alt" id="existingSection" hidden>
+        <div class="container">
+            <div class="section-head spread">
+                <div class="section-head-text">
+                    <span class="eyebrow">Upcoming</span>
+                    <h2 class="section-title">Your charging reservations</h2>
+                </div>
+            </div>
+            <div class="grid grid-3 gap-5" id="existingList"></div>
+        </div>
+    </section>
+
+</main>
+
+<div id="footerSlot"></div>
+
+<script src="assets/vendor/lucide.min.js"></script>
+<script type="module" src="js/reservation.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Invoices | EVRide</title>
+    <meta name="description" content="View, download and print your EVRide invoices and payment receipts.">
+    <meta name="theme-color" content="#050B10">
+    <meta name="robots" content="noindex">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/vehicles.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/booking.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <link rel="icon" href="assets/images/favicon.png" type="image/png">
+</head>
+<body class="dash-body">
+<div class="preloader" id="preloader" role="status" aria-live="polite" aria-label="Loading">
+    <div class="preloader-inner">
+        <img src="assets/images/stackly-whitish_blue-logo.webp" alt="Stackly"
+             class="preloader-logo" width="320" height="132">
+        <div class="preloader-bar"></div>
+    </div>
+</div>
+
+
+<div class="dash-layout">
+    <div id="sidebarSlot"></div>
+
+    <div class="dash-main">
+        <div id="topbarSlot"></div>
+
+        <div class="dash-content">
+
+            <!-- ============ LIST ============ -->
+            <section data-dash-section="invoices">
+                <div class="dash-page-head">
+                    <div>
+                        <h1>Invoices</h1>
+                        <p>Every receipt for bookings and charging on your account.</p>
+                    </div>
+                    <div class="flex gap-3 flex-wrap">
+                        <button class="btn btn-secondary" id="exportInvoices">
+                            <i data-lucide="download"></i> Export CSV
+                        </button>
+                    </div>
+                </div>
+
+                <div class="dash-grid-4" id="invoiceStats"></div>
+
+                <div class="panel">
+                    <div class="panel-head">
+                        <div class="table-toolbar">
+                            <div class="input-icon" style="max-width:280px;flex:1">
+                                <i data-lucide="search"></i>
+                                <input type="search" class="input" id="invSearch"
+                                       placeholder="Search invoice or booking ID">
+                            </div>
+                            <select class="select" id="invStatusFilter" style="width:auto;min-width:140px">
+                                <option value="">All statuses</option>
+                                <option value="paid">Paid</option>
+                                <option value="pending">Pending</option>
+                                <option value="refunded">Refunded</option>
+                                <option value="failed">Failed</option>
+                            </select>
+                        </div>
+                        <span class="text-muted" style="font-size:.85rem">
+                            <strong class="text-primary" id="invCount">0</strong> invoices
+                        </span>
+                    </div>
+
+                    <div class="panel-body flush">
+                        <div id="invoiceList"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============ DETAIL ============ -->
+            <section data-dash-section="detail" hidden>
+                <div class="dash-page-head no-print">
+                    <div>
+                        <button class="btn-link mb-3" id="backToList">
+                            <i data-lucide="arrow-left"></i> All invoices
+                        </button>
+                        <h1 id="detailTitle">Invoice</h1>
+                        <p id="detailSub">—</p>
+                    </div>
+                    <div class="flex gap-3 flex-wrap">
+                        <button class="btn btn-secondary" id="printInvoice">
+                            <i data-lucide="printer"></i> Print
+                        </button>
+                        <button class="btn btn-primary" id="downloadInvoice">
+                            <i data-lucide="download"></i> Download
+                        </button>
+                    </div>
+                </div>
+
+                <div id="invoiceDoc"></div>
+            </section>
+
+        </div>
+    </div>
+</div>
+
+<script src="assets/vendor/lucide.min.js"></script>
+<script type="module" src="js/invoices.js"></script>
+
+</body>
+</html>

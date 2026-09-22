@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Contact Us | EVRide</title>
+    <meta name="description" content="Get in touch with EVRide — support, sales, partnerships and 24/7 emergency assistance.">
+    <meta name="theme-color" content="#050B10">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/vehicles.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/pages.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <link rel="icon" href="assets/images/favicon.png" type="image/png">
+</head>
+<body>
+<div class="preloader" id="preloader" role="status" aria-live="polite" aria-label="Loading">
+    <div class="preloader-inner">
+        <img src="assets/images/stackly-whitish_blue-logo.webp" alt="Stackly"
+             class="preloader-logo" width="320" height="132">
+        <div class="preloader-bar"></div>
+    </div>
+</div>
+
+
+<div id="navSlot"></div>
+
+<main id="main">
+
+    <header class="page-head">
+        <div class="orb orb-green" style="width:500px;height:500px;top:-60%;right:-6%" aria-hidden="true"></div>
+        <div class="container">
+            <nav class="crumbs" aria-label="Breadcrumb">
+                <a href="index.html">Home</a>
+                <i data-lucide="chevron-right"></i>
+                <span class="current">Contact</span>
+            </nav>
+            <h1 class="page-head-title">Get in touch</h1>
+            <p class="page-head-sub">
+                Real people, fast replies. Support answers in under two minutes, any hour of
+                the day.
+            </p>
+        </div>
+    </header>
+
+    <!-- Emergency band -->
+    <section style="padding-top:var(--s-10)">
+        <div class="container">
+            <div class="emergency-band alert-pulse" data-reveal>
+                <div class="emergency-icon"><i data-lucide="life-buoy"></i></div>
+                <div class="emergency-copy">
+                    <h3 class="emergency-title">Emergency or breakdown?</h3>
+                    <p class="emergency-text">
+                        Don't use this form. Call our 24/7 line — we can already see your
+                        vehicle's live location and state of charge.
+                    </p>
+                </div>
+                <a href="tel:18008658110" class="btn btn-danger btn-lg">
+                    <i data-lucide="phone-call"></i> 1800-EVRIDE-911
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact form + methods -->
+    <section class="section">
+        <div class="container">
+            <div class="contact-layout">
+
+                <div data-reveal="left">
+                    <div class="card contact-form-card">
+                        <h2 class="contact-form-title">Send us a message</h2>
+                        <p class="text-muted mb-6" style="font-size:.9rem">
+                            We reply to everything within one working day, usually much sooner.
+                        </p>
+
+                        <form id="contactForm" class="flex flex-col gap-5" novalidate>
+                            <div class="field">
+                                <label class="label">What's this about?</label>
+                                <div class="filter-chips" id="topicPicker">
+                                    <button type="button" class="chip active" data-topic="support">Support</button>
+                                    <button type="button" class="chip" data-topic="booking">A booking</button>
+                                    <button type="button" class="chip" data-topic="billing">Billing</button>
+                                    <button type="button" class="chip" data-topic="corporate">Corporate</button>
+                                    <button type="button" class="chip" data-topic="partner">Partnership</button>
+                                    <button type="button" class="chip" data-topic="press">Press</button>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-2 gap-4">
+                                <div class="field">
+                                    <label class="label" for="ctName">Your name <span class="req">*</span></label>
+                                    <input type="text" class="input" id="ctName" placeholder="Full name" autocomplete="name">
+                                    <span class="field-error"><i data-lucide="alert-circle" style="width:12px;height:12px"></i> Enter your name</span>
+                                </div>
+                                <div class="field">
+                                    <label class="label" for="ctEmail">Email <span class="req">*</span></label>
+                                    <input type="email" class="input" id="ctEmail" placeholder="you@example.com" autocomplete="email">
+                                    <span class="field-error"><i data-lucide="alert-circle" style="width:12px;height:12px"></i> Enter a valid email</span>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-2 gap-4">
+                                <div class="field">
+                                    <label class="label" for="ctPhone">Phone <span class="field-hint" style="display:inline">(optional)</span></label>
+                                    <input type="tel" class="input" id="ctPhone" placeholder="+91 98765 43210" autocomplete="tel">
+                                </div>
+                                <div class="field" id="bookingField" style="display:none">
+                                    <label class="label" for="ctBooking">Booking ID</label>
+                                    <input type="text" class="input" id="ctBooking" placeholder="EV2048">
+                                </div>
+                            </div>
+
+                            <div class="field">
+                                <label class="label" for="ctSubject">Subject <span class="req">*</span></label>
+                                <input type="text" class="input" id="ctSubject" placeholder="A one-line summary">
+                                <span class="field-error"><i data-lucide="alert-circle" style="width:12px;height:12px"></i> Add a subject</span>
+                            </div>
+
+                            <div class="field">
+                                <label class="label" for="ctMessage">Message <span class="req">*</span></label>
+                                <textarea class="textarea" id="ctMessage" rows="6"
+                                    placeholder="Tell us what's going on. The more detail, the faster we can help."></textarea>
+                                <div class="flex justify-between">
+                                    <span class="field-error"><i data-lucide="alert-circle" style="width:12px;height:12px"></i> Please add a message</span>
+                                    <span class="field-hint" id="charCount">0 / 1000</span>
+                                </div>
+                            </div>
+
+                            <label class="check">
+                                <input type="checkbox" id="ctConsent">
+                                <span>I agree to EVRide storing this message so the team can respond.</span>
+                            </label>
+
+                            <button type="submit" class="btn btn-primary btn-lg" id="ctSubmit">
+                                <i data-lucide="send"></i> Send message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <aside class="contact-aside" data-reveal="right">
+                    <div class="card">
+                        <div class="card-head">
+                            <div class="card-title">Support hours</div>
+                            <span class="badge badge-green" id="openNow">Open now</span>
+                        </div>
+                        <div class="office-hours" id="hoursList"></div>
+                        <p class="text-muted mt-4 contact-note">
+                            Emergency and roadside assistance operate 24 hours a day, every day,
+                            including public holidays.
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-head">
+                            <div class="card-title">Head office</div>
+                        </div>
+                        <p class="contact-address">
+                            EVRide Mobility Tower<br>
+                            100 Feet Road, Indiranagar<br>
+                            Bengaluru 560038, Karnataka<br>
+                            India
+                        </p>
+                        <div class="map map-sm contact-map" id="officeMap"></div>
+                        <button class="btn btn-secondary btn-sm btn-block mt-4" id="directionsBtn">
+                            <i data-lucide="navigation"></i> Get directions
+                        </button>
+                    </div>
+                </aside>
+
+            </div>
+
+            <!-- Ways to reach us — a full-width row, so five cards do not
+                 tower over the form when stacked in the aside. -->
+            <div class="contact-ways" data-reveal>
+                <h2 class="contact-ways-title">Other ways to reach us</h2>
+                <div class="contact-methods">
+                    <div class="contact-method">
+                        <span class="contact-method-icon"><i data-lucide="message-circle"></i></span>
+                        <div class="contact-method-body">
+                            <h5>Live chat</h5>
+                            <p>Fastest route to a human. Average first reply under two minutes.</p>
+                            <a href="support.html#chat">Start a chat →</a>
+                        </div>
+                    </div>
+                    <div class="contact-method">
+                        <span class="contact-method-icon blue"><i data-lucide="mail"></i></span>
+                        <div class="contact-method-body">
+                            <h5>Email</h5>
+                            <p>For anything that isn't urgent. We reply within one working day.</p>
+                            <a href="mailto:hello@evride.in">hello@evride.in</a>
+                        </div>
+                    </div>
+                    <div class="contact-method">
+                        <span class="contact-method-icon purple"><i data-lucide="phone"></i></span>
+                        <div class="contact-method-body">
+                            <h5>Phone</h5>
+                            <p>General enquiries, Monday to Saturday, 8am to 9pm.</p>
+                            <a href="tel:+918045678900">+91 80 4567 8900</a>
+                        </div>
+                    </div>
+                    <div class="contact-method">
+                        <span class="contact-method-icon danger"><i data-lucide="life-buoy"></i></span>
+                        <div class="contact-method-body">
+                            <h5>Emergency &amp; roadside</h5>
+                            <p>Accidents, breakdowns and out-of-charge situations. Always open.</p>
+                            <a href="tel:18008658110">1800-EVRIDE-911</a>
+                        </div>
+                    </div>
+                    <div class="contact-method">
+                        <span class="contact-method-icon"><i data-lucide="briefcase"></i></span>
+                        <div class="contact-method-body">
+                            <h5>Corporate sales</h5>
+                            <p>Fleet solutions for teams of five or more.</p>
+                            <a href="corporate.html">Request a proposal →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FAQ shortcut -->
+    <section class="section section-alt">
+        <div class="container">
+            <div class="section-head centered" data-reveal>
+                <span class="eyebrow centered">Before you write</span>
+                <h2 class="section-title">These come up most often</h2>
+                <p class="section-sub">
+                    There's a good chance your answer is already here — it'll be faster than waiting for us.
+                </p>
+            </div>
+
+            <div class="container-narrow" style="padding:0">
+                <div class="accordion" data-single="true" id="contactFaq"></div>
+            </div>
+
+            <div class="text-center mt-8">
+                <a href="404.html" class="btn btn-secondary">
+                    <i data-lucide="help-circle"></i> Browse all FAQs
+                </a>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<div id="footerSlot"></div>
+
+<script src="assets/vendor/lucide.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script type="module" src="js/contact.js"></script>
+
+</body>
+</html>

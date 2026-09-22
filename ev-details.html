@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Vehicle Details | EVRide</title>
+    <meta name="description" content="Full specifications, live battery level, real remaining range and current location for this electric vehicle. Reserve in seconds.">
+    <meta name="theme-color" content="#050B10">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/vehicles.css">
+    <link rel="stylesheet" href="css/booking.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <link rel="icon" href="assets/images/favicon.png" type="image/png">
+</head>
+<body>
+<div class="preloader" id="preloader" role="status" aria-live="polite" aria-label="Loading">
+    <div class="preloader-inner">
+        <img src="assets/images/stackly-whitish_blue-logo.webp" alt="Stackly"
+             class="preloader-logo" width="320" height="132">
+        <div class="preloader-bar"></div>
+    </div>
+</div>
+
+
+<div id="navSlot"></div>
+
+<main id="main">
+
+    <div class="container" style="padding-top:calc(var(--nav-h) + var(--s-8))">
+        <nav class="crumbs mb-6" aria-label="Breadcrumb">
+            <a href="index.html">Home</a>
+            <i data-lucide="chevron-right"></i>
+            <a href="404.html">Explore EVs</a>
+            <i data-lucide="chevron-right"></i>
+            <span class="current" id="crumbName">Vehicle</span>
+        </nav>
+    </div>
+
+    <section style="padding-bottom:var(--s-20)">
+        <div class="container">
+            <div class="detail-layout" id="detailLayout">
+                <!-- Populated by JS -->
+                <div>
+                    <div class="skeleton" style="aspect-ratio:16/9;border-radius:28px;margin-bottom:12px"></div>
+                    <div class="grid grid-4 gap-3">
+                        <div class="skeleton" style="aspect-ratio:16/10;border-radius:14px"></div>
+                        <div class="skeleton" style="aspect-ratio:16/10;border-radius:14px"></div>
+                        <div class="skeleton" style="aspect-ratio:16/10;border-radius:14px"></div>
+                        <div class="skeleton" style="aspect-ratio:16/10;border-radius:14px"></div>
+                    </div>
+                </div>
+                <div class="skeleton" style="height:520px;border-radius:28px"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Similar vehicles -->
+    <section class="section section-alt" id="similarSection" hidden>
+        <div class="container">
+            <div class="section-head spread">
+                <div class="section-head-text">
+                    <span class="eyebrow">You might also like</span>
+                    <h2 class="section-title">Similar electric vehicles</h2>
+                </div>
+                <a href="explore-evs.html" class="btn btn-secondary">
+                    Browse all <i data-lucide="arrow-right"></i>
+                </a>
+            </div>
+            <div class="v-grid" id="similarGrid"></div>
+        </div>
+    </section>
+
+</main>
+
+<div id="footerSlot"></div>
+
+<!-- 360 view modal -->
+<div class="modal-backdrop" id="view360Modal">
+    <div class="modal modal-lg" role="dialog" aria-modal="true" aria-labelledby="view360Title">
+        <div class="modal-head">
+            <div>
+                <h4 class="modal-title" id="view360Title">360° interior &amp; exterior</h4>
+                <p class="modal-sub">Drag to rotate</p>
+            </div>
+            <button class="modal-close" data-modal-close aria-label="Close"><i data-lucide="x"></i></button>
+        </div>
+        <div class="modal-body">
+            <div id="view360Stage" style="aspect-ratio:16/9;border-radius:14px;overflow:hidden;background:var(--card-light);position:relative;cursor:grab">
+                <img id="view360Img" src="" alt="360 degree vehicle view" style="width:100%;height:100%;object-fit:cover;pointer-events:none">
+                <div style="position:absolute;bottom:14px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:8px;padding:8px 16px;border-radius:999px;background:rgba(5,11,16,.82);backdrop-filter:blur(10px);border:1px solid var(--border);font-size:.8rem;color:var(--text-secondary)">
+                    <i data-lucide="move-horizontal" style="width:15px;height:15px;color:var(--primary)"></i>
+                    Drag to rotate the vehicle
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Review modal -->
+<div class="modal-backdrop" id="reviewModal">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="reviewModalTitle">
+        <div class="modal-head">
+            <div>
+                <h4 class="modal-title" id="reviewModalTitle">Write a review</h4>
+                <p class="modal-sub">Share your experience with this vehicle</p>
+            </div>
+            <button class="modal-close" data-modal-close aria-label="Close"><i data-lucide="x"></i></button>
+        </div>
+        <div class="modal-body">
+            <div class="field mb-5">
+                <label class="label">Overall rating</label>
+                <div class="flex gap-2" id="ratingPicker" role="radiogroup" aria-label="Overall rating">
+                    <button class="btn-icon btn-sm" data-star="1" aria-label="1 star"><i data-lucide="star"></i></button>
+                    <button class="btn-icon btn-sm" data-star="2" aria-label="2 stars"><i data-lucide="star"></i></button>
+                    <button class="btn-icon btn-sm" data-star="3" aria-label="3 stars"><i data-lucide="star"></i></button>
+                    <button class="btn-icon btn-sm" data-star="4" aria-label="4 stars"><i data-lucide="star"></i></button>
+                    <button class="btn-icon btn-sm" data-star="5" aria-label="5 stars"><i data-lucide="star"></i></button>
+                </div>
+            </div>
+            <div class="field mb-5">
+                <label class="label" for="reviewName">Your name</label>
+                <input type="text" class="input" id="reviewName" placeholder="How should we credit you?">
+            </div>
+            <div class="field mb-5">
+                <label class="label" for="reviewText">Your review</label>
+                <textarea class="textarea" id="reviewText" placeholder="How was the vehicle? Was the range accurate? How was pickup?"></textarea>
+            </div>
+            <div class="field">
+                <label class="label">Add photos</label>
+                <button class="btn btn-secondary btn-block" type="button" id="reviewPhotos">
+                    <i data-lucide="image-plus"></i> Upload photos
+                </button>
+                <span class="field-hint">Up to 5 images, 10 MB each.</span>
+            </div>
+        </div>
+        <div class="modal-foot">
+            <button class="btn btn-secondary" data-modal-close>Cancel</button>
+            <button class="btn btn-primary" id="submitReview">Post review</button>
+        </div>
+    </div>
+</div>
+
+<script src="assets/vendor/lucide.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script type="module" src="js/details.js"></script>
+
+</body>
+</html>

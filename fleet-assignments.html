@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Assignments | Fleet Console | Stackly</title>
+    <meta name="description" content="Real-time EV fleet operations — vehicle status, battery health, utilisation, assignments and maintenance in one console.">
+    <meta name="theme-color" content="#050B10">
+    <meta name="robots" content="noindex">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/vehicles.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <link rel="icon" href="assets/images/favicon.png" type="image/png">
+</head>
+<body class="dash-body">
+<div class="preloader" id="preloader" role="status" aria-live="polite" aria-label="Loading">
+    <div class="preloader-inner">
+        <img src="assets/images/stackly-whitish_blue-logo.webp" alt="Stackly"
+             class="preloader-logo" width="320" height="132">
+        <div class="preloader-bar"></div>
+    </div>
+</div>
+
+
+<div class="dash-layout">
+    <div id="sidebarSlot"></div>
+
+    <div class="dash-main">
+        <div id="topbarSlot"></div>
+
+        <div class="dash-content">
+
+<section data-dash-section="assignments">
+                <div class="dash-page-head">
+                    <div>
+                        <h1>Assignments</h1>
+                        <p>Which driver is in which vehicle, and what's unassigned.</p>
+                    </div>
+                    <button class="btn btn-primary" id="autoAssign">
+                        <i data-lucide="wand-2"></i> Auto-assign
+                    </button>
+                </div>
+                <div class="dash-grid-2" id="assignmentGrid"></div>
+            </section>
+
+        </div>
+    </div>
+</div>
+
+<script src="assets/vendor/lucide.min.js"></script>
+<script type="module" src="js/fleet.js"></script>
+
+</body>
+</html>

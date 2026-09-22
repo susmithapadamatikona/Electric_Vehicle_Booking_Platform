@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Charging Station Details | EVRide</title>
+    <meta name="description" content="Live bay availability, charging speeds, connector types, pricing and amenities for this EV charging station.">
+    <meta name="theme-color" content="#050B10">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/vehicles.css">
+    <link rel="stylesheet" href="css/charging.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <link rel="icon" href="assets/images/favicon.png" type="image/png">
+</head>
+<body>
+<div class="preloader" id="preloader" role="status" aria-live="polite" aria-label="Loading">
+    <div class="preloader-inner">
+        <img src="assets/images/stackly-whitish_blue-logo.webp" alt="Stackly"
+             class="preloader-logo" width="320" height="132">
+        <div class="preloader-bar"></div>
+    </div>
+</div>
+
+
+<div id="navSlot"></div>
+
+<main id="main">
+
+    <div class="container" style="padding-top:calc(var(--nav-h) + var(--s-8))">
+        <nav class="crumbs mb-6" aria-label="Breadcrumb">
+            <a href="index.html">Home</a>
+            <i data-lucide="chevron-right"></i>
+            <a href="charging-stations.html">Charging</a>
+            <i data-lucide="chevron-right"></i>
+            <span class="current" id="crumbName">Station</span>
+        </nav>
+    </div>
+
+    <section style="padding-bottom:var(--s-20)">
+        <div class="container">
+            <div id="stationContent">
+                <div class="skeleton" style="aspect-ratio:21/9;border-radius:28px;margin-bottom:24px"></div>
+                <div class="skeleton sk-text w-40"></div>
+                <div class="skeleton sk-text w-60" style="height:24px"></div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<div id="footerSlot"></div>
+
+<script src="assets/vendor/lucide.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script type="module" src="js/station-details.js"></script>
+
+</body>
+</html>

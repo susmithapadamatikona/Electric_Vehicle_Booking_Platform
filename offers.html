@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Offers &amp; Deals | EVRide</title>
+    <meta name="description" content="Save on EV rentals and charging with EVRide offers — first ride discounts, weekend deals, long-term rates and corporate packages.">
+    <meta name="theme-color" content="#050B10">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/vehicles.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/pages.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <link rel="icon" href="assets/images/favicon.png" type="image/png">
+</head>
+<body>
+<div class="preloader" id="preloader" role="status" aria-live="polite" aria-label="Loading">
+    <div class="preloader-inner">
+        <img src="assets/images/stackly-whitish_blue-logo.webp" alt="Stackly"
+             class="preloader-logo" width="320" height="132">
+        <div class="preloader-bar"></div>
+    </div>
+</div>
+
+
+<div id="navSlot"></div>
+
+<main id="main">
+
+    <header class="page-head">
+        <div class="orb orb-green" style="width:520px;height:520px;top:-60%;right:-6%" aria-hidden="true"></div>
+        <div class="container">
+            <nav class="crumbs" aria-label="Breadcrumb">
+                <a href="index.html">Home</a>
+                <i data-lucide="chevron-right"></i>
+                <span class="current">Offers</span>
+            </nav>
+            <h1 class="page-head-title">Offers &amp; deals</h1>
+            <p class="page-head-sub">
+                Real discounts with plain terms. Apply any code at checkout — we'll tell you
+                immediately if it stacks with what you've already got.
+            </p>
+        </div>
+    </header>
+
+    <!-- Featured offer -->
+    <section class="section" style="padding-top:var(--s-12)">
+        <div class="container">
+            <div class="featured-offer" data-reveal="zoom">
+                <div class="featured-offer-body">
+                    <span class="badge badge-solid mb-4">Limited time</span>
+                    <h2 style="font-size:clamp(1.8rem,3.4vw,2.6rem);margin-bottom:16px">
+                        Your first electric drive is <span class="text-gradient">40% off</span>
+                    </h2>
+                    <p style="font-size:1.02rem;color:var(--text-secondary);line-height:1.75;margin-bottom:28px;max-width:520px">
+                        New to EVRide? Use code <strong class="text-green mono">EVRIDEFIRST</strong> on your
+                        first booking and start with a complimentary full charge. No deposit for
+                        first-time members.
+                    </p>
+
+                    <div class="countdown mb-8" id="featuredCountdown">
+                        <div class="countdown-cell"><strong data-cd="days">00</strong><span>Days</span></div>
+                        <div class="countdown-cell"><strong data-cd="hours">00</strong><span>Hours</span></div>
+                        <div class="countdown-cell"><strong data-cd="mins">00</strong><span>Minutes</span></div>
+                        <div class="countdown-cell"><strong data-cd="secs">00</strong><span>Seconds</span></div>
+                    </div>
+
+                    <div class="flex gap-3 flex-wrap">
+                        <a href="404.html" class="btn btn-primary btn-lg">
+                            <i data-lucide="zap"></i> Claim this offer
+                        </a>
+                        <button class="btn btn-secondary btn-lg" data-copy-code="EVRIDEFIRST">
+                            <i data-lucide="copy"></i> Copy code
+                        </button>
+                    </div>
+                </div>
+                <div class="featured-offer-visual" aria-hidden="true">
+                    <div class="discount-ring">
+                        <span class="discount-val">40<small>%</small></span>
+                        <span class="discount-label">OFF</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- All offers -->
+    <section class="section" style="padding-top:0">
+        <div class="container">
+            <div class="section-head spread" data-reveal>
+                <div class="section-head-text">
+                    <span class="eyebrow">All offers</span>
+                    <h2 class="section-title">Every discount, in one place</h2>
+                </div>
+                <div class="flex gap-2 flex-wrap" id="offerFilters">
+                    <button class="chip active" data-of="all">All</button>
+                    <button class="chip" data-of="New Users">New users</button>
+                    <button class="chip" data-of="Weekends">Weekends</button>
+                    <button class="chip" data-of="Monthly">Long term</button>
+                    <button class="chip" data-of="Business">Business</button>
+                    <button class="chip" data-of="Charging">Charging</button>
+                </div>
+            </div>
+
+            <div class="offer-grid" id="offerGrid"></div>
+        </div>
+    </section>
+
+    <!-- Subscription plans -->
+    <section class="section section-alt" id="subscription">
+        <div class="container">
+            <div class="section-head centered" data-reveal>
+                <span class="eyebrow centered">Monthly Subscription</span>
+                <h2 class="section-title">Drive electric every day for less</h2>
+                <p class="section-sub">
+                    A car when you want one, without owning one. Insurance, servicing and
+                    roadside assistance included in every plan.
+                </p>
+            </div>
+
+            <div class="plan-grid" id="planGrid"></div>
+
+            <p class="text-center text-muted mt-8" style="font-size:.85rem">
+                All plans include insurance, scheduled maintenance and 24/7 roadside assistance.
+                Cancel with 30 days' notice — no exit fee.
+            </p>
+        </div>
+    </section>
+
+    <!-- Referral -->
+    <section class="section">
+        <div class="container">
+            <div class="referral-band" data-reveal>
+                <div>
+                    <span class="eyebrow">Referral programme</span>
+                    <h2 class="section-title" style="font-size:clamp(1.6rem,3vw,2.2rem)">
+                        Give ₹500, get ₹500
+                    </h2>
+                    <p style="font-size:.98rem;color:var(--text-secondary);line-height:1.75;margin-bottom:24px;max-width:480px">
+                        Share your code with a friend. They get ₹500 off their first booking,
+                        and you get ₹500 in credit the moment they complete their first trip.
+                        No limit on how many people you refer.
+                    </p>
+
+                    <div class="referral-code-box">
+                        <div>
+                            <small>Your referral code</small>
+                            <strong class="mono" id="referralCode">EVRIDE-SP4821</strong>
+                        </div>
+                        <button class="btn btn-primary btn-sm" data-copy-code="EVRIDE-SP4821">
+                            <i data-lucide="copy"></i> Copy
+                        </button>
+                    </div>
+
+                    <div class="flex gap-2 mt-5 flex-wrap">
+                        <button class="btn btn-secondary btn-sm" data-share="whatsapp">
+                            <i data-lucide="message-circle"></i> WhatsApp
+                        </button>
+                        <button class="btn btn-secondary btn-sm" data-share="email">
+                            <i data-lucide="mail"></i> Email
+                        </button>
+                        <button class="btn btn-secondary btn-sm" data-share="link">
+                            <i data-lucide="link"></i> Copy link
+                        </button>
+                    </div>
+                </div>
+
+                <div class="referral-stats">
+                    <div class="referral-stat">
+                        <strong>7</strong>
+                        <span>Friends referred</span>
+                    </div>
+                    <div class="referral-stat">
+                        <strong>₹3,500</strong>
+                        <span>Credit earned</span>
+                    </div>
+                    <div class="referral-stat">
+                        <strong>₹1,240</strong>
+                        <span>Available now</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Terms -->
+    <section class="section section-alt">
+        <div class="container-narrow">
+            <div class="section-head centered" data-reveal>
+                <span class="eyebrow centered">The fine print</span>
+                <h2 class="section-title">How our offers work</h2>
+            </div>
+
+            <div class="accordion" data-single="true" data-reveal>
+                <div class="acc-item">
+                    <button class="acc-head"><span>Can I use more than one code on a booking?</span>
+                        <span class="acc-icon"><i data-lucide="chevron-down"></i></span></button>
+                    <div class="acc-body"><div class="acc-body-inner">
+                        One promo code per booking. Automatic discounts — like the 12% long-rental
+                        reduction — do stack on top of a promo code, and we always apply the
+                        combination that costs you least.
+                    </div></div>
+                </div>
+                <div class="acc-item">
+                    <button class="acc-head"><span>When is a discount actually applied?</span>
+                        <span class="acc-icon"><i data-lucide="chevron-down"></i></span></button>
+                    <div class="acc-body"><div class="acc-body-inner">
+                        Discounts apply to the rental subtotal before tax. Taxes are calculated on
+                        the discounted amount, so a promo code reduces your GST too. Security
+                        deposits are never discounted — they're refundable in full.
+                    </div></div>
+                </div>
+                <div class="acc-item">
+                    <button class="acc-head"><span>What happens to my discount if I cancel?</span>
+                        <span class="acc-icon"><i data-lucide="chevron-down"></i></span></button>
+                    <div class="acc-body"><div class="acc-body-inner">
+                        Cancel within the free window and single-use codes are returned to your
+                        account for next time. Cancel outside it and the code is consumed, though
+                        support can usually reinstate it once as a goodwill gesture.
+                    </div></div>
+                </div>
+                <div class="acc-item">
+                    <button class="acc-head"><span>Do referral credits expire?</span>
+                        <span class="acc-icon"><i data-lucide="chevron-down"></i></span></button>
+                    <div class="acc-body"><div class="acc-body-inner">
+                        Referral credit is valid for 90 days from the date it lands in your account.
+                        It applies automatically at checkout, oldest credit first, so nothing goes
+                        to waste.
+                    </div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<div id="footerSlot"></div>
+
+<script src="assets/vendor/lucide.min.js"></script>
+<script type="module" src="js/offers.js"></script>
+
+</body>
+</html>

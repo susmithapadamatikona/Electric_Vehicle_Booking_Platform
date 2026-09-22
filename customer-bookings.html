@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>My Bookings | My Account | Stackly</title>
+    <meta name="description" content="Manage your EV bookings, track active trips, view invoices and control your EVRide account.">
+    <meta name="theme-color" content="#050B10">
+    <meta name="robots" content="noindex">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/vehicles.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <link rel="icon" href="assets/images/favicon.png" type="image/png">
+</head>
+<body class="dash-body">
+<div class="preloader" id="preloader" role="status" aria-live="polite" aria-label="Loading">
+    <div class="preloader-inner">
+        <img src="assets/images/stackly-whitish_blue-logo.webp" alt="Stackly"
+             class="preloader-logo" width="320" height="132">
+        <div class="preloader-bar"></div>
+    </div>
+</div>
+
+
+<div class="dash-layout">
+    <div id="sidebarSlot"></div>
+
+    <div class="dash-main">
+        <div id="topbarSlot"></div>
+
+        <div class="dash-content">
+
+<section data-dash-section="bookings">
+                <div class="dash-page-head">
+                    <div>
+                        <h1>My bookings</h1>
+                        <p>Every trip you've booked, past and upcoming.</p>
+                    </div>
+                    <a href="explore-evs.html" class="btn btn-primary">
+                        <i data-lucide="plus"></i> New booking
+                    </a>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-head">
+                        <div class="segment" id="bookingFilter" role="group" aria-label="Filter bookings">
+                            <button class="active" data-bfilter="all">All</button>
+                            <button data-bfilter="active">Active</button>
+                            <button data-bfilter="upcoming">Upcoming</button>
+                            <button data-bfilter="completed">Completed</button>
+                            <button data-bfilter="cancelled">Cancelled</button>
+                        </div>
+                        <span class="text-muted" style="font-size:.85rem">
+                            <strong class="text-primary" id="bookingCount">0</strong> bookings
+                        </span>
+                    </div>
+                    <div class="panel-body flush">
+                        <div class="table-wrap" style="border:none;border-radius:0">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Booking</th>
+                                        <th>Vehicle</th>
+                                        <th>Pickup</th>
+                                        <th>Dates</th>
+                                        <th>Duration</th>
+                                        <th>Amount</th>
+                                        <th>Status</th>
+                                        <th style="text-align:right">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="bookingsTable"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+</div>
+
+<script src="assets/vendor/lucide.min.js"></script>
+<script type="module" src="js/customer.js"></script>
+
+</body>
+</html>

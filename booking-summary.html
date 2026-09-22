@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Review Your Booking | EVRide</title>
+    <meta name="description" content="Review your electric vehicle booking details, price breakdown and policies before payment.">
+    <meta name="theme-color" content="#050B10">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/vehicles.css">
+    <link rel="stylesheet" href="css/booking.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <link rel="icon" href="assets/images/favicon.png" type="image/png">
+</head>
+<body>
+<div class="preloader" id="preloader" role="status" aria-live="polite" aria-label="Loading">
+    <div class="preloader-inner">
+        <img src="assets/images/stackly-whitish_blue-logo.webp" alt="Stackly"
+             class="preloader-logo" width="320" height="132">
+        <div class="preloader-bar"></div>
+    </div>
+</div>
+
+
+<div id="navSlot"></div>
+
+<main id="main">
+
+    <div class="stepper-wrap">
+        <div class="container">
+            <div class="stepper">
+                <div class="step-node done"><span class="step-dot"><i data-lucide="check"></i></span>
+                    <span class="step-node-label"><small>Step 1</small><strong>Vehicle</strong></span></div>
+                <span class="stepper-line filled"></span>
+                <div class="step-node done"><span class="step-dot"><i data-lucide="check"></i></span>
+                    <span class="step-node-label"><small>Step 2</small><strong>Schedule</strong></span></div>
+                <span class="stepper-line filled"></span>
+                <div class="step-node done"><span class="step-dot"><i data-lucide="check"></i></span>
+                    <span class="step-node-label"><small>Step 3</small><strong>Details</strong></span></div>
+                <span class="stepper-line filled"></span>
+                <div class="step-node active"><span class="step-dot">4</span>
+                    <span class="step-node-label"><small>Step 4</small><strong>Review</strong></span></div>
+                <span class="stepper-line"></span>
+                <div class="step-node"><span class="step-dot">5</span>
+                    <span class="step-node-label"><small>Step 5</small><strong>Payment</strong></span></div>
+            </div>
+
+            <div class="stepper-mobile">
+                <div class="stepper-mobile-text">
+                    <strong>Review Booking</strong>
+                    <span>Step 4 of 5</span>
+                </div>
+                <div class="bar" style="width:120px"><div class="bar-fill" style="width:80%"></div></div>
+            </div>
+        </div>
+    </div>
+
+    <section class="section" style="padding-top:var(--s-8)">
+        <div class="container">
+            <div class="booking-layout">
+
+                <div>
+                    <div class="booking-panel mb-6">
+                        <div class="booking-panel-head">
+                            <h2>Review your booking</h2>
+                            <p>Check everything below, then continue to secure payment.</p>
+                        </div>
+
+                        <div class="booking-panel-body" id="reviewBody">
+                            <!-- Populated by JS -->
+                        </div>
+
+                        <div class="booking-panel-foot">
+                            <a href="booking.html" class="btn btn-secondary">
+                                <i data-lucide="pencil"></i> Edit Booking
+                            </a>
+                            <button class="btn btn-primary btn-lg" id="toPayment">
+                                <i data-lucide="lock"></i> Continue to Payment
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Policies -->
+                    <div class="card mb-6">
+                        <div class="card-head">
+                            <div class="card-title">Policies that apply</div>
+                        </div>
+                        <div class="accordion" data-single="true">
+                            <div class="acc-item">
+                                <button class="acc-head">
+                                    <span>Cancellation &amp; refunds</span>
+                                    <span class="acc-icon"><i data-lucide="chevron-down"></i></span>
+                                </button>
+                                <div class="acc-body"><div class="acc-body-inner">
+                                    Free cancellation up to 24 hours before pickup with a full refund.
+                                    Between 24 and 6 hours, 75% is refunded. Under 6 hours, 50%.
+                                    No-shows are not refunded. You can cancel in one tap from My Bookings.
+                                </div></div>
+                            </div>
+                            <div class="acc-item">
+                                <button class="acc-head">
+                                    <span>Security deposit</span>
+                                    <span class="acc-icon"><i data-lucide="chevron-down"></i></span>
+                                </button>
+                                <div class="acc-body"><div class="acc-body-inner">
+                                    A refundable hold is placed on your card at pickup — ₹5,000 for standard
+                                    vehicles, ₹15,000 for luxury and performance models. It is released
+                                    automatically within five to seven working days after return.
+                                </div></div>
+                            </div>
+                            <div class="acc-item">
+                                <button class="acc-head">
+                                    <span>Charge level on return</span>
+                                    <span class="acc-icon"><i data-lucide="chevron-down"></i></span>
+                                </button>
+                                <div class="acc-body"><div class="acc-body-inner">
+                                    Return the vehicle with at least 20% charge and there is nothing to pay.
+                                    Below 20%, a recharge fee of ₹16 per kWh applies — roughly what a public
+                                    charger would cost you anyway.
+                                </div></div>
+                            </div>
+                            <div class="acc-item">
+                                <button class="acc-head">
+                                    <span>Mileage &amp; usage limits</span>
+                                    <span class="acc-icon"><i data-lucide="chevron-down"></i></span>
+                                </button>
+                                <div class="acc-body"><div class="acc-body-inner">
+                                    300 km included per day, pooled across the booking. Additional kilometres
+                                    are ₹8 each. Rentals of 15 days or more include unlimited kilometres.
+                                </div></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- What's included -->
+                    <div class="card">
+                        <div class="card-head">
+                            <div class="card-title">Included with every booking</div>
+                        </div>
+                        <div class="grid grid-2 gap-4" id="includedGrid">
+                            <div class="trust-row"><i data-lucide="shield-check"></i> Third-party &amp; collision insurance</div>
+                            <div class="trust-row"><i data-lucide="life-buoy"></i> 24/7 roadside assistance</div>
+                            <div class="trust-row"><i data-lucide="battery-charging"></i> Delivered above 80% charge</div>
+                            <div class="trust-row"><i data-lucide="sparkles"></i> Sanitised before handover</div>
+                            <div class="trust-row"><i data-lucide="key-round"></i> Digital key &amp; app unlock</div>
+                            <div class="trust-row"><i data-lucide="navigation"></i> Live trip tracking</div>
+                        </div>
+                    </div>
+                </div>
+
+                <aside class="booking-summary-panel" id="summaryPanel" aria-label="Booking summary"></aside>
+
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<div id="footerSlot"></div>
+
+<script src="assets/vendor/lucide.min.js"></script>
+<script type="module" src="js/summary.js"></script>
+
+</body>
+</html>

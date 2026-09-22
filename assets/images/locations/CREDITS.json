@@ -1,0 +1,86 @@
+{
+  "loc-01": {
+    "file": "Indiranagar Shopping Hundred Feet Road, Indiranagar Bangalore by night.JPG",
+    "artist": "Indiranagar Seller",
+    "licence": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Indiranagar%20Shopping%20Hundred%20Feet%20Road%2C%20Indiranagar%20Bangalore%20by%20night.JPG",
+    "match": "EXACT"
+  },
+  "loc-02": {
+    "file": "Trees on either side of Inner Ring Road - Koramangala.JPG",
+    "artist": "Veera.sj",
+    "licence": "CC0",
+    "source": "https://commons.wikimedia.org/wiki/File:Trees%20on%20either%20side%20of%20Inner%20Ring%20Road%20-%20Koramangala.JPG",
+    "match": "EXACT"
+  },
+  "loc-03": {
+    "file": "Skyline of Varthur, Bangalore.jpg",
+    "artist": "SlowPhoton",
+    "licence": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Skyline%20of%20Varthur%2C%20Bangalore.jpg",
+    "match": "CITY"
+  },
+  "loc-04": {
+    "file": "Brigade Road facing MG Road.jpg",
+    "artist": "Wilhelm Tell DCCXLVI",
+    "licence": "CC0",
+    "source": "https://commons.wikimedia.org/wiki/File:Brigade%20Road%20facing%20MG%20Road.jpg",
+    "match": "EXACT"
+  },
+  "loc-05": {
+    "file": "Sunset AgaraLake Bangalore.jpg",
+    "artist": "SukantaBhowmik",
+    "licence": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Sunset%20AgaraLake%20Bangalore.jpg",
+    "match": "EXACT"
+  },
+  "loc-06": {
+    "file": "BLRT2 IntlDep.jpg",
+    "artist": "Ananthmohanram18",
+    "licence": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:BLRT2%20IntlDep.jpg",
+    "match": "EXACT"
+  },
+  "loc-07": {
+    "file": "Bangalore Electronic City Fly Over (Elevated HighWay) 1356.jpg",
+    "artist": "Rameshng",
+    "licence": "CC BY-SA 3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Bangalore%20Electronic%20City%20Fly%20Over%20%28Elevated%20HighWay%29%201356.jpg",
+    "match": "EXACT"
+  },
+  "loc-08": {
+    "file": "Southend Circle metro station.jpg",
+    "artist": "LittleT889",
+    "licence": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Southend%20Circle%20metro%20station.jpg",
+    "match": "EXACT"
+  },
+  "loc-09": {
+    "file": "Twin Towers from Hebbal Flyover.JPG",
+    "artist": "Veera.sj",
+    "licence": "CC BY-SA 3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Twin%20Towers%20from%20Hebbal%20Flyover.JPG",
+    "match": "EXACT"
+  },
+  "loc-10": {
+    "file": "Marathahalli bridge 2018 05 26.jpg",
+    "artist": "Amol.Gaitonde",
+    "licence": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Marathahalli%20bridge%202018%2005%2026.jpg",
+    "match": "EXACT"
+  },
+  "loc-11": {
+    "file": "Yelahanka New Town.jpg",
+    "artist": "Geetworld",
+    "licence": "CC BY-SA 3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Yelahanka%20New%20Town.jpg",
+    "match": "EXACT"
+  },
+  "loc-12": {
+    "file": "An urban road and traffic in Bangalore Karnataka India April 2014.jpg",
+    "artist": "Harsha K R from Bangalore, India",
+    "licence": "CC BY-SA 2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:An%20urban%20road%20and%20traffic%20in%20Bangalore%20Karnataka%20India%20April%202014.jpg",
+    "match": "CITY"
+  }
+}

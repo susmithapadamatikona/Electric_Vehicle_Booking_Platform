@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Frequently Asked Questions | EVRide</title>
+    <meta name="description" content="Answers about booking EVs, charging, payments, cancellation, safety and your EVRide account.">
+    <meta name="theme-color" content="#050B10">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/vehicles.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/pages.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <link rel="icon" href="assets/images/favicon.png" type="image/png">
+</head>
+<body>
+<div class="preloader" id="preloader" role="status" aria-live="polite" aria-label="Loading">
+    <div class="preloader-inner">
+        <img src="assets/images/stackly-whitish_blue-logo.webp" alt="Stackly"
+             class="preloader-logo" width="320" height="132">
+        <div class="preloader-bar"></div>
+    </div>
+</div>
+
+
+<div id="navSlot"></div>
+
+<main id="main">
+
+    <header class="page-head">
+        <div class="orb orb-green" style="width:500px;height:500px;top:-60%;right:-6%" aria-hidden="true"></div>
+        <div class="container">
+            <nav class="crumbs" aria-label="Breadcrumb">
+                <a href="index.html">Home</a>
+                <i data-lucide="chevron-right"></i>
+                <span class="current">FAQ</span>
+            </nav>
+            <h1 class="page-head-title">Frequently asked questions</h1>
+            <p class="page-head-sub">
+                Straight answers about booking, charging, payments and everything in between.
+            </p>
+
+            <div class="input-icon mt-6" style="max-width:520px">
+                <i data-lucide="search"></i>
+                <input type="search" class="input" id="faqSearch"
+                       placeholder="Search questions…" aria-label="Search FAQs">
+            </div>
+        </div>
+    </header>
+
+    <section class="section" style="padding-top:var(--s-10)">
+        <div class="container">
+            <div class="faq-layout">
+
+                <nav class="faq-nav" id="faqNav" aria-label="FAQ categories"></nav>
+
+                <div id="faqContent"></div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-alt">
+        <div class="container">
+            <div class="cta-band" data-reveal="zoom">
+                <div class="cta-inner">
+                    <h2 class="cta-title">Still stuck?</h2>
+                    <p class="cta-sub">
+                        Our support team answers in under two minutes, 24 hours a day.
+                    </p>
+                    <div class="cta-actions">
+                        <a href="support.html" class="btn btn-primary btn-lg">
+                            <i data-lucide="message-circle"></i> Start a chat
+                        </a>
+                        <a href="contact.html" class="btn btn-secondary btn-lg">
+                            <i data-lucide="mail"></i> Send a message
+                        </a>
+                    </div>
+                    <div class="cta-note">
+                        <span><i data-lucide="phone"></i> +91 80 4567 8900</span>
+                        <span><i data-lucide="life-buoy"></i> Emergency: 1800-EVRIDE-911</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<div id="footerSlot"></div>
+
+<script src="assets/vendor/lucide.min.js"></script>
+<script type="module" src="js/faq.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,1149 @@
+/* ==========================================================================
+   EVRide — booking.css
+   Multi-step booking flow, summary, payment and confirmation pages.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. STEPPER
+   -------------------------------------------------------------------------- */
+.stepper-wrap {
+    background: var(--secondary-bg);
+    border-bottom: 1px solid var(--border);
+    padding-block: var(--s-6);
+    position: sticky;
+    top: var(--nav-h);
+    z-index: calc(var(--z-sticky) + 1);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+.stepper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-2);
+    max-width: 860px;
+    margin-inline: auto;
+}
+
+.step-node {
+    display: flex;
+    align-items: center;
+    gap: var(--s-3);
+    flex-shrink: 0;
+    position: relative;
+}
+
+.step-dot {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: var(--card-bg);
+    border: 1.5px solid var(--border);
+    color: var(--text-muted);
+    font-family: var(--font-display);
+    font-size: 0.88rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    transition: all var(--t-slow) var(--ease-spring);
+}
+
+.step-dot i, .step-dot svg { width: 17px; height: 17px; }
+
+.step-node.active .step-dot {
+    background: var(--electric-gradient);
+    border-color: transparent;
+    color: #04231A;
+    box-shadow: var(--glow-primary);
+    transform: scale(1.08);
+}
+
+.step-node.done .step-dot {
+    background: rgba(0, 230, 118, 0.14);
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.step-node-label {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.25;
+}
+
+.step-node-label small {
+    font-size: 0.64rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.step-node-label strong {
+    font-size: 0.87rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    white-space: nowrap;
+    transition: color var(--t-base) var(--ease);
+}
+
+.step-node.active .step-node-label strong { color: var(--text-primary); }
+.step-node.done .step-node-label strong { color: var(--primary); }
+
+.stepper-line {
+    flex: 1;
+    height: 2px;
+    background: var(--border);
+    border-radius: var(--r-full);
+    position: relative;
+    overflow: hidden;
+    min-width: 20px;
+}
+
+.stepper-line::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--electric-gradient);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 600ms var(--ease-out);
+}
+
+.stepper-line.filled::after { transform: scaleX(1); }
+
+/* Mobile progress readout */
+.stepper-mobile {
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-4);
+}
+
+.stepper-mobile-text strong {
+    display: block;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    font-family: var(--font-display);
+}
+
+.stepper-mobile-text span { font-size: 0.78rem; color: var(--text-muted); }
+
+/* --------------------------------------------------------------------------
+   2. BOOKING LAYOUT
+   -------------------------------------------------------------------------- */
+.booking-layout {
+    display: grid;
+    grid-template-columns: 1fr 396px;
+    gap: var(--s-8);
+    align-items: start;
+}
+
+.booking-panel {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--r-xl);
+    overflow: hidden;
+}
+
+.booking-panel-head {
+    padding: var(--s-6);
+    border-bottom: 1px solid var(--border);
+}
+
+.booking-panel-head h2 {
+    font-size: 1.4rem;
+    margin-bottom: 6px;
+}
+
+.booking-panel-head p { font-size: 0.89rem; color: var(--text-secondary); }
+
+.booking-panel-body { padding: var(--s-6); }
+
+.booking-panel-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-4);
+    padding: var(--s-5) var(--s-6);
+    border-top: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.015);
+    flex-wrap: wrap;
+}
+
+/* Step panels */
+.bk-step { display: none; }
+.bk-step.active { display: block; animation: fadeInUp 420ms var(--ease-out); }
+
+.bk-section { margin-bottom: var(--s-8); }
+.bk-section:last-child { margin-bottom: 0; }
+
+.bk-section-title {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: var(--s-4);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.bk-section-title i, .bk-section-title svg { width: 14px; height: 14px; }
+
+.bk-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s-4);
+}
+
+.bk-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--s-4);
+}
+
+/* --------------------------------------------------------------------------
+   3. VEHICLE PICKER (step 1)
+   -------------------------------------------------------------------------- */
+.picker-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+    max-height: 520px;
+    overflow-y: auto;
+    padding-right: 6px;
+}
+
+.picker-card {
+    display: flex;
+    align-items: center;
+    gap: var(--s-4);
+    padding: var(--s-4);
+    border-radius: var(--r-md);
+    border: 1.5px solid var(--border);
+    background: rgba(255, 255, 255, 0.02);
+    cursor: pointer;
+    transition: all var(--t-base) var(--ease);
+    text-align: left;
+    width: 100%;
+}
+
+.picker-card:hover { border-color: var(--border-strong); background: var(--glass); }
+
+.picker-card.selected {
+    border-color: var(--primary);
+    background: rgba(0, 230, 118, 0.06);
+    box-shadow: 0 0 0 1px var(--primary);
+}
+
+.picker-card img {
+    width: 92px;
+    height: 66px;
+    object-fit: cover;
+    border-radius: var(--r-sm);
+    background: var(--card-light);
+    flex-shrink: 0;
+}
+
+.picker-body { flex: 1; min-width: 0; }
+
+.picker-body strong {
+    display: block;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    margin-bottom: 3px;
+}
+
+.picker-meta {
+    display: flex;
+    gap: var(--s-3);
+    flex-wrap: wrap;
+    font-size: 0.76rem;
+    color: var(--text-muted);
+    margin-top: 5px;
+}
+
+.picker-meta span { display: inline-flex; align-items: center; gap: 4px; }
+.picker-meta i, .picker-meta svg { width: 12px; height: 12px; }
+
+.picker-price { text-align: right; flex-shrink: 0; }
+
+.picker-price strong {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    color: var(--text-primary);
+    letter-spacing: -0.03em;
+}
+
+.picker-price span { font-size: 0.7rem; color: var(--text-muted); }
+
+.picker-check {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 1.5px solid var(--border-strong);
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    transition: all var(--t-base) var(--ease);
+    color: transparent;
+}
+
+.picker-card.selected .picker-check {
+    background: var(--electric-gradient);
+    border-color: transparent;
+    color: #04231A;
+}
+
+.picker-check i, .picker-check svg { width: 13px; height: 13px; }
+
+/* --------------------------------------------------------------------------
+   4. LOCATION PICKER (step 3)
+   -------------------------------------------------------------------------- */
+.delivery-choice {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s-4);
+    margin-bottom: var(--s-6);
+}
+
+.delivery-opt {
+    padding: var(--s-5);
+    border-radius: var(--r-lg);
+    border: 1.5px solid var(--border);
+    background: rgba(255, 255, 255, 0.02);
+    cursor: pointer;
+    transition: all var(--t-base) var(--ease);
+    text-align: left;
+    position: relative;
+}
+
+.delivery-opt:hover { border-color: var(--border-strong); }
+
+.delivery-opt.selected {
+    border-color: var(--primary);
+    background: rgba(0, 230, 118, 0.06);
+}
+
+.delivery-opt-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--r-md);
+    display: grid;
+    place-items: center;
+    background: rgba(0, 230, 118, 0.1);
+    color: var(--primary);
+    margin-bottom: var(--s-4);
+}
+
+.delivery-opt-icon i, .delivery-opt-icon svg { width: 20px; height: 20px; }
+
+.delivery-opt h5 { font-size: 1rem; margin-bottom: 5px; }
+.delivery-opt p { font-size: 0.83rem; color: var(--text-secondary); line-height: 1.6; }
+
+.delivery-opt-price {
+    position: absolute;
+    top: var(--s-5);
+    right: var(--s-5);
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.hub-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-2);
+    max-height: 320px;
+    overflow-y: auto;
+    padding-right: 6px;
+}
+
+.hub-opt {
+    display: flex;
+    align-items: center;
+    gap: var(--s-3);
+    padding: var(--s-3) var(--s-4);
+    border-radius: var(--r-md);
+    border: 1.5px solid var(--border);
+    background: rgba(255, 255, 255, 0.02);
+    cursor: pointer;
+    transition: all var(--t-base) var(--ease);
+    text-align: left;
+    width: 100%;
+}
+
+.hub-opt:hover { border-color: var(--border-strong); }
+.hub-opt.selected { border-color: var(--primary); background: rgba(0, 230, 118, 0.06); }
+
+.hub-opt-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--r-sm);
+    display: grid;
+    place-items: center;
+    background: rgba(0, 200, 255, 0.1);
+    color: var(--electric-blue);
+    flex-shrink: 0;
+}
+
+.hub-opt-icon i, .hub-opt-icon svg { width: 16px; height: 16px; }
+
+.hub-opt-body { flex: 1; min-width: 0; }
+.hub-opt-body strong { display: block; font-size: 0.88rem; color: var(--text-primary); }
+.hub-opt-body span { font-size: 0.75rem; color: var(--text-muted); }
+
+/* --------------------------------------------------------------------------
+   5. SUMMARY PANEL (sticky sidebar)
+   -------------------------------------------------------------------------- */
+.booking-summary-panel {
+    position: sticky;
+    top: calc(var(--nav-h) + 120px);
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--r-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+}
+
+.bsp-vehicle {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: var(--card-light);
+}
+
+.bsp-vehicle img { width: 100%; height: 100%; object-fit: cover; }
+
+.bsp-vehicle::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 40%, rgba(5, 11, 16, 0.9) 100%);
+}
+
+.bsp-vehicle-info {
+    position: absolute;
+    bottom: var(--s-4);
+    left: var(--s-5);
+    right: var(--s-5);
+    z-index: 1;
+}
+
+.bsp-vehicle-info strong {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    color: var(--white);
+    letter-spacing: -0.025em;
+}
+
+.bsp-vehicle-info span { font-size: 0.78rem; color: var(--text-secondary); }
+
+.bsp-body { padding: var(--s-5); }
+
+.bsp-title {
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: var(--s-4);
+}
+
+.bsp-trip {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-bottom: var(--s-5);
+    padding-bottom: var(--s-5);
+    border-bottom: 1px solid var(--border);
+}
+
+.bsp-leg {
+    display: flex;
+    gap: var(--s-3);
+    position: relative;
+}
+
+.bsp-leg-marker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+    width: 16px;
+}
+
+.bsp-leg-dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    border: 2px solid var(--primary);
+    background: var(--card-bg);
+    margin-top: 5px;
+    flex-shrink: 0;
+}
+
+.bsp-leg:last-child .bsp-leg-dot {
+    background: var(--primary);
+    border-color: var(--primary);
+}
+
+.bsp-leg-line {
+    width: 2px;
+    flex: 1;
+    background: var(--border);
+    margin-block: 3px;
+    min-height: 22px;
+}
+
+.bsp-leg-body { flex: 1; min-width: 0; padding-bottom: var(--s-4); }
+.bsp-leg:last-child .bsp-leg-body { padding-bottom: 0; }
+
+.bsp-leg-body small {
+    display: block;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-weight: 600;
+    margin-bottom: 3px;
+}
+
+.bsp-leg-body strong {
+    display: block;
+    font-size: 0.89rem;
+    color: var(--text-primary);
+    margin-bottom: 2px;
+}
+
+.bsp-leg-body span { font-size: 0.78rem; color: var(--text-secondary); }
+
+/* Price breakdown */
+.bsp-prices { display: flex; flex-direction: column; gap: 11px; }
+
+.bsp-price-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-3);
+    font-size: 0.85rem;
+}
+
+.bsp-price-row .k { color: var(--text-secondary); display: inline-flex; align-items: center; gap: 6px; }
+.bsp-price-row .v { color: var(--text-primary); font-weight: 600; font-variant-numeric: tabular-nums; }
+.bsp-price-row.discount .v { color: var(--primary); }
+.bsp-price-row .k small { font-size: 0.72rem; color: var(--text-muted); }
+
+.bsp-total {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--s-3);
+    margin-top: var(--s-4);
+    padding-top: var(--s-4);
+    border-top: 1px solid var(--border);
+}
+
+.bsp-total .k { font-size: 0.95rem; color: var(--text-primary); font-weight: 600; }
+
+.bsp-total .v {
+    font-family: var(--font-display);
+    font-size: 1.85rem;
+    color: var(--primary);
+    letter-spacing: -0.04em;
+    font-variant-numeric: tabular-nums;
+}
+
+.bsp-foot {
+    padding: var(--s-5);
+    border-top: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.015);
+}
+
+/* Promo code */
+.promo-row {
+    display: flex;
+    gap: var(--s-2);
+    margin-bottom: var(--s-4);
+}
+
+.promo-row .input { padding: 10px 14px; font-size: 0.85rem; }
+
+.promo-applied {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-3);
+    padding: 10px 14px;
+    border-radius: var(--r-sm);
+    background: rgba(0, 230, 118, 0.09);
+    border: 1px dashed rgba(0, 230, 118, 0.4);
+    font-size: 0.83rem;
+    color: var(--primary);
+    margin-bottom: var(--s-4);
+}
+
+.promo-applied button { color: var(--text-muted); display: grid; place-items: center; }
+.promo-applied button:hover { color: #FF8A8A; }
+.promo-applied i, .promo-applied svg { width: 14px; height: 14px; }
+
+/* --------------------------------------------------------------------------
+   6. PAYMENT PAGE
+   -------------------------------------------------------------------------- */
+.pay-methods {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: var(--s-3);
+    margin-bottom: var(--s-6);
+}
+
+.pay-method {
+    padding: var(--s-4);
+    border-radius: var(--r-md);
+    border: 1.5px solid var(--border);
+    background: rgba(255, 255, 255, 0.02);
+    cursor: pointer;
+    transition: all var(--t-base) var(--ease);
+    text-align: center;
+    position: relative;
+}
+
+.pay-method:hover { border-color: var(--border-strong); }
+
+.pay-method.selected {
+    border-color: var(--primary);
+    background: rgba(0, 230, 118, 0.06);
+}
+
+.pay-method.selected::after {
+    content: '';
+    position: absolute;
+    top: 9px;
+    right: 9px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--primary);
+    box-shadow: var(--glow-primary);
+}
+
+.pay-method-icon {
+    width: 40px;
+    height: 40px;
+    margin: 0 auto var(--s-3);
+    border-radius: var(--r-sm);
+    display: grid;
+    place-items: center;
+    background: var(--glass);
+    color: var(--text-secondary);
+    transition: all var(--t-base) var(--ease);
+}
+
+.pay-method.selected .pay-method-icon {
+    background: rgba(0, 230, 118, 0.12);
+    color: var(--primary);
+}
+
+.pay-method-icon i, .pay-method-icon svg { width: 19px; height: 19px; }
+
+.pay-method strong { display: block; font-size: 0.85rem; color: var(--text-primary); }
+.pay-method span { font-size: 0.71rem; color: var(--text-muted); }
+
+/* Credit card preview */
+.card-preview {
+    position: relative;
+    width: 100%;
+    max-width: 380px;
+    aspect-ratio: 1.586;
+    border-radius: var(--r-lg);
+    background:
+        radial-gradient(circle at 80% 15%, rgba(0, 230, 118, 0.3), transparent 55%),
+        radial-gradient(circle at 15% 85%, rgba(0, 200, 255, 0.24), transparent 55%),
+        linear-gradient(140deg, #16323E, #0B151C);
+    border: 1px solid var(--border-strong);
+    padding: var(--s-5);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: var(--shadow-lg);
+    margin-bottom: var(--s-6);
+    overflow: hidden;
+    transition: transform var(--t-slow) var(--ease-out);
+}
+
+.card-preview::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+    background-size: 30px 30px;
+    pointer-events: none;
+}
+
+.card-preview-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    position: relative;
+    z-index: 1;
+}
+
+.card-chip {
+    width: 42px;
+    height: 32px;
+    border-radius: 6px;
+    background: linear-gradient(140deg, #D4AF37, #F9E7A0, #B8860B);
+    position: relative;
+    overflow: hidden;
+}
+
+.card-chip::after {
+    content: '';
+    position: absolute;
+    inset: 4px;
+    border: 1px solid rgba(0, 0, 0, 0.22);
+    border-radius: 3px;
+}
+
+.card-brand {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    color: var(--white);
+    letter-spacing: -0.02em;
+    opacity: 0.9;
+}
+
+.card-number {
+    font-family: var(--font-mono);
+    font-size: 1.28rem;
+    letter-spacing: 0.1em;
+    color: var(--white);
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.card-preview-bottom {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--s-4);
+    position: relative;
+    z-index: 1;
+}
+
+.card-field small {
+    display: block;
+    font-size: 0.58rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 3px;
+}
+
+.card-field strong {
+    font-size: 0.88rem;
+    color: var(--white);
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+/* Security badges */
+.secure-row {
+    display: flex;
+    gap: var(--s-4);
+    flex-wrap: wrap;
+    padding: var(--s-4);
+    border-radius: var(--r-md);
+    background: rgba(0, 230, 118, 0.05);
+    border: 1px solid rgba(0, 230, 118, 0.18);
+    margin-top: var(--s-5);
+}
+
+.secure-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 0.79rem;
+    color: var(--text-secondary);
+}
+
+.secure-item i, .secure-item svg { width: 14px; height: 14px; color: var(--primary); }
+
+/* UPI / netbanking panes */
+.pay-pane { display: none; }
+.pay-pane.active { display: block; animation: fadeInUp 340ms var(--ease-out); }
+
+.bank-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: var(--s-3);
+}
+
+.bank-opt {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 13px var(--s-4);
+    border-radius: var(--r-md);
+    border: 1.5px solid var(--border);
+    background: rgba(255, 255, 255, 0.02);
+    cursor: pointer;
+    transition: all var(--t-base) var(--ease);
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.bank-opt:hover { border-color: var(--border-strong); }
+.bank-opt.selected { border-color: var(--primary); background: rgba(0, 230, 118, 0.06); color: var(--primary); }
+
+.bank-logo {
+    width: 30px;
+    height: 30px;
+    border-radius: 7px;
+    display: grid;
+    place-items: center;
+    background: var(--glass);
+    font-family: var(--font-display);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    flex-shrink: 0;
+}
+
+/* Processing overlay */
+.pay-processing {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-modal);
+    background: rgba(5, 11, 16, 0.93);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: var(--s-5);
+}
+
+.pay-processing.show { display: flex; }
+
+.pay-processing-box {
+    text-align: center;
+    max-width: 420px;
+}
+
+.pay-processing-ring {
+    width: 96px;
+    height: 96px;
+    margin: 0 auto var(--s-6);
+    position: relative;
+}
+
+.pay-steps {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+    margin-top: var(--s-8);
+    text-align: left;
+}
+
+.pay-step {
+    display: flex;
+    align-items: center;
+    gap: var(--s-3);
+    font-size: 0.87rem;
+    color: var(--text-muted);
+    transition: color var(--t-base) var(--ease);
+}
+
+.pay-step-icon {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    border: 1.5px solid var(--border);
+    flex-shrink: 0;
+    transition: all var(--t-base) var(--ease);
+}
+
+.pay-step-icon i, .pay-step-icon svg { width: 13px; height: 13px; opacity: 0; transition: opacity var(--t-base) var(--ease); }
+
+.pay-step.active { color: var(--text-primary); }
+.pay-step.active .pay-step-icon { border-color: var(--primary); }
+
+.pay-step.done { color: var(--primary); }
+.pay-step.done .pay-step-icon {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #04231A;
+}
+.pay-step.done .pay-step-icon i,
+.pay-step.done .pay-step-icon svg { opacity: 1; }
+
+/* --------------------------------------------------------------------------
+   7. SUCCESS / CONFIRMATION
+   -------------------------------------------------------------------------- */
+.success-hero {
+    text-align: center;
+    padding-block: var(--s-16) var(--s-12);
+    position: relative;
+    overflow: hidden;
+}
+
+.success-icon {
+    width: 108px;
+    height: 108px;
+    margin: 0 auto var(--s-6);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: rgba(0, 230, 118, 0.12);
+    border: 2px solid var(--primary);
+    box-shadow: 0 0 50px rgba(0, 230, 118, 0.3);
+    position: relative;
+}
+
+.success-icon svg { width: 52px; height: 52px; color: var(--primary); }
+
+.success-title { margin-bottom: var(--s-3); }
+
+.success-sub {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    max-width: 520px;
+    margin: 0 auto var(--s-8);
+}
+
+.booking-id-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 11px;
+    padding: 12px 24px;
+    border-radius: var(--r-full);
+    background: var(--card-bg);
+    border: 1px dashed rgba(0, 230, 118, 0.45);
+    margin-bottom: var(--s-8);
+}
+
+.booking-id-badge small {
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.booking-id-badge strong {
+    font-family: var(--font-mono);
+    font-size: 1.05rem;
+    color: var(--primary);
+    letter-spacing: 0.04em;
+}
+
+.booking-id-badge button { color: var(--text-muted); display: grid; place-items: center; }
+.booking-id-badge button:hover { color: var(--primary); }
+.booking-id-badge i, .booking-id-badge svg { width: 15px; height: 15px; }
+
+/* Ticket-style confirmation card */
+.ticket {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--r-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    position: relative;
+}
+
+.ticket-head {
+    display: flex;
+    align-items: center;
+    gap: var(--s-5);
+    padding: var(--s-6);
+    background: linear-gradient(140deg, rgba(0, 230, 118, 0.08), rgba(0, 200, 255, 0.05));
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+}
+
+.ticket-head img {
+    width: 130px;
+    height: 88px;
+    object-fit: cover;
+    border-radius: var(--r-md);
+    background: var(--card-light);
+    flex-shrink: 0;
+}
+
+.ticket-head-body { flex: 1; min-width: 200px; }
+
+.ticket-body {
+    display: grid;
+    grid-template-columns: 1fr 236px;
+    gap: var(--s-8);
+    padding: var(--s-6);
+}
+
+/* Perforated divider between body and QR */
+.ticket-body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 268px;
+    width: 1px;
+    background-image: linear-gradient(180deg, var(--border) 50%, transparent 50%);
+    background-size: 1px 12px;
+}
+
+.ticket-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: var(--s-5);
+}
+
+.ticket-field small {
+    display: block;
+    font-size: 0.68rem;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.ticket-field strong {
+    display: block;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.ticket-field span { font-size: 0.79rem; color: var(--text-secondary); }
+
+/* QR block */
+.qr-block { text-align: center; }
+
+.qr-code {
+    width: 168px;
+    height: 168px;
+    margin: 0 auto var(--s-4);
+    border-radius: var(--r-md);
+    background: var(--white);
+    padding: 11px;
+    display: grid;
+    place-items: center;
+}
+
+.qr-code svg { width: 100%; height: 100%; }
+
+.qr-note { font-size: 0.76rem; color: var(--text-muted); line-height: 1.6; }
+
+.ticket-foot {
+    display: flex;
+    gap: var(--s-3);
+    padding: var(--s-5) var(--s-6);
+    border-top: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.015);
+    flex-wrap: wrap;
+}
+
+.ticket-foot .btn { flex: 1; min-width: 150px; }
+
+/* Next steps */
+.next-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--s-5);
+    margin-top: var(--s-10);
+}
+
+.next-step {
+    padding: var(--s-5);
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+    transition: all var(--t-base) var(--ease);
+}
+
+.next-step:hover { border-color: rgba(0, 230, 118, 0.3); transform: translateY(-3px); }
+
+.next-step-num {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: rgba(0, 230, 118, 0.12);
+    color: var(--primary);
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-bottom: var(--s-3);
+}
+
+.next-step h5 { font-size: 0.97rem; margin-bottom: 5px; }
+.next-step p { font-size: 0.83rem; color: var(--text-secondary); line-height: 1.65; }
+
+/* --------------------------------------------------------------------------
+   8. INVOICE
+   -------------------------------------------------------------------------- */
+.invoice-doc {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+    padding: var(--s-10);
+    max-width: 860px;
+    margin-inline: auto;
+}
+
+.invoice-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--s-8);
+    padding-bottom: var(--s-8);
+    border-bottom: 1px solid var(--border);
+    margin-bottom: var(--s-8);
+    flex-wrap: wrap;
+}
+
+.invoice-meta { text-align: right; }
+
+.invoice-meta h3 {
+    font-size: 1.6rem;
+    letter-spacing: -0.03em;
+    margin-bottom: var(--s-2);
+}
+
+.invoice-parties {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s-8);
+    margin-bottom: var(--s-8);
+}
+
+.invoice-party h6 {
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: var(--s-3);
+    font-family: var(--font-body);
+}
+
+.invoice-party p { font-size: 0.87rem; line-height: 1.75; }
+.invoice-party strong { display: block; color: var(--text-primary); font-size: 0.95rem; margin-bottom: 3px; }
+
+.invoice-totals {
+    margin-left: auto;
+    max-width: 340px;
+    margin-top: var(--s-6);
+}

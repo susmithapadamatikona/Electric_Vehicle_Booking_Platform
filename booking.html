@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Book Your Electric Vehicle | EVRide</title>
+    <meta name="description" content="Complete your EV booking in five steps — choose your vehicle, set your schedule, pick a location, add extras and confirm.">
+    <meta name="theme-color" content="#050B10">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/vehicles.css">
+    <link rel="stylesheet" href="css/booking.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <link rel="icon" href="assets/images/favicon.png" type="image/png">
+</head>
+<body>
+<div class="preloader" id="preloader" role="status" aria-live="polite" aria-label="Loading">
+    <div class="preloader-inner">
+        <img src="assets/images/stackly-whitish_blue-logo.webp" alt="Stackly"
+             class="preloader-logo" width="320" height="132">
+        <div class="preloader-bar"></div>
+    </div>
+</div>
+
+
+<div id="navSlot"></div>
+
+<main id="main">
+
+    <!-- Stepper -->
+    <div class="stepper-wrap">
+        <div class="container">
+            <div class="stepper" id="stepper">
+                <div class="step-node active" data-step="1">
+                    <span class="step-dot">1</span>
+                    <span class="step-node-label"><small>Step 1</small><strong>Vehicle</strong></span>
+                </div>
+                <span class="stepper-line"></span>
+                <div class="step-node" data-step="2">
+                    <span class="step-dot">2</span>
+                    <span class="step-node-label"><small>Step 2</small><strong>Schedule</strong></span>
+                </div>
+                <span class="stepper-line"></span>
+                <div class="step-node" data-step="3">
+                    <span class="step-dot">3</span>
+                    <span class="step-node-label"><small>Step 3</small><strong>Location</strong></span>
+                </div>
+                <span class="stepper-line"></span>
+                <div class="step-node" data-step="4">
+                    <span class="step-dot">4</span>
+                    <span class="step-node-label"><small>Step 4</small><strong>Add-ons</strong></span>
+                </div>
+                <span class="stepper-line"></span>
+                <div class="step-node" data-step="5">
+                    <span class="step-dot">5</span>
+                    <span class="step-node-label"><small>Step 5</small><strong>Details</strong></span>
+                </div>
+            </div>
+
+            <div class="stepper-mobile" id="stepperMobile">
+                <div class="stepper-mobile-text">
+                    <strong id="smTitle">Select Vehicle</strong>
+                    <span id="smCount">Step 1 of 5</span>
+                </div>
+                <div class="bar" style="width:120px">
+                    <div class="bar-fill" id="smBar" style="width:20%"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="section" style="padding-top:var(--s-8)">
+        <div class="container">
+            <div class="booking-layout">
+
+                <!-- ==================== FLOW ==================== -->
+                <div class="booking-panel">
+
+                    <!-- STEP 1: VEHICLE -->
+                    <div class="bk-step active" data-bk-step="1">
+                        <div class="booking-panel-head">
+                            <h2>Select your electric vehicle</h2>
+                            <p>Live battery and range shown for every available car. Prices are per day.</p>
+                        </div>
+                        <div class="booking-panel-body">
+                            <div class="flex gap-3 mb-6 flex-wrap items-center justify-between">
+                                <div class="input-icon" style="flex:1;min-width:220px">
+                                    <i data-lucide="search"></i>
+                                    <input type="search" class="input" id="pickerSearch" placeholder="Search by model or brand">
+                                </div>
+                                <select class="select" id="pickerSort" style="width:auto;min-width:170px">
+                                    <option value="recommended">Recommended</option>
+                                    <option value="price-asc">Price: Low to High</option>
+                                    <option value="range">Longest Range</option>
+                                    <option value="battery">Highest Battery</option>
+                                </select>
+                            </div>
+                            <div class="picker-list" id="pickerList"></div>
+                        </div>
+                    </div>
+
+                    <!-- STEP 2: SCHEDULE -->
+                    <div class="bk-step" data-bk-step="2">
+                        <div class="booking-panel-head">
+                            <h2>When do you need it?</h2>
+                            <p>Rentals are billed per 24-hour day, rounded up. Minimum one day.</p>
+                        </div>
+                        <div class="booking-panel-body">
+                            <div class="bk-section">
+                                <div class="bk-section-title"><i data-lucide="calendar"></i> Pickup</div>
+                                <div class="bk-grid-2">
+                                    <div class="field">
+                                        <label class="label" for="bkPickupDate">Pickup date <span class="req">*</span></label>
+                                        <input type="date" class="input" id="bkPickupDate" required>
+                                    </div>
+                                    <div class="field">
+                                        <label class="label" for="bkPickupTime">Pickup time <span class="req">*</span></label>
+                                        <input type="time" class="input" id="bkPickupTime" value="09:00" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bk-section">
+                                <div class="bk-section-title"><i data-lucide="calendar-check"></i> Return</div>
+                                <div class="bk-grid-2">
+                                    <div class="field">
+                                        <label class="label" for="bkReturnDate">Return date <span class="req">*</span></label>
+                                        <input type="date" class="input" id="bkReturnDate" required>
+                                    </div>
+                                    <div class="field">
+                                        <label class="label" for="bkReturnTime">Return time <span class="req">*</span></label>
+                                        <input type="time" class="input" id="bkReturnTime" value="18:00" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bk-section">
+                                <div class="bk-section-title"><i data-lucide="zap"></i> Quick durations</div>
+                                <div class="filter-chips">
+                                    <button class="chip" data-dur="1">1 day</button>
+                                    <button class="chip" data-dur="2">Weekend</button>
+                                    <button class="chip" data-dur="7">1 week</button>
+                                    <button class="chip" data-dur="15">15 days</button>
+                                    <button class="chip" data-dur="30">1 month</button>
+                                </div>
+                            </div>
+
+                            <div class="card-glass" id="durationCallout" style="display:flex;align-items:center;gap:14px">
+                                <div class="stat-icon"><i data-lucide="clock"></i></div>
+                                <div>
+                                    <strong class="text-primary" id="durationText">1 day</strong>
+                                    <p class="text-muted" style="font-size:.82rem;margin:0" id="durationHint">
+                                        Book 7 days or more to unlock a 12% discount automatically.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- STEP 3: LOCATION -->
+                    <div class="bk-step" data-bk-step="3">
+                        <div class="booking-panel-head">
+                            <h2>Where should we meet?</h2>
+                            <p>Collect from a hub at no extra cost, or have the vehicle delivered to you.</p>
+                        </div>
+                        <div class="booking-panel-body">
+                            <div class="delivery-choice">
+                                <button type="button" class="delivery-opt selected" data-delivery="hub">
+                                    <span class="delivery-opt-price">Free</span>
+                                    <div class="delivery-opt-icon"><i data-lucide="building-2"></i></div>
+                                    <h5>Collect from a hub</h5>
+                                    <p>Pick up at any EVRide location. Vehicles are charged above 80% and sanitised.</p>
+                                </button>
+                                <button type="button" class="delivery-opt" data-delivery="doorstep">
+                                    <span class="delivery-opt-price">₹599</span>
+                                    <div class="delivery-opt-icon"><i data-lucide="truck"></i></div>
+                                    <h5>Doorstep delivery</h5>
+                                    <p>We bring the EV to your home, office or hotel and collect it afterwards.</p>
+                                </button>
+                            </div>
+
+                            <div class="bk-section" id="hubSection">
+                                <div class="bk-section-title"><i data-lucide="map-pin"></i> Choose a pickup hub</div>
+                                <div class="hub-list" id="hubList"></div>
+                            </div>
+
+                            <div class="bk-section" id="addressSection" style="display:none">
+                                <div class="bk-section-title"><i data-lucide="home"></i> Delivery address</div>
+                                <div class="field">
+                                    <label class="label" for="bkAddress">Full address <span class="req">*</span></label>
+                                    <textarea class="textarea" id="bkAddress" rows="3"
+                                        placeholder="Flat / house number, street, landmark, area, city, PIN code"></textarea>
+                                    <span class="field-hint">Our delivery partner will call 30 minutes before arrival.</span>
+                                </div>
+                            </div>
+
+                            <div class="bk-section">
+                                <label class="check">
+                                    <input type="checkbox" id="bkSameReturn" checked>
+                                    <span>Return to the same location</span>
+                                </label>
+                                <div class="field mt-4" id="dropSection" style="display:none">
+                                    <label class="label" for="bkDropLocation">Drop-off location</label>
+                                    <select class="select" id="bkDropLocation"></select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- STEP 4: ADD-ONS -->
+                    <div class="bk-step" data-bk-step="4">
+                        <div class="booking-panel-head">
+                            <h2>Anything else for the trip?</h2>
+                            <p>All optional. You can add or remove extras right up until pickup.</p>
+                        </div>
+                        <div class="booking-panel-body">
+                            <div class="addon-list" id="addonList"></div>
+                        </div>
+                    </div>
+
+                    <!-- STEP 5: DRIVER DETAILS -->
+                    <div class="bk-step" data-bk-step="5">
+                        <div class="booking-panel-head">
+                            <h2>Main driver details</h2>
+                            <p>These must match the licence presented at pickup.</p>
+                        </div>
+                        <div class="booking-panel-body">
+                            <div class="bk-section">
+                                <div class="bk-grid-2">
+                                    <div class="field">
+                                        <label class="label" for="bkName">Full name <span class="req">*</span></label>
+                                        <input type="text" class="input" id="bkName" placeholder="As printed on your licence" autocomplete="name">
+                                        <span class="field-error"><i data-lucide="alert-circle" style="width:12px;height:12px"></i> Enter your full name</span>
+                                    </div>
+                                    <div class="field">
+                                        <label class="label" for="bkEmail">Email <span class="req">*</span></label>
+                                        <input type="email" class="input" id="bkEmail" placeholder="you@example.com" autocomplete="email">
+                                        <span class="field-error"><i data-lucide="alert-circle" style="width:12px;height:12px"></i> Enter a valid email</span>
+                                    </div>
+                                    <div class="field">
+                                        <label class="label" for="bkPhone">Phone <span class="req">*</span></label>
+                                        <input type="tel" class="input" id="bkPhone" placeholder="+91 98765 43210" autocomplete="tel">
+                                        <span class="field-error"><i data-lucide="alert-circle" style="width:12px;height:12px"></i> Enter a valid phone number</span>
+                                    </div>
+                                    <div class="field">
+                                        <label class="label" for="bkLicence">Driving licence number <span class="req">*</span></label>
+                                        <input type="text" class="input" id="bkLicence" placeholder="KA0120230012345">
+                                        <span class="field-error"><i data-lucide="alert-circle" style="width:12px;height:12px"></i> Enter your licence number</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bk-section">
+                                <div class="bk-section-title"><i data-lucide="file-check"></i> Requirements</div>
+                                <div class="card-glass">
+                                    <div class="trust-row mb-2"><i data-lucide="check"></i> Licence held for at least one year</div>
+                                    <div class="trust-row mb-2"><i data-lucide="check"></i> Minimum age 21 (25 for performance and luxury EVs)</div>
+                                    <div class="trust-row mb-2"><i data-lucide="check"></i> One government photo ID at pickup</div>
+                                    <div class="trust-row"><i data-lucide="check"></i> The payment card used for this booking</div>
+                                </div>
+                            </div>
+
+                            <div class="bk-section">
+                                <label class="check">
+                                    <input type="checkbox" id="bkTerms">
+                                    <span>I agree to the <a href="#" class="text-green">Terms of Service</a>,
+                                    <a href="#" class="text-green">Cancellation Policy</a> and
+                                    <a href="#" class="text-green">Insurance Terms</a>.</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Footer nav -->
+                    <div class="booking-panel-foot">
+                        <button class="btn btn-secondary" id="bkBack">
+                            <i data-lucide="arrow-left"></i> Back
+                        </button>
+                        <div class="flex items-center gap-4">
+                            <span class="text-muted" style="font-size:.82rem" id="bkStepLabel">Step 1 of 5</span>
+                            <button class="btn btn-primary" id="bkNext">
+                                Continue <i data-lucide="arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ==================== SUMMARY ==================== -->
+                <aside class="booking-summary-panel" id="summaryPanel" aria-label="Booking summary"></aside>
+
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<div id="footerSlot"></div>
+
+<script src="assets/vendor/lucide.min.js"></script>
+<script type="module" src="js/booking-flow.js"></script>
+
+</body>
+</html>

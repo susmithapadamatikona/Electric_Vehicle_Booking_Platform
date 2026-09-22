@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Booking Confirmed | EVRide</title>
+    <meta name="description" content="Your electric vehicle booking is confirmed. View your booking ID, pickup details and digital key.">
+    <meta name="theme-color" content="#050B10">
+    <meta name="robots" content="noindex">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/vehicles.css">
+    <link rel="stylesheet" href="css/booking.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <link rel="icon" href="assets/images/favicon.png" type="image/png">
+</head>
+<body>
+<div class="preloader" id="preloader" role="status" aria-live="polite" aria-label="Loading">
+    <div class="preloader-inner">
+        <img src="assets/images/stackly-whitish_blue-logo.webp" alt="Stackly"
+             class="preloader-logo" width="320" height="132">
+        <div class="preloader-bar"></div>
+    </div>
+</div>
+
+
+<div id="navSlot"></div>
+
+<main id="main">
+
+    <section class="success-hero">
+        <div class="orb orb-green" style="width:640px;height:640px;top:-40%;left:50%;transform:translateX(-50%)" aria-hidden="true"></div>
+        <div class="container" style="position:relative;z-index:1">
+
+            <div class="success-icon success-pop">
+                <svg viewBox="0 0 52 52" fill="none" stroke="currentColor" stroke-width="3.5"
+                     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M14 27l8 8 16-16" class="check-draw"/>
+                </svg>
+            </div>
+
+            <h1 class="success-title anim-up">Booking Confirmed</h1>
+            <p class="success-sub anim-up d-1" id="successSub">
+                Your electric vehicle is reserved. We've sent the details and your digital key to your email.
+            </p>
+
+            <div class="booking-id-badge anim-up d-2">
+                <small>Booking ID</small>
+                <strong id="bookingIdText">—</strong>
+                <button id="copyId" aria-label="Copy booking ID"><i data-lucide="copy"></i></button>
+            </div>
+
+        </div>
+    </section>
+
+    <section style="padding-bottom:var(--s-20)">
+        <div class="container">
+
+            <!-- Ticket -->
+            <div class="ticket" data-reveal="zoom" id="ticket">
+                <!-- Populated by JS -->
+            </div>
+
+            <!-- Next steps -->
+            <h3 class="mt-12 mb-6" data-reveal>What happens next</h3>
+            <div class="next-steps" style="margin-top:0">
+                <div class="next-step" data-reveal>
+                    <div class="next-step-num">1</div>
+                    <h5>Documents verified</h5>
+                    <p>We'll verify your licence within fifteen minutes. You'll get a notification once it clears.</p>
+                </div>
+                <div class="next-step" data-reveal data-reveal-delay="80">
+                    <div class="next-step-num">2</div>
+                    <h5>Reminder before pickup</h5>
+                    <p>A reminder lands 30 minutes before your slot, with live vehicle location and a tracking link.</p>
+                </div>
+                <div class="next-step" data-reveal data-reveal-delay="160">
+                    <div class="next-step-num">3</div>
+                    <h5>Unlock with your phone</h5>
+                    <p>Scan the QR code or tap Unlock in the app. No counter, no keys, no paperwork.</p>
+                </div>
+                <div class="next-step" data-reveal data-reveal-delay="240">
+                    <div class="next-step-num">4</div>
+                    <h5>Drive and return</h5>
+                    <p>Return to the agreed location with 20% or more charge. Your deposit releases automatically.</p>
+                </div>
+            </div>
+
+            <!-- Support callout -->
+            <div class="cta-band mt-12" data-reveal>
+                <div class="cta-inner">
+                    <h3 class="mb-3">Need to change something?</h3>
+                    <p class="cta-sub">
+                        Modify or cancel free of charge up to 24 hours before pickup, straight from your dashboard.
+                    </p>
+                    <div class="cta-actions">
+                        <a href="customer-dashboard.html#bookings" class="btn btn-primary">
+                            <i data-lucide="calendar-check"></i> Manage Booking
+                        </a>
+                        <a href="404.html" class="btn btn-secondary">
+                            <i data-lucide="life-buoy"></i> Contact Support
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+</main>
+
+<div id="footerSlot"></div>
+
+<script src="assets/vendor/lucide.min.js"></script>
+<script type="module" src="js/success.js"></script>
+
+</body>
+</html>

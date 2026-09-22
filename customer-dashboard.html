@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>My Dashboard | EVRide</title>
+    <meta name="description" content="Manage your EV bookings, track active trips, view invoices and control your EVRide account.">
+    <meta name="theme-color" content="#050B10">
+    <meta name="robots" content="noindex">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/vehicles.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <link rel="icon" href="assets/images/favicon.png" type="image/png">
+</head>
+<body class="dash-body">
+<div class="preloader" id="preloader" role="status" aria-live="polite" aria-label="Loading">
+    <div class="preloader-inner">
+        <img src="assets/images/stackly-whitish_blue-logo.webp" alt="Stackly"
+             class="preloader-logo" width="320" height="132">
+        <div class="preloader-bar"></div>
+    </div>
+</div>
+
+
+<div class="dash-layout">
+    <div id="sidebarSlot"></div>
+
+    <div class="dash-main">
+        <div id="topbarSlot"></div>
+
+        <div class="dash-content">
+
+            <!-- ============ OVERVIEW ============ -->
+            <section data-dash-section="overview">
+                <div class="dash-page-head">
+                    <div>
+                        <h1 id="greeting">Welcome back</h1>
+                        <p>Here's what's happening with your electric mobility today.</p>
+                    </div>
+                    <div class="flex gap-3 flex-wrap">
+                        <a href="404.html" class="btn btn-primary">
+                            <i data-lucide="zap"></i> Book an EV
+                        </a>
+                        <a href="charging-stations.html" class="btn btn-secondary">
+                            <i data-lucide="map-pin"></i> Find Charging
+                        </a>
+                    </div>
+                </div>
+
+                <div class="dash-grid-4" id="statsGrid"></div>
+
+                <div id="activeBookingWrap"></div>
+
+                <div class="dash-split">
+                    <div>
+                        <div class="panel mb-6">
+                            <div class="panel-head">
+                                <div>
+                                    <div class="panel-title"><i data-lucide="calendar-check"></i> Upcoming bookings</div>
+                                    <div class="panel-sub">Your next trips</div>
+                                </div>
+                                <a href="#bookings" class="btn-link" data-section>View all <i data-lucide="arrow-right"></i></a>
+                            </div>
+                            <div class="panel-body" id="upcomingList"></div>
+                        </div>
+
+                        <div class="panel">
+                            <div class="panel-head">
+                                <div class="panel-title"><i data-lucide="leaf"></i> Your environmental impact</div>
+                                <span class="badge badge-green">All time</span>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dash-grid-3" style="margin-bottom:0" id="impactGrid"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="panel mb-6">
+                            <div class="panel-head">
+                                <div class="panel-title"><i data-lucide="zap"></i> Quick actions</div>
+                            </div>
+                            <div class="panel-body">
+                                <div class="quick-grid">
+                                    <a href="explore-evs.html" class="quick-action">
+                                        <span class="quick-action-icon"><i data-lucide="car"></i></span>
+                                        <span>Book EV</span>
+                                    </a>
+                                    <a href="charging-stations.html" class="quick-action">
+                                        <span class="quick-action-icon blue"><i data-lucide="zap"></i></span>
+                                        <span>Charge</span>
+                                    </a>
+                                    <a href="live-tracking.html" class="quick-action">
+                                        <span class="quick-action-icon purple"><i data-lucide="navigation"></i></span>
+                                        <span>Track</span>
+                                    </a>
+                                    <a href="404.html" class="quick-action">
+                                        <span class="quick-action-icon warn"><i data-lucide="file-text"></i></span>
+                                        <span>Invoices</span>
+                                    </a>
+                                    <a href="offers.html" class="quick-action">
+                                        <span class="quick-action-icon"><i data-lucide="gift"></i></span>
+                                        <span>Offers</span>
+                                    </a>
+                                    <a href="support.html" class="quick-action">
+                                        <span class="quick-action-icon blue"><i data-lucide="life-buoy"></i></span>
+                                        <span>Support</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel">
+                            <div class="panel-head">
+                                <div class="panel-title"><i data-lucide="activity"></i> Recent activity</div>
+                                <span class="live-tag">Live</span>
+                            </div>
+                            <div class="panel-body flush">
+                                <div class="activity" id="activityFeed"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============ BOOKINGS ============ -->
+            
+
+            <!-- ============ FAVOURITES ============ -->
+            <section data-dash-section="favorites" hidden>
+                <div class="dash-page-head">
+                    <div>
+                        <h1>Saved vehicles</h1>
+                        <p>Your wishlist, with live availability.</p>
+                    </div>
+                    <a href="explore-evs.html" class="btn btn-secondary">
+                        <i data-lucide="search"></i> Browse more
+                    </a>
+                </div>
+                <div class="v-grid" id="favGrid"></div>
+            </section>
+
+            <!-- ============ RESERVATIONS ============ -->
+            <section data-dash-section="reservations" hidden>
+                <div class="dash-page-head">
+                    <div>
+                        <h1>Charging reservations</h1>
+                        <p>Bays you've held across the network.</p>
+                    </div>
+                    <a href="404.html" class="btn btn-primary">
+                        <i data-lucide="calendar-clock"></i> Reserve a slot
+                    </a>
+                </div>
+                <div class="dash-grid-3" id="reservationGrid"></div>
+            </section>
+
+            <!-- ============ PAYMENTS ============ -->
+            
+
+            <!-- ============ NOTIFICATIONS ============ -->
+            <section data-dash-section="notifications" hidden>
+                <div class="dash-page-head">
+                    <div>
+                        <h1>Notifications</h1>
+                        <p>Everything the platform has told you.</p>
+                    </div>
+                    <div class="flex gap-3">
+                        <button class="btn btn-secondary" id="markAllBtn">
+                            <i data-lucide="check-check"></i> Mark all read
+                        </button>
+                        <button class="btn btn-danger" id="clearNotifsBtn">
+                            <i data-lucide="trash-2"></i> Clear
+                        </button>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-body flush">
+                        <div id="notifFull"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============ PROFILE ============ -->
+            
+
+            <!-- ============ SETTINGS ============ -->
+            <section data-dash-section="settings" hidden>
+                <div class="dash-page-head">
+                    <div>
+                        <h1>Settings</h1>
+                        <p>Preferences, notifications and account controls.</p>
+                    </div>
+                </div>
+
+                <div class="dash-grid-2">
+                    <div class="panel">
+                        <div class="panel-head">
+                            <div class="panel-title"><i data-lucide="bell"></i> Notifications</div>
+                        </div>
+                        <div class="panel-body" id="notifSettings"></div>
+                    </div>
+
+                    <div class="panel">
+                        <div class="panel-head">
+                            <div class="panel-title"><i data-lucide="sliders-horizontal"></i> Preferences</div>
+                        </div>
+                        <div class="panel-body" id="prefSettings"></div>
+                    </div>
+
+                    <div class="panel">
+                        <div class="panel-head">
+                            <div class="panel-title"><i data-lucide="shield"></i> Security</div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="setting-row">
+                                <div class="setting-row-body">
+                                    <strong>Password</strong>
+                                    <span>Last changed 3 months ago</span>
+                                </div>
+                                <button class="btn btn-secondary btn-sm">Change</button>
+                            </div>
+                            <div class="setting-row">
+                                <div class="setting-row-body">
+                                    <strong>Two-factor authentication</strong>
+                                    <span>Adds a verification step at sign-in</span>
+                                </div>
+                                <label class="switch"><input type="checkbox"></label>
+                            </div>
+                            <div class="setting-row">
+                                <div class="setting-row-body">
+                                    <strong>Active sessions</strong>
+                                    <span>2 devices signed in</span>
+                                </div>
+                                <button class="btn btn-secondary btn-sm">Manage</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel" style="border-color:rgba(239,68,68,.25)">
+                        <div class="panel-head">
+                            <div class="panel-title" style="color:#FF8A8A">
+                                <i data-lucide="alert-triangle" style="color:#FF8A8A"></i> Danger zone
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="setting-row">
+                                <div class="setting-row-body">
+                                    <strong>Reset demo data</strong>
+                                    <span>Regenerate the fleet, stations and bookings</span>
+                                </div>
+                                <button class="btn btn-secondary btn-sm" id="resetDataBtn">Reset</button>
+                            </div>
+                            <div class="setting-row">
+                                <div class="setting-row-body">
+                                    <strong>Delete account</strong>
+                                    <span>Permanently removes your data within 30 days</span>
+                                </div>
+                                <button class="btn btn-danger btn-sm" id="deleteAccountBtn">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+</div>
+
+<script src="assets/vendor/lucide.min.js"></script>
+<script type="module" src="js/customer.js"></script>
+
+</body>
+</html>

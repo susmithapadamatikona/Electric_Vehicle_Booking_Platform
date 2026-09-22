@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Admin Console | EVRide</title>
+    <meta name="description" content="EVRide platform administration — users, fleet, bookings, charging network, payments and live operations.">
+    <meta name="theme-color" content="#050B10">
+    <meta name="robots" content="noindex">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/vehicles.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <link rel="icon" href="assets/images/favicon.png" type="image/png">
+</head>
+<body class="dash-body">
+<div class="preloader" id="preloader" role="status" aria-live="polite" aria-label="Loading">
+    <div class="preloader-inner">
+        <img src="assets/images/stackly-whitish_blue-logo.webp" alt="Stackly"
+             class="preloader-logo" width="320" height="132">
+        <div class="preloader-bar"></div>
+    </div>
+</div>
+
+
+<div class="dash-layout">
+    <div id="sidebarSlot"></div>
+
+    <div class="dash-main">
+        <div id="topbarSlot"></div>
+
+        <div class="dash-content">
+
+            <!-- ============ OVERVIEW ============ -->
+            <section data-dash-section="overview">
+                <div class="dash-page-head">
+                    <div>
+                        <h1>Platform overview</h1>
+                        <p>Everything happening across EVRide, updated live.</p>
+                    </div>
+                    <div class="flex gap-3 flex-wrap items-center">
+                        <div class="range-tabs" id="adminRange">
+                            <button data-range="7">7D</button>
+                            <button class="active" data-range="30">30D</button>
+                            <button data-range="12">12M</button>
+                        </div>
+                        <button class="btn btn-secondary" id="adminExport">
+                            <i data-lucide="download"></i> Export
+                        </button>
+                    </div>
+                </div>
+
+                <div class="kpi-strip" id="adminKpi"></div>
+
+                <div class="dash-split">
+                    <div class="panel">
+                        <div class="panel-head">
+                            <div>
+                                <div class="panel-title"><i data-lucide="trending-up"></i> Revenue &amp; bookings</div>
+                                <div class="panel-sub">Two measures, two axes never — bookings shown as a share of revenue scale</div>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="chart-box tall"><canvas id="revenueChart"></canvas></div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="panel mb-6">
+                            <div class="panel-head">
+                                <div class="panel-title"><i data-lucide="pie-chart"></i> Fleet status</div>
+                                <span class="live-tag">Live</span>
+                            </div>
+                            <div class="panel-body">
+                                <div class="chart-box short"><canvas id="adminStatusChart"></canvas></div>
+                            </div>
+                        </div>
+
+                        <div class="panel">
+                            <div class="panel-head">
+                                <div class="panel-title"><i data-lucide="alert-triangle"></i> System alerts</div>
+                            </div>
+                            <div class="panel-body" id="systemAlerts"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dash-grid-2">
+                    <div class="panel">
+                        <div class="panel-head">
+                            <div class="panel-title"><i data-lucide="users"></i> User growth</div>
+                        </div>
+                        <div class="panel-body"><div class="chart-box"><canvas id="userChart"></canvas></div></div>
+                    </div>
+                    <div class="panel">
+                        <div class="panel-head">
+                            <div class="panel-title"><i data-lucide="trophy"></i> Top performing models</div>
+                        </div>
+                        <div class="panel-body"><div class="chart-box"><canvas id="topModelsChart"></canvas></div></div>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-head">
+                        <div class="panel-title"><i data-lucide="calendar-check"></i> Recent bookings</div>
+                        <a href="#bookings" class="btn-link" data-section>View all <i data-lucide="arrow-right"></i></a>
+                    </div>
+                    <div class="panel-body flush">
+                        <div class="table-wrap" style="border:none;border-radius:0">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Booking</th><th>Customer</th><th>Vehicle</th>
+                                        <th>Dates</th><th>Amount</th><th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="recentBookings"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============ LIVE MONITOR ============ -->
+            <section data-dash-section="monitor" hidden>
+                <div class="dash-page-head">
+                    <div>
+                        <h1>Live operations centre</h1>
+                        <p>Every vehicle and station across the network, in real time.</p>
+                    </div>
+                    <span class="live-tag">Live · 4s refresh</span>
+                </div>
+
+                <div class="ops-grid" id="monitorOps"></div>
+
+                <div class="dash-split">
+                    <div class="panel">
+                        <div class="panel-head">
+                            <div class="panel-title"><i data-lucide="radar"></i> Network map</div>
+                            <div class="flex gap-2 flex-wrap" id="monitorFilters">
+                                <button class="chip active" data-mf="all">All</button>
+                                <button class="chip" data-mf="vehicles">Vehicles</button>
+                                <button class="chip" data-mf="stations">Stations</button>
+                            </div>
+                        </div>
+                        <div class="panel-body flush">
+                            <div class="map" style="height:520px;border-radius:0;border:none" id="opsMap">
+                                <div class="map-legend">
+                                    <h6>Legend</h6>
+                                    <ul>
+                                        <li><span class="legend-dot available"></span> Available</li>
+                                        <li><span class="legend-dot on_trip"></span> On trip</li>
+                                        <li><span class="legend-dot charging"></span> Charging</li>
+                                        <li><span class="legend-dot reserved"></span> Reserved</li>
+                                        <li><span class="legend-dot maintenance"></span> Maintenance</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel">
+                        <div class="panel-head">
+                            <div class="panel-title"><i data-lucide="activity"></i> Event stream</div>
+                            <span class="live-tag">Live</span>
+                        </div>
+                        <div class="panel-body flush">
+                            <div class="ticker" id="eventTicker"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============ USERS ============ -->
+            
+
+            <!-- ============ VEHICLES ============ -->
+            
+
+            <!-- ============ BOOKINGS ============ -->
+            
+
+            <!-- ============ DRIVERS ============ -->
+            <section data-dash-section="drivers" hidden>
+                <div class="dash-page-head">
+                    <div><h1>Drivers</h1><p>Verified drivers and their performance.</p></div>
+                </div>
+                <div class="dash-grid-3" id="adminDrivers"></div>
+            </section>
+
+            <!-- ============ STATIONS ============ -->
+            <section data-dash-section="stations" hidden>
+                <div class="dash-page-head">
+                    <div>
+                        <h1>Charging network</h1>
+                        <p>Station health, utilisation and revenue.</p>
+                    </div>
+                </div>
+                <div class="dash-grid-4" id="stationStats"></div>
+                <div class="panel">
+                    <div class="panel-head">
+                        <div class="panel-title"><i data-lucide="zap"></i> All stations</div>
+                        <span class="live-tag">Live</span>
+                    </div>
+                    <div class="panel-body flush" id="adminStations"></div>
+                </div>
+            </section>
+
+            <!-- ============ PAYMENTS ============ -->
+            <section data-dash-section="payments" hidden>
+                <div class="dash-page-head">
+                    <div><h1>Payments</h1><p>Transactions, refunds and settlement.</p></div>
+                </div>
+                <div class="dash-grid-4" id="payStats"></div>
+                <div class="panel">
+                    <div class="panel-head"><div class="panel-title"><i data-lucide="receipt"></i> Transactions</div></div>
+                    <div class="panel-body flush">
+                        <div class="table-wrap" style="border:none;border-radius:0">
+                            <table class="table">
+                                <thead>
+                                    <tr><th>Transaction</th><th>Booking</th><th>Date</th>
+                                        <th>Method</th><th>Gateway</th><th>Amount</th><th>Status</th></tr>
+                                </thead>
+                                <tbody id="adminPaymentsTable"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============ REVENUE ============ -->
+            
+
+            <!-- ============ PROMOTIONS ============ -->
+            <section data-dash-section="promotions" hidden>
+                <div class="dash-page-head">
+                    <div><h1>Promotions</h1><p>Active offers and their redemption rates.</p></div>
+                    <button class="btn btn-primary" id="newPromo"><i data-lucide="plus"></i> New promotion</button>
+                </div>
+                <div class="dash-grid-3" id="promoGrid"></div>
+            </section>
+
+            <!-- ============ REVIEWS ============ -->
+            <section data-dash-section="reviews" hidden>
+                <div class="dash-page-head">
+                    <div><h1>Reviews</h1><p>Customer feedback across the fleet.</p></div>
+                </div>
+                <div class="dash-split" id="reviewsSection"></div>
+            </section>
+
+            <!-- ============ SUPPORT ============ -->
+            <section data-dash-section="support" hidden>
+                <div class="dash-page-head">
+                    <div><h1>Support tickets</h1><p>Open issues from customers and owners.</p></div>
+                </div>
+                <div class="dash-grid-4" id="ticketStats"></div>
+                <div class="panel">
+                    <div class="panel-head"><div class="panel-title"><i data-lucide="life-buoy"></i> Open tickets</div></div>
+                    <div class="panel-body flush" id="ticketList"></div>
+                </div>
+            </section>
+
+            <!-- ============ SETTINGS ============ -->
+            <section data-dash-section="settings" hidden>
+                <div class="dash-page-head">
+                    <div><h1>Platform settings</h1><p>Global configuration and simulation controls.</p></div>
+                </div>
+                <div class="dash-grid-2" id="adminSettings"></div>
+            </section>
+
+        </div>
+    </div>
+</div>
+
+<script src="assets/vendor/lucide.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script type="module" src="js/admin.js"></script>
+
+</body>
+</html>

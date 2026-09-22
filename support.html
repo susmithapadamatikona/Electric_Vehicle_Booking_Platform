@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Support Centre | EVRide</title>
+    <meta name="description" content="EVRide help centre — booking help, payments, charging, cancellations, emergency assistance and live chat.">
+    <meta name="theme-color" content="#050B10">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/vehicles.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/pages.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <link rel="icon" href="assets/images/favicon.png" type="image/png">
+</head>
+<body>
+<div class="preloader" id="preloader" role="status" aria-live="polite" aria-label="Loading">
+    <div class="preloader-inner">
+        <img src="assets/images/stackly-whitish_blue-logo.webp" alt="Stackly"
+             class="preloader-logo" width="320" height="132">
+        <div class="preloader-bar"></div>
+    </div>
+</div>
+
+
+<div id="navSlot"></div>
+
+<main id="main">
+
+    <header class="page-head" style="text-align:center">
+        <div class="orb orb-green" style="width:560px;height:560px;top:-70%;left:50%;transform:translateX(-50%)" aria-hidden="true"></div>
+        <div class="container">
+            <nav class="crumbs" style="justify-content:center" aria-label="Breadcrumb">
+                <a href="index.html">Home</a>
+                <i data-lucide="chevron-right"></i>
+                <span class="current">Support</span>
+            </nav>
+            <h1 class="page-head-title">How can we help?</h1>
+            <p class="page-head-sub" style="margin-inline:auto">
+                Search our help articles, or talk to a human — we answer in under two minutes,
+                any hour of the day.
+            </p>
+
+            <div class="support-search mt-8">
+                <div class="input-icon">
+                    <i data-lucide="search"></i>
+                    <input type="search" class="input" id="supportSearch"
+                           placeholder="Search help articles, e.g. &quot;cancel a booking&quot;"
+                           aria-label="Search help articles">
+                </div>
+                <div id="searchHits" class="mt-4" hidden></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Emergency -->
+    <section id="emergency" style="padding-top:var(--s-6)">
+        <div class="container">
+            <div class="emergency-band" data-reveal>
+                <div class="emergency-icon alert-pulse"><i data-lucide="life-buoy"></i></div>
+                <div style="flex:1;min-width:260px">
+                    <h2 style="font-size:1.35rem;margin-bottom:8px">Emergency assistance</h2>
+                    <p style="font-size:.93rem;color:var(--text-secondary);line-height:1.7">
+                        Accident, breakdown, or out of charge? Call us — we can already see your
+                        vehicle's live location and battery level, so help gets to the right place.
+                    </p>
+
+                    <div class="emergency-actions">
+                        <a href="tel:18008658110" class="emergency-action">
+                            <i data-lucide="alert-octagon"></i>
+                            <span>
+                                <strong>Accident or collision</strong>
+                                <span>Immediate dispatch &amp; insurance support</span>
+                            </span>
+                        </a>
+                        <a href="tel:18008658110" class="emergency-action">
+                            <i data-lucide="wrench"></i>
+                            <span>
+                                <strong>Vehicle breakdown</strong>
+                                <span>Roadside mechanic within 45 minutes</span>
+                            </span>
+                        </a>
+                        <a href="tel:18008658110" class="emergency-action">
+                            <i data-lucide="battery-warning"></i>
+                            <span>
+                                <strong>Out of charge</strong>
+                                <span>Mobile charging unit, free of charge</span>
+                            </span>
+                        </a>
+                        <a href="tel:18008658110" class="emergency-action">
+                            <i data-lucide="shield-alert"></i>
+                            <span>
+                                <strong>Safety concern</strong>
+                                <span>Immediate escalation to our safety team</span>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="section">
+        <div class="container">
+            <div class="section-head centered" data-reveal>
+                <span class="eyebrow centered">Browse by topic</span>
+                <h2 class="section-title">Help categories</h2>
+            </div>
+
+            <div class="support-grid" id="supportGrid"></div>
+        </div>
+    </section>
+
+    <!-- Live chat + popular articles -->
+    <section class="section section-alt" id="chat">
+        <div class="container">
+            <div class="contact-layout">
+
+                <div data-reveal="left">
+                    <span class="eyebrow">Live chat</span>
+                    <h2 class="section-title" style="font-size:clamp(1.5rem,2.8vw,2.1rem)">
+                        Talk to us right now
+                    </h2>
+                    <p class="section-sub mb-6">
+                        Our team is online. Average first response is under two minutes, and
+                        you'll always reach a person rather than a script.
+                    </p>
+
+                    <div class="chat-window">
+                        <div class="chat-head">
+                            <div class="avatar avatar-sm avatar-blue">VS</div>
+                            <div style="flex:1;min-width:0">
+                                <strong style="display:block;font-size:.9rem;color:var(--text-primary)">EVRide Support</strong>
+                                <span class="status status-available" style="font-size:.76rem">
+                                    <span class="status-dot"></span>Online · replies in ~2 min
+                                </span>
+                            </div>
+                            <button class="btn btn-secondary btn-xs" id="clearChat">
+                                <i data-lucide="rotate-ccw"></i> Reset
+                            </button>
+                        </div>
+
+                        <div class="chat-body" id="chatBody"></div>
+
+                        <div class="chat-typing" id="chatTyping" hidden>
+                            <div class="dots"><span></span><span></span><span></span></div>
+                            Support is typing…
+                        </div>
+
+                        <form class="chat-foot" id="chatForm">
+                            <input type="text" class="input" id="chatInput"
+                                   placeholder="Type your message…" aria-label="Chat message" autocomplete="off">
+                            <button type="submit" class="btn btn-primary btn-icon" aria-label="Send">
+                                <i data-lucide="send"></i>
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="flex gap-2 mt-4 flex-wrap">
+                        <button class="chip" data-quick-msg="How do I cancel my booking?">Cancel a booking</button>
+                        <button class="chip" data-quick-msg="Where is my refund?">Refund status</button>
+                        <button class="chip" data-quick-msg="The charger is not working">Charger issue</button>
+                        <button class="chip" data-quick-msg="How do I extend my rental?">Extend rental</button>
+                    </div>
+                </div>
+
+                <aside data-reveal="right">
+                    <div class="card mb-6">
+                        <div class="card-head">
+                            <div class="card-title"><i data-lucide="trending-up" style="width:16px;height:16px;color:var(--primary)"></i> Popular articles</div>
+                        </div>
+                        <div class="article-list" id="popularArticles"></div>
+                    </div>
+
+                    <div class="card mb-6">
+                        <div class="card-head">
+                            <div class="card-title">Other ways to reach us</div>
+                        </div>
+                        <div class="flex flex-col gap-3">
+                            <a href="tel:+918045678900" class="article-row">
+                                <i data-lucide="phone"></i> +91 80 4567 8900
+                            </a>
+                            <a href="mailto:hello@evride.in" class="article-row">
+                                <i data-lucide="mail"></i> hello@evride.in
+                            </a>
+                            <a href="contact.html" class="article-row">
+                                <i data-lucide="message-square"></i> Send a message
+                            </a>
+                            <a href="tel:18008658110" class="article-row" style="color:#FF8A8A">
+                                <i data-lucide="life-buoy"></i> 1800-EVRIDE-911 (24/7)
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-head">
+                            <div class="card-title">Raise a ticket</div>
+                        </div>
+                        <p class="text-secondary mb-5" style="font-size:.87rem;line-height:1.7">
+                            Prefer a written trail? Create a ticket and we'll respond by email
+                            with a reference you can follow up on.
+                        </p>
+                        <a href="contact.html" class="btn btn-secondary btn-block">
+                            <i data-lucide="ticket"></i> Create a ticket
+                        </a>
+                    </div>
+                </aside>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Status -->
+    <section class="section">
+        <div class="container">
+            <div class="card" data-reveal>
+                <div class="card-head">
+                    <div>
+                        <div class="card-title"><i data-lucide="activity" style="width:16px;height:16px;color:var(--primary)"></i> Platform status</div>
+                        <div class="card-sub">Live health of every EVRide system</div>
+                    </div>
+                    <span class="badge badge-green">
+                        <span class="status-dot available" style="width:6px;height:6px"></span> All systems operational
+                    </span>
+                </div>
+                <div id="statusList"></div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<div id="footerSlot"></div>
+
+<script src="assets/vendor/lucide.min.js"></script>
+<script type="module" src="js/support.js"></script>
+
+</body>
+</html>

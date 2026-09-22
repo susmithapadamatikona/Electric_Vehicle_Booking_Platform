@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Corporate EV Mobility | EVRide for Business</title>
+    <meta name="description" content="Electric fleet solutions for business — employee booking, monthly billing, spend controls and utilisation analytics in one dashboard.">
+    <meta name="theme-color" content="#050B10">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/vehicles.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/pages.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <link rel="icon" href="assets/images/favicon.png" type="image/png">
+</head>
+<body>
+<div class="preloader" id="preloader" role="status" aria-live="polite" aria-label="Loading">
+    <div class="preloader-inner">
+        <img src="assets/images/stackly-whitish_blue-logo.webp" alt="Stackly"
+             class="preloader-logo" width="320" height="132">
+        <div class="preloader-bar"></div>
+    </div>
+</div>
+
+
+<div id="navSlot"></div>
+
+<main id="main">
+
+    <!-- Hero -->
+    <section class="section" style="padding-top:calc(var(--nav-h) + var(--s-16));position:relative;overflow:hidden">
+        <div class="orb orb-green" style="width:600px;height:600px;top:-30%;right:-10%" aria-hidden="true"></div>
+        <div class="container">
+            <div class="corp-hero">
+                <div data-reveal="left">
+                    <span class="eyebrow">EVRide for Business</span>
+                    <h1 style="font-size:clamp(2.2rem,4.4vw,3.4rem);margin-bottom:20px">
+                        Electrify your company travel <span class="text-gradient">without buying a fleet</span>
+                    </h1>
+                    <p style="font-size:1.05rem;color:var(--text-secondary);line-height:1.8;margin-bottom:32px;max-width:520px">
+                        Give your team access to 18,500+ electric vehicles with one account,
+                        one monthly invoice and full visibility of every trip. No capital
+                        outlay, no depreciation, no fleet manager needed.
+                    </p>
+
+                    <div class="flex gap-3 flex-wrap mb-8">
+                        <a href="#enquiry" class="btn btn-primary btn-lg">
+                            <i data-lucide="briefcase"></i> Talk to sales
+                        </a>
+                        <a href="#calculator" class="btn btn-secondary btn-lg">
+                            <i data-lucide="calculator"></i> Estimate savings
+                        </a>
+                    </div>
+
+                    <div class="flex gap-6 flex-wrap" style="font-size:.85rem;color:var(--text-muted)">
+                        <span class="flex items-center gap-2">
+                            <i data-lucide="check" style="width:15px;height:15px;color:var(--primary)"></i>
+                            No setup fee
+                        </span>
+                        <span class="flex items-center gap-2">
+                            <i data-lucide="check" style="width:15px;height:15px;color:var(--primary)"></i>
+                            30-day credit terms
+                        </span>
+                        <span class="flex items-center gap-2">
+                            <i data-lucide="check" style="width:15px;height:15px;color:var(--primary)"></i>
+                            Cancel anytime
+                        </span>
+                    </div>
+                </div>
+
+                <div data-reveal="right" id="enquiry">
+                    <div class="corp-form-card">
+                        <h3 style="font-size:1.3rem;margin-bottom:6px">Request a proposal</h3>
+                        <p class="text-muted mb-6" style="font-size:.88rem">
+                            We'll come back within one working day with pricing for your team size.
+                        </p>
+
+                        <form id="corpForm" class="flex flex-col gap-4" novalidate>
+                            <div class="field">
+                                <label class="label" for="cpCompany">Company name <span class="req">*</span></label>
+                                <input type="text" class="input" id="cpCompany" placeholder="Acme Technologies Pvt Ltd">
+                                <span class="field-error"><i data-lucide="alert-circle" style="width:12px;height:12px"></i> Enter your company name</span>
+                            </div>
+
+                            <div class="grid grid-2 gap-4">
+                                <div class="field">
+                                    <label class="label" for="cpName">Your name <span class="req">*</span></label>
+                                    <input type="text" class="input" id="cpName" placeholder="Full name">
+                                    <span class="field-error"><i data-lucide="alert-circle" style="width:12px;height:12px"></i> Enter your name</span>
+                                </div>
+                                <div class="field">
+                                    <label class="label" for="cpEmail">Work email <span class="req">*</span></label>
+                                    <input type="email" class="input" id="cpEmail" placeholder="you@company.com">
+                                    <span class="field-error"><i data-lucide="alert-circle" style="width:12px;height:12px"></i> Enter a valid work email</span>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-2 gap-4">
+                                <div class="field">
+                                    <label class="label" for="cpPhone">Phone <span class="req">*</span></label>
+                                    <input type="tel" class="input" id="cpPhone" placeholder="+91 98765 43210">
+                                    <span class="field-error"><i data-lucide="alert-circle" style="width:12px;height:12px"></i> Enter a valid phone number</span>
+                                </div>
+                                <div class="field">
+                                    <label class="label" for="cpSize">Team size</label>
+                                    <select class="select" id="cpSize">
+                                        <option value="5-20">5 – 20 employees</option>
+                                        <option value="21-50" selected>21 – 50 employees</option>
+                                        <option value="51-200">51 – 200 employees</option>
+                                        <option value="200+">200+ employees</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="field">
+                                <label class="label" for="cpNeeds">What do you need?</label>
+                                <textarea class="textarea" id="cpNeeds" rows="3"
+                                    placeholder="e.g. 15 vehicles for a Bengaluru sales team, weekday use, monthly billing"></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-lg btn-block" id="corpSubmit">
+                                <i data-lucide="send"></i> Request proposal
+                            </button>
+
+                            <p class="text-center text-muted" style="font-size:.78rem">
+                                We'll never share your details. Unsubscribe from follow-ups at any time.
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust band -->
+    <section style="padding-block:var(--s-10);border-block:1px solid var(--border-faint)">
+        <div class="container">
+            <p class="brand-strip-label">Trusted by mobility-forward teams across India</p>
+            <div class="marquee">
+                <div class="marquee-track" id="clientTrack" aria-hidden="true"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Metrics -->
+    <section class="section">
+        <div class="container">
+            <div class="section-head centered" data-reveal>
+                <span class="eyebrow centered">The business case</span>
+                <h2 class="section-title">What companies see in their first year</h2>
+                <p class="section-sub">
+                    Averages across 140+ corporate accounts, measured against their previous
+                    petrol or diesel arrangements.
+                </p>
+            </div>
+
+            <div class="corp-metric-band" data-reveal>
+                <div class="corp-metric">
+                    <strong>68%</strong>
+                    <span>Lower running cost per km</span>
+                </div>
+                <div class="corp-metric">
+                    <strong>₹0</strong>
+                    <span>Capital expenditure</span>
+                </div>
+                <div class="corp-metric">
+                    <strong>42%</strong>
+                    <span>Less admin overhead</span>
+                </div>
+                <div class="corp-metric">
+                    <strong>18t</strong>
+                    <span>CO₂ avoided per 20 cars</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Savings calculator -->
+    <section class="section section-alt" id="calculator">
+        <div class="container">
+            <div class="section-head centered" data-reveal>
+                <span class="eyebrow centered">Calculator</span>
+                <h2 class="section-title">What would you save?</h2>
+                <p class="section-sub">
+                    Adjust the sliders to match your team. Figures assume ₹105/litre petrol at
+                    15 km/l against EVRide corporate rates.
+                </p>
+            </div>
+
+            <div class="dash-grid-2" style="margin-bottom:0" data-reveal>
+                <div class="card">
+                    <div class="card-head"><div class="card-title">Your team</div></div>
+
+                    <div class="field mb-6">
+                        <div class="range-vals mb-2">
+                            <span>Vehicles needed</span>
+                            <strong class="text-primary" id="calcVehiclesLabel">15</strong>
+                        </div>
+                        <input type="range" class="range" id="calcVehicles" min="1" max="100" value="15">
+                    </div>
+
+                    <div class="field mb-6">
+                        <div class="range-vals mb-2">
+                            <span>Km per vehicle, per month</span>
+                            <strong class="text-primary" id="calcKmLabel">1,800 km</strong>
+                        </div>
+                        <input type="range" class="range" id="calcKm" min="300" max="5000" step="100" value="1800">
+                    </div>
+
+                    <div class="field">
+                        <div class="range-vals mb-2">
+                            <span>Contract length</span>
+                            <strong class="text-primary" id="calcMonthsLabel">12 months</strong>
+                        </div>
+                        <input type="range" class="range" id="calcMonths" min="1" max="36" value="12">
+                    </div>
+                </div>
+
+                <div class="card" style="background:linear-gradient(160deg,rgba(0,230,118,.06),var(--card-bg) 60%);border-color:rgba(0,230,118,.25)">
+                    <div class="card-head"><div class="card-title">Estimated saving</div></div>
+
+                    <div class="text-center mb-6">
+                        <div style="font-family:var(--font-display);font-size:clamp(2.4rem,5vw,3.4rem);line-height:1;letter-spacing:-.05em;color:var(--primary)"
+                             id="calcSaving">₹0</div>
+                        <span class="text-muted" style="font-size:.85rem">over the contract</span>
+                    </div>
+
+                    <div class="meta-list">
+                        <div class="meta-row">
+                            <span class="meta-k">Petrol equivalent cost</span>
+                            <span class="meta-v" id="calcPetrol">—</span>
+                        </div>
+                        <div class="meta-row">
+                            <span class="meta-k">EVRide corporate cost</span>
+                            <span class="meta-v" id="calcEVRide">—</span>
+                        </div>
+                        <div class="meta-row">
+                            <span class="meta-k">Monthly saving</span>
+                            <span class="meta-v text-green" id="calcMonthly">—</span>
+                        </div>
+                        <div class="meta-row">
+                            <span class="meta-k">CO₂ avoided</span>
+                            <span class="meta-v text-green" id="calcCo2">—</span>
+                        </div>
+                        <div class="meta-row total">
+                            <span class="meta-k">Cost per km</span>
+                            <span class="meta-v" id="calcPerKm">—</span>
+                        </div>
+                    </div>
+
+                    <a href="#enquiry" class="btn btn-primary btn-block mt-6">
+                        Get an exact quote <i data-lucide="arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="section">
+        <div class="container">
+            <div class="section-head centered" data-reveal>
+                <span class="eyebrow centered">Built for finance and ops</span>
+                <h2 class="section-title">Everything your team needs, nothing they don't</h2>
+            </div>
+
+            <div class="corp-benefits">
+                <article class="card card-hover" data-reveal>
+                    <div class="feat-icon mb-4"><i data-lucide="users"></i></div>
+                    <h4 class="mb-2">Employee booking</h4>
+                    <p style="font-size:.88rem;color:var(--text-secondary);line-height:1.7">
+                        Staff book through their own login against the company account. You set
+                        who can book what, and how often.
+                    </p>
+                </article>
+
+                <article class="card card-hover" data-reveal data-reveal-delay="70">
+                    <div class="feat-icon blue mb-4"><i data-lucide="receipt"></i></div>
+                    <h4 class="mb-2">One monthly invoice</h4>
+                    <p style="font-size:.88rem;color:var(--text-secondary);line-height:1.7">
+                        Every trip consolidated into a single GST invoice with cost-centre
+                        breakdown. No employee expense claims.
+                    </p>
+                </article>
+
+                <article class="card card-hover" data-reveal data-reveal-delay="140">
+                    <div class="feat-icon purple mb-4"><i data-lucide="shield"></i></div>
+                    <h4 class="mb-2">Spend controls</h4>
+                    <p style="font-size:.88rem;color:var(--text-secondary);line-height:1.7">
+                        Per-employee monthly caps, vehicle-category limits and approval rules for
+                        anything above a threshold you choose.
+                    </p>
+                </article>
+
+                <article class="card card-hover" data-reveal>
+                    <div class="feat-icon mb-4"><i data-lucide="bar-chart-3"></i></div>
+                    <h4 class="mb-2">Utilisation analytics</h4>
+                    <p style="font-size:.88rem;color:var(--text-secondary);line-height:1.7">
+                        See which teams travel most, which vehicles sit idle and where your
+                        spend actually goes — exportable monthly.
+                    </p>
+                </article>
+
+                <article class="card card-hover" data-reveal data-reveal-delay="70">
+                    <div class="feat-icon blue mb-4"><i data-lucide="leaf"></i></div>
+                    <h4 class="mb-2">ESG reporting</h4>
+                    <p style="font-size:.88rem;color:var(--text-secondary);line-height:1.7">
+                        Scope 3 emissions data for your sustainability report, calculated per
+                        trip and certified annually.
+                    </p>
+                </article>
+
+                <article class="card card-hover" data-reveal data-reveal-delay="140">
+                    <div class="feat-icon purple mb-4"><i data-lucide="headset"></i></div>
+                    <h4 class="mb-2">Dedicated account manager</h4>
+                    <p style="font-size:.88rem;color:var(--text-secondary);line-height:1.7">
+                        A named contact who knows your account, handles swaps and escalations,
+                        and answers on a direct line.
+                    </p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Plan comparison -->
+    <section class="section section-alt">
+        <div class="container">
+            <div class="section-head centered" data-reveal>
+                <span class="eyebrow centered">Plans</span>
+                <h2 class="section-title">Pick the tier that fits</h2>
+            </div>
+
+            <div class="card" style="padding:0;overflow:hidden" data-reveal>
+                <div class="table-wrap" style="border:none;border-radius:0">
+                    <table class="compare-table" style="min-width:700px">
+                        <thead>
+                            <tr>
+                                <th style="width:36%">Feature</th>
+                                <th>Starter<br><span class="text-muted" style="font-weight:400;text-transform:none;letter-spacing:0">5–20 vehicles</span></th>
+                                <th style="color:var(--primary)">Business<br><span class="text-muted" style="font-weight:400;text-transform:none;letter-spacing:0">21–100 vehicles</span></th>
+                                <th>Enterprise<br><span class="text-muted" style="font-weight:400;text-transform:none;letter-spacing:0">100+ vehicles</span></th>
+                            </tr>
+                        </thead>
+                        <tbody id="planTable"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Case study -->
+    <section class="section">
+        <div class="container">
+            <div class="referral-band" data-reveal>
+                <div>
+                    <span class="eyebrow">Case study</span>
+                    <h2 class="section-title" style="font-size:clamp(1.5rem,2.8vw,2.1rem)">
+                        How a logistics startup cut travel costs 68%
+                    </h2>
+                    <p style="font-size:.95rem;color:var(--text-secondary);line-height:1.8;margin-bottom:24px;max-width:520px">
+                        "We moved our entire sales fleet to EVRide corporate. Monthly billing,
+                        one dashboard, and fuel costs down 68%. The fleet utilisation reports
+                        alone paid for the switch — we found four cars nobody was using."
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <div class="avatar">RM</div>
+                        <div>
+                            <strong style="display:block;font-size:.92rem;color:var(--text-primary)">Rahul Menon</strong>
+                            <span style="font-size:.8rem;color:var(--text-muted)">Founder, Logistics Startup · 12 vehicles</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="referral-stats">
+                    <div class="referral-stat"><strong>68%</strong><span>Cost reduction</span></div>
+                    <div class="referral-stat"><strong>12</strong><span>Vehicles switched</span></div>
+                    <div class="referral-stat"><strong>4.2t</strong><span>CO₂ avoided / year</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section section-alt">
+        <div class="container-narrow">
+            <div class="section-head centered" data-reveal>
+                <span class="eyebrow centered">Questions</span>
+                <h2 class="section-title">Corporate FAQ</h2>
+            </div>
+
+            <div class="accordion" data-single="true" data-reveal>
+                <div class="acc-item">
+                    <button class="acc-head"><span>What's the minimum commitment?</span>
+                        <span class="acc-icon"><i data-lucide="chevron-down"></i></span></button>
+                    <div class="acc-body"><div class="acc-body-inner">
+                        Five vehicles for three months. Below that, individual bookings on standard
+                        rates usually work out cheaper and you keep full flexibility.
+                    </div></div>
+                </div>
+                <div class="acc-item">
+                    <button class="acc-head"><span>How does billing work?</span>
+                        <span class="acc-icon"><i data-lucide="chevron-down"></i></span></button>
+                    <div class="acc-body"><div class="acc-body-inner">
+                        One consolidated GST invoice on the first working day of each month,
+                        broken down by employee, cost centre and vehicle. Payment terms are net 30
+                        by default, extendable to net 45 for enterprise accounts.
+                    </div></div>
+                </div>
+                <div class="acc-item">
+                    <button class="acc-head"><span>Can employees use vehicles personally?</span>
+                        <span class="acc-icon"><i data-lucide="chevron-down"></i></span></button>
+                    <div class="acc-body"><div class="acc-body-inner">
+                        That's your call. Personal use can be switched on per employee and billed
+                        separately to their own card, so it never lands on your invoice.
+                    </div></div>
+                </div>
+                <div class="acc-item">
+                    <button class="acc-head"><span>What happens if a vehicle breaks down?</span>
+                        <span class="acc-icon"><i data-lucide="chevron-down"></i></span></button>
+                    <div class="acc-body"><div class="acc-body-inner">
+                        A replacement is dispatched within 90 minutes in serviced cities, at no
+                        cost. Corporate accounts sit at the front of the allocation queue.
+                    </div></div>
+                </div>
+                <div class="acc-item">
+                    <button class="acc-head"><span>Do you handle charging for us?</span>
+                        <span class="acc-icon"><i data-lucide="chevron-down"></i></span></button>
+                    <div class="acc-body"><div class="acc-body-inner">
+                        Yes. Business and Enterprise plans include unlimited charging across the
+                        EVRide network, billed into your monthly invoice. We can also install
+                        chargers at your office on a cost-share basis.
+                    </div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" style="padding-top:0">
+        <div class="container">
+            <div class="cta-band" data-reveal="zoom">
+                <div class="cta-inner">
+                    <h2 class="cta-title">Ready to electrify your team?</h2>
+                    <p class="cta-sub">
+                        Tell us your team size and we'll send pricing within one working day.
+                    </p>
+                    <div class="cta-actions">
+                        <a href="#enquiry" class="btn btn-primary btn-lg">
+                            <i data-lucide="briefcase"></i> Request a proposal
+                        </a>
+                        <a href="tel:+918045678900" class="btn btn-secondary btn-lg">
+                            <i data-lucide="phone"></i> +91 80 4567 8900
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<div id="footerSlot"></div>
+
+<script src="assets/vendor/lucide.min.js"></script>
+<script type="module" src="js/corporate.js"></script>
+
+</body>
+</html>

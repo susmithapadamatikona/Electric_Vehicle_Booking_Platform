@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Live Trip Tracking | EVRide</title>
+    <meta name="description" content="Track your electric vehicle in real time — live location, battery, speed and ETA on one map.">
+    <meta name="theme-color" content="#050B10">
+    <meta name="robots" content="noindex">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/vehicles.css">
+    <link rel="stylesheet" href="css/tracking.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <link rel="icon" href="assets/images/favicon.png" type="image/png">
+</head>
+<body>
+<div class="preloader" id="preloader" role="status" aria-live="polite" aria-label="Loading">
+    <div class="preloader-inner">
+        <img src="assets/images/stackly-whitish_blue-logo.webp" alt="Stackly"
+             class="preloader-logo" width="320" height="132">
+        <div class="preloader-bar"></div>
+    </div>
+</div>
+
+
+<div id="navSlot"></div>
+
+<main id="main">
+
+    <div class="container-wide" style="padding-top:calc(var(--nav-h) + var(--s-6));padding-bottom:var(--s-12)">
+
+        <div class="flex items-center justify-between gap-4 mb-6 flex-wrap">
+            <div>
+                <nav class="crumbs mb-3" aria-label="Breadcrumb">
+                    <a href="index.html">Home</a>
+                    <i data-lucide="chevron-right"></i>
+                    <a href="customer-dashboard.html">Dashboard</a>
+                    <i data-lucide="chevron-right"></i>
+                    <span class="current">Live Tracking</span>
+                </nav>
+                <h1 style="font-size:clamp(1.7rem,3.2vw,2.3rem)">Live trip tracking</h1>
+            </div>
+            <div class="flex gap-3 items-center flex-wrap">
+                <span class="live-tag">Live · updates every 2s</span>
+                <button class="btn btn-secondary btn-sm" id="shareTripBtn">
+                    <i data-lucide="share-2"></i> Share trip
+                </button>
+            </div>
+        </div>
+
+        <div class="track-layout" id="trackLayout">
+
+            <!-- ============ MAP ============ -->
+            <div class="track-map" id="trackMap">
+                <div class="track-banner" id="trackBanner">
+                    <div class="track-banner-icon">
+                        <i data-lucide="navigation" id="bannerIcon"></i>
+                    </div>
+                    <div class="track-banner-body">
+                        <div class="track-banner-title" id="bannerTitle">Connecting to vehicle…</div>
+                        <div class="track-banner-sub" id="bannerSub">Establishing live telemetry feed</div>
+                    </div>
+                    <div class="track-banner-eta">
+                        <strong id="bannerEta">—</strong>
+                        <span>min ETA</span>
+                    </div>
+                </div>
+
+                <div class="track-map-controls">
+                    <button class="track-map-btn active" id="followBtn" aria-label="Follow vehicle" title="Follow vehicle">
+                        <i data-lucide="crosshair"></i>
+                    </button>
+                    <button class="track-map-btn" id="fitBtn" aria-label="Fit route" title="Fit route">
+                        <i data-lucide="maximize"></i>
+                    </button>
+                    <button class="track-map-btn" id="stationsBtn" aria-label="Toggle charging stations" title="Show charging stations">
+                        <i data-lucide="zap"></i>
+                    </button>
+                </div>
+
+                <div class="map-legend">
+                    <h6>Map key</h6>
+                    <ul>
+                        <li><span class="legend-dot on_trip"></span> Your vehicle</li>
+                        <li><span class="legend-dot available"></span> Pickup point</li>
+                        <li><span class="legend-dot reserved"></span> Destination</li>
+                        <li><span class="legend-dot charging"></span> Charging station</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- ============ PANEL ============ -->
+            <aside class="track-panel" id="trackPanel">
+                <!-- Populated by JS -->
+            </aside>
+
+        </div>
+    </div>
+
+</main>
+
+<div id="footerSlot"></div>
+
+<!-- SOS modal -->
+<div class="modal-backdrop" id="sosModal">
+    <div class="modal modal-sm" role="dialog" aria-modal="true" aria-labelledby="sosTitle">
+        <div class="modal-head">
+            <div>
+                <h4 class="modal-title" id="sosTitle">Emergency assistance</h4>
+                <p class="modal-sub">We can see your vehicle's live location</p>
+            </div>
+            <button class="modal-close" data-modal-close aria-label="Close"><i data-lucide="x"></i></button>
+        </div>
+        <div class="modal-body">
+            <div class="flex flex-col gap-3">
+                <button class="btn btn-danger btn-block" style="justify-content:flex-start;padding:16px 20px" data-sos="accident">
+                    <i data-lucide="alert-octagon"></i>
+                    <span style="text-align:left">
+                        <strong style="display:block">Accident or collision</strong>
+                        <small style="opacity:.8;font-weight:400">Immediate dispatch and insurance support</small>
+                    </span>
+                </button>
+                <button class="btn btn-secondary btn-block" style="justify-content:flex-start;padding:16px 20px" data-sos="breakdown">
+                    <i data-lucide="wrench"></i>
+                    <span style="text-align:left">
+                        <strong style="display:block">Vehicle breakdown</strong>
+                        <small style="opacity:.8;font-weight:400">Roadside mechanic within 45 minutes</small>
+                    </span>
+                </button>
+                <button class="btn btn-secondary btn-block" style="justify-content:flex-start;padding:16px 20px" data-sos="battery">
+                    <i data-lucide="battery-warning"></i>
+                    <span style="text-align:left">
+                        <strong style="display:block">Out of charge</strong>
+                        <small style="opacity:.8;font-weight:400">Mobile charging unit, free of charge</small>
+                    </span>
+                </button>
+                <button class="btn btn-secondary btn-block" style="justify-content:flex-start;padding:16px 20px" data-sos="other">
+                    <i data-lucide="phone-call"></i>
+                    <span style="text-align:left">
+                        <strong style="display:block">Speak to someone</strong>
+                        <small style="opacity:.8;font-weight:400">1800-EVRIDE-911 · answers in under 30 seconds</small>
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="assets/vendor/lucide.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script type="module" src="js/tracking.js"></script>
+
+</body>
+</html>

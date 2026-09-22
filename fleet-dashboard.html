@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Fleet Management | EVRide</title>
+    <meta name="description" content="Real-time EV fleet operations — vehicle status, battery health, utilisation, assignments and maintenance in one console.">
+    <meta name="theme-color" content="#050B10">
+    <meta name="robots" content="noindex">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/vehicles.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <link rel="icon" href="assets/images/favicon.png" type="image/png">
+</head>
+<body class="dash-body">
+<div class="preloader" id="preloader" role="status" aria-live="polite" aria-label="Loading">
+    <div class="preloader-inner">
+        <img src="assets/images/stackly-whitish_blue-logo.webp" alt="Stackly"
+             class="preloader-logo" width="320" height="132">
+        <div class="preloader-bar"></div>
+    </div>
+</div>
+
+
+<div class="dash-layout">
+    <div id="sidebarSlot"></div>
+
+    <div class="dash-main">
+        <div id="topbarSlot"></div>
+
+        <div class="dash-content">
+
+            <!-- ============ OVERVIEW ============ -->
+            <section data-dash-section="overview">
+                <div class="dash-page-head">
+                    <div>
+                        <h1>Fleet overview</h1>
+                        <p>Live status across every vehicle in the EVRide network.</p>
+                    </div>
+                    <div class="flex gap-3 flex-wrap">
+                        <button class="btn btn-secondary" id="exportFleet">
+                            <i data-lucide="download"></i> Export
+                        </button>
+                        <a href="analytics.html" class="btn btn-primary">
+                            <i data-lucide="bar-chart-3"></i> Analytics
+                        </a>
+                    </div>
+                </div>
+
+                <div class="ops-grid" id="fleetOps"></div>
+
+                <div class="dash-grid-4" id="fleetStats"></div>
+
+                <div class="dash-split">
+                    <div class="panel">
+                        <div class="panel-head">
+                            <div>
+                                <div class="panel-title"><i data-lucide="radar"></i> Live fleet map</div>
+                                <div class="panel-sub">Positions update every few seconds</div>
+                            </div>
+                            <span class="live-tag">Live</span>
+                        </div>
+                        <div class="panel-body flush">
+                            <div class="map" style="height:440px;border-radius:0;border:none" id="fleetMap">
+                                <div class="map-legend">
+                                    <h6>Vehicle status</h6>
+                                    <ul>
+                                        <li><span class="legend-dot available"></span> Available</li>
+                                        <li><span class="legend-dot on_trip"></span> On trip</li>
+                                        <li><span class="legend-dot charging"></span> Charging</li>
+                                        <li><span class="legend-dot reserved"></span> Reserved</li>
+                                        <li><span class="legend-dot maintenance"></span> Maintenance</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="panel mb-6">
+                            <div class="panel-head">
+                                <div class="panel-title"><i data-lucide="alert-triangle"></i> Attention needed</div>
+                                <span class="badge badge-danger" id="alertCount">0</span>
+                            </div>
+                            <div class="panel-body" id="alertsList"></div>
+                        </div>
+
+                        <div class="panel">
+                            <div class="panel-head">
+                                <div class="panel-title"><i data-lucide="pie-chart"></i> Status breakdown</div>
+                            </div>
+                            <div class="panel-body">
+                                <div class="chart-box short"><canvas id="statusChart"></canvas></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dash-grid-2">
+                    <div class="panel">
+                        <div class="panel-head">
+                            <div class="panel-title"><i data-lucide="battery-charging"></i> Battery distribution</div>
+                            <span class="text-muted" style="font-size:.82rem">Fleet average <strong class="text-primary" id="avgBattery">—</strong></span>
+                        </div>
+                        <div class="panel-body">
+                            <div class="chart-box short"><canvas id="batteryChart"></canvas></div>
+                        </div>
+                    </div>
+
+                    <div class="panel">
+                        <div class="panel-head">
+                            <div class="panel-title"><i data-lucide="activity"></i> Utilisation by location</div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="chart-box short"><canvas id="utilChart"></canvas></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============ LIVE MAP ============ -->
+            <section data-dash-section="live" hidden>
+                <div class="dash-page-head">
+                    <div>
+                        <h1>Live operations map</h1>
+                        <p>Every vehicle, every charging station, in real time.</p>
+                    </div>
+                    <div class="flex gap-2 flex-wrap" id="mapFilters">
+                        <button class="chip active" data-mapf="all">All</button>
+                        <button class="chip" data-mapf="available">Available</button>
+                        <button class="chip" data-mapf="on_trip">On trip</button>
+                        <button class="chip" data-mapf="charging">Charging</button>
+                        <button class="chip" data-mapf="maintenance">Maintenance</button>
+                    </div>
+                </div>
+
+                <div class="ops-grid" id="liveOps"></div>
+
+                <div class="panel">
+                    <div class="panel-body flush">
+                        <div class="map" style="height:calc(100vh - 340px);min-height:500px;border-radius:0;border:none" id="bigMap">
+                            <div class="map-legend">
+                                <h6>Vehicle status</h6>
+                                <ul>
+                                    <li><span class="legend-dot available"></span> Available</li>
+                                    <li><span class="legend-dot on_trip"></span> On trip</li>
+                                    <li><span class="legend-dot charging"></span> Charging</li>
+                                    <li><span class="legend-dot reserved"></span> Reserved</li>
+                                    <li><span class="legend-dot maintenance"></span> Maintenance</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============ VEHICLES ============ -->
+            
+
+            <!-- ============ ASSIGNMENTS ============ -->
+            
+
+            <!-- ============ CHARGING ============ -->
+            <section data-dash-section="charging" hidden>
+                <div class="dash-page-head">
+                    <div>
+                        <h1>Fleet charging</h1>
+                        <p>Vehicles charging now and network capacity across sites.</p>
+                    </div>
+                </div>
+                <div class="dash-grid-4" id="chargeStats"></div>
+                <div class="dash-grid-2">
+                    <div class="panel">
+                        <div class="panel-head">
+                            <div class="panel-title"><i data-lucide="zap"></i> Charging now</div>
+                            <span class="live-tag">Live</span>
+                        </div>
+                        <div class="panel-body flush"><div id="chargingNow"></div></div>
+                    </div>
+                    <div class="panel">
+                        <div class="panel-head">
+                            <div class="panel-title"><i data-lucide="building-2"></i> Network capacity</div>
+                        </div>
+                        <div class="panel-body" id="networkCapacity"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============ MAINTENANCE ============ -->
+            
+
+            <!-- ============ DRIVERS ============ -->
+            <section data-dash-section="drivers" hidden>
+                <div class="dash-page-head">
+                    <div>
+                        <h1>Drivers</h1>
+                        <p>Your driver roster, ratings and current assignments.</p>
+                    </div>
+                    <button class="btn btn-primary" id="inviteDriver">
+                        <i data-lucide="user-plus"></i> Invite driver
+                    </button>
+                </div>
+                <div class="dash-grid-3" id="driversGrid"></div>
+            </section>
+
+            <!-- ============ UTILISATION ============ -->
+            <section data-dash-section="utilization" hidden>
+                <div class="dash-page-head">
+                    <div>
+                        <h1>Utilisation</h1>
+                        <p>How hard each vehicle and location is working.</p>
+                    </div>
+                </div>
+                <div class="dash-grid-4" id="utilStats"></div>
+                <div class="panel mb-6">
+                    <div class="panel-head">
+                        <div class="panel-title"><i data-lucide="bar-chart-3"></i> Utilisation over time</div>
+                    </div>
+                    <div class="panel-body"><div class="chart-box"><canvas id="utilTrendChart"></canvas></div></div>
+                </div>
+                <div class="panel">
+                    <div class="panel-head">
+                        <div class="panel-title"><i data-lucide="list-ordered"></i> Per-vehicle utilisation</div>
+                    </div>
+                    <div class="panel-body" id="utilList"></div>
+                </div>
+            </section>
+
+            <!-- ============ REPORTS ============ -->
+            <section data-dash-section="reports" hidden>
+                <div class="dash-page-head">
+                    <div>
+                        <h1>Reports</h1>
+                        <p>Download operational data for any period.</p>
+                    </div>
+                </div>
+                <div class="dash-grid-3" id="reportsGrid"></div>
+            </section>
+
+        </div>
+    </div>
+</div>
+
+<script src="assets/vendor/lucide.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script type="module" src="js/fleet.js"></script>
+
+</body>
+</html>

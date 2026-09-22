@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Payments | My Account | Stackly</title>
+    <meta name="description" content="Manage your EV bookings, track active trips, view invoices and control your EVRide account.">
+    <meta name="theme-color" content="#050B10">
+    <meta name="robots" content="noindex">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/vehicles.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <link rel="icon" href="assets/images/favicon.png" type="image/png">
+</head>
+<body class="dash-body">
+<div class="preloader" id="preloader" role="status" aria-live="polite" aria-label="Loading">
+    <div class="preloader-inner">
+        <img src="assets/images/stackly-whitish_blue-logo.webp" alt="Stackly"
+             class="preloader-logo" width="320" height="132">
+        <div class="preloader-bar"></div>
+    </div>
+</div>
+
+
+<div class="dash-layout">
+    <div id="sidebarSlot"></div>
+
+    <div class="dash-main">
+        <div id="topbarSlot"></div>
+
+        <div class="dash-content">
+
+<section data-dash-section="payments">
+                <div class="dash-page-head">
+                    <div>
+                        <h1>Payments</h1>
+                        <p>Every transaction on your account.</p>
+                    </div>
+                    <a href="invoices.html" class="btn btn-secondary">
+                        <i data-lucide="file-text"></i> View invoices
+                    </a>
+                </div>
+
+                <div class="dash-grid-4" id="paymentStats"></div>
+
+                <div class="panel mb-6">
+                    <div class="panel-head">
+                        <div class="panel-title"><i data-lucide="credit-card"></i> Saved payment methods</div>
+                        <button class="btn btn-secondary btn-sm" id="addCardBtn">
+                            <i data-lucide="plus"></i> Add card
+                        </button>
+                    </div>
+                    <div class="panel-body" id="cardsList"></div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-head">
+                        <div class="panel-title"><i data-lucide="receipt"></i> Transaction history</div>
+                    </div>
+                    <div class="panel-body flush">
+                        <div class="table-wrap" style="border:none;border-radius:0">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Transaction</th>
+                                        <th>Date</th>
+                                        <th>Booking</th>
+                                        <th>Method</th>
+                                        <th>Amount</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="paymentsTable"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+</div>
+
+<script src="assets/vendor/lucide.min.js"></script>
+<script type="module" src="js/customer.js"></script>
+
+</body>
+</html>

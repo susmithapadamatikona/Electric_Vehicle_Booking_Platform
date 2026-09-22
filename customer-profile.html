@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Profile | My Account | Stackly</title>
+    <meta name="description" content="Manage your EV bookings, track active trips, view invoices and control your EVRide account.">
+    <meta name="theme-color" content="#050B10">
+    <meta name="robots" content="noindex">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/vehicles.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <link rel="icon" href="assets/images/favicon.png" type="image/png">
+</head>
+<body class="dash-body">
+<div class="preloader" id="preloader" role="status" aria-live="polite" aria-label="Loading">
+    <div class="preloader-inner">
+        <img src="assets/images/stackly-whitish_blue-logo.webp" alt="Stackly"
+             class="preloader-logo" width="320" height="132">
+        <div class="preloader-bar"></div>
+    </div>
+</div>
+
+
+<div class="dash-layout">
+    <div id="sidebarSlot"></div>
+
+    <div class="dash-main">
+        <div id="topbarSlot"></div>
+
+        <div class="dash-content">
+
+<section data-dash-section="profile">
+                <div class="dash-page-head">
+                    <div>
+                        <h1>Profile</h1>
+                        <p>Your details and verification status.</p>
+                    </div>
+                </div>
+
+                <div id="profileHead"></div>
+
+                <div class="dash-grid-2">
+                    <div class="panel">
+                        <div class="panel-head">
+                            <div class="panel-title"><i data-lucide="user"></i> Personal details</div>
+                        </div>
+                        <div class="panel-body">
+                            <form id="profileForm" class="flex flex-col gap-4">
+                                <div class="field">
+                                    <label class="label" for="pfName">Full name</label>
+                                    <input type="text" class="input" id="pfName">
+                                </div>
+                                <div class="field">
+                                    <label class="label" for="pfEmail">Email</label>
+                                    <input type="email" class="input" id="pfEmail">
+                                </div>
+                                <div class="field">
+                                    <label class="label" for="pfPhone">Phone</label>
+                                    <input type="tel" class="input" id="pfPhone">
+                                </div>
+                                <div class="field">
+                                    <label class="label" for="pfCity">City</label>
+                                    <input type="text" class="input" id="pfCity">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="panel">
+                        <div class="panel-head">
+                            <div class="panel-title"><i data-lucide="file-check"></i> Documents</div>
+                            <span class="badge badge-green">Verified</span>
+                        </div>
+                        <div class="panel-body">
+                            <div class="setting-row">
+                                <div class="setting-row-body">
+                                    <strong>Driving licence</strong>
+                                    <span>KA0120230012345 · Expires 12 Mar 2031</span>
+                                </div>
+                                <span class="badge badge-green"><i data-lucide="check" style="width:11px;height:11px"></i> Verified</span>
+                            </div>
+                            <div class="setting-row">
+                                <div class="setting-row-body">
+                                    <strong>Government ID</strong>
+                                    <span>Aadhaar ending 4821</span>
+                                </div>
+                                <span class="badge badge-green"><i data-lucide="check" style="width:11px;height:11px"></i> Verified</span>
+                            </div>
+                            <div class="setting-row">
+                                <div class="setting-row-body">
+                                    <strong>Address proof</strong>
+                                    <span>Utility bill · Uploaded 14 Jan 2026</span>
+                                </div>
+                                <span class="badge badge-green"><i data-lucide="check" style="width:11px;height:11px"></i> Verified</span>
+                            </div>
+                            <div class="setting-row">
+                                <div class="setting-row-body">
+                                    <strong>Selfie verification</strong>
+                                    <span>Required for luxury and performance EVs</span>
+                                </div>
+                                <button class="btn btn-secondary btn-xs" id="uploadSelfie">Upload</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+</div>
+
+<script src="assets/vendor/lucide.min.js"></script>
+<script type="module" src="js/customer.js"></script>
+
+</body>
+</html>

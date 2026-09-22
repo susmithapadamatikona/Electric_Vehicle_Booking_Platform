@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Page not found | EVRide</title>
+    <meta name="description" content="This page could not be found. Head back to the EVRide homepage or browse available electric vehicles.">
+    <meta name="theme-color" content="#050B10">
+    <meta name="robots" content="noindex">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/vehicles.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <link rel="icon" href="assets/images/favicon.png" type="image/png">
+</head>
+<body>
+<div class="preloader" id="preloader" role="status" aria-live="polite" aria-label="Loading">
+    <div class="preloader-inner">
+        <img src="assets/images/stackly-whitish_blue-logo.webp" alt="Stackly"
+             class="preloader-logo" width="320" height="132">
+        <div class="preloader-bar"></div>
+    </div>
+</div>
+
+<main id="main">
+
+    <section class="error-page">
+        <div class="orb orb-green" style="width:600px;height:600px;top:-25%;left:50%;transform:translateX(-50%)" aria-hidden="true"></div>
+
+        <div class="container" style="position:relative;z-index:1;max-width:760px">
+
+            <!-- Brand mark. Links home so it doubles as a way out of the page. -->
+            <a href="index.html" class="logo error-logo" aria-label="Stackly home">
+                <img src="assets/images/stackly-whitish_blue-logo.webp" alt="Stackly"
+                     class="logo-img" width="320" height="132">
+            </a>
+
+            <div class="error-code anim-up d-1">404</div>
+
+            <h1 class="anim-up d-2" style="font-size:clamp(1.6rem,3.4vw,2.4rem);margin-bottom:16px">
+                This page has run out of charge
+            </h1>
+
+            <p class="anim-up d-3" style="font-size:1.05rem;color:var(--text-secondary);line-height:1.8;max-width:520px;margin-inline:auto">
+                The page you're looking for doesn't exist, moved somewhere else, or was
+                never plugged in to begin with. Let's get you back on the road.
+            </p>
+
+            <div class="error-actions anim-up d-4">
+                <a href="index.html" class="btn btn-primary btn-lg">
+                    <i data-lucide="home"></i> Back to home
+                </a>
+                <button class="btn btn-secondary btn-lg" id="goBack">
+                    <i data-lucide="arrow-left"></i> Go back
+                </button>
+            </div>
+
+        </div>
+    </section>
+
+</main>
+
+<script src="assets/vendor/lucide.min.js"></script>
+<script type="module" src="js/error.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Driver &amp; Owner Dashboard | EVRide</title>
+    <meta name="description" content="Manage your listed EVs, accept booking requests, track earnings and monitor vehicle health.">
+    <meta name="theme-color" content="#050B10">
+    <meta name="robots" content="noindex">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/vehicles.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <link rel="icon" href="assets/images/favicon.png" type="image/png">
+</head>
+<body class="dash-body">
+<div class="preloader" id="preloader" role="status" aria-live="polite" aria-label="Loading">
+    <div class="preloader-inner">
+        <img src="assets/images/stackly-whitish_blue-logo.webp" alt="Stackly"
+             class="preloader-logo" width="320" height="132">
+        <div class="preloader-bar"></div>
+    </div>
+</div>
+
+
+<div class="dash-layout">
+    <div id="sidebarSlot"></div>
+
+    <div class="dash-main">
+        <div id="topbarSlot"></div>
+
+        <div class="dash-content">
+
+            <!-- ============ OVERVIEW ============ -->
+            <section data-dash-section="overview">
+                <div class="dash-page-head">
+                    <div>
+                        <h1 id="ownerGreeting">Owner dashboard</h1>
+                        <p>Your vehicles, requests and earnings at a glance.</p>
+                    </div>
+                    <div class="flex gap-3 flex-wrap">
+                        <button class="btn btn-secondary" id="toggleAvailability">
+                            <i data-lucide="power"></i> Go offline
+                        </button>
+                        <button class="btn btn-primary" id="addListing">
+                            <i data-lucide="plus"></i> List a vehicle
+                        </button>
+                    </div>
+                </div>
+
+                <div class="earnings-hero">
+                    <div class="flex items-start justify-between gap-5 flex-wrap">
+                        <div>
+                            <div class="stat-label mb-2">Total earnings</div>
+                            <div class="earnings-val" id="totalEarnings">₹0</div>
+                            <div class="stat-meta mt-2">
+                                <span class="stat-delta up"><i data-lucide="trending-up"></i> 18.4%</span>
+                                <span>vs. last month</span>
+                            </div>
+                        </div>
+                        <div class="flex gap-3 flex-wrap">
+                            <button class="btn btn-primary" id="withdrawBtn">
+                                <i data-lucide="banknote"></i> Withdraw
+                            </button>
+                            <a href="analytics.html" class="btn btn-secondary">
+                                <i data-lucide="bar-chart-3"></i> Analytics
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="earnings-split" id="earningsSplit"></div>
+                </div>
+
+                <div class="dash-grid-4" id="ownerStats"></div>
+
+                <div class="dash-split">
+                    <div>
+                        <div class="panel mb-6">
+                            <div class="panel-head">
+                                <div>
+                                    <div class="panel-title"><i data-lucide="inbox"></i> Booking requests</div>
+                                    <div class="panel-sub">Respond within 15 minutes to keep your acceptance rate</div>
+                                </div>
+                                <span class="badge badge-warning" id="pendingCount">0</span>
+                            </div>
+                            <div class="panel-body flush" id="requestsList"></div>
+                        </div>
+
+                        <div class="panel">
+                            <div class="panel-head">
+                                <div class="panel-title"><i data-lucide="trending-up"></i> Earnings trend</div>
+                                <div class="range-tabs" id="earnRange">
+                                    <button data-range="7">7D</button>
+                                    <button class="active" data-range="30">30D</button>
+                                    <button data-range="12">12M</button>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <div class="chart-box"><canvas id="earningsChart"></canvas></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="panel mb-6">
+                            <div class="panel-head">
+                                <div class="panel-title"><i data-lucide="star"></i> Your rating</div>
+                            </div>
+                            <div class="panel-body" id="ratingPanel"></div>
+                        </div>
+
+                        <div class="panel">
+                            <div class="panel-head">
+                                <div class="panel-title"><i data-lucide="activity"></i> Recent activity</div>
+                                <span class="live-tag">Live</span>
+                            </div>
+                            <div class="panel-body flush">
+                                <div class="activity" id="ownerActivity"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============ REQUESTS ============ -->
+            
+
+            <!-- ============ TRIPS ============ -->
+            
+
+            <!-- ============ VEHICLES ============ -->
+            <section data-dash-section="vehicles" hidden>
+                <div class="dash-page-head">
+                    <div>
+                        <h1>My vehicles</h1>
+                        <p>Everything you've listed on the EVRide platform.</p>
+                    </div>
+                    <button class="btn btn-primary" id="addListing2">
+                        <i data-lucide="plus"></i> List a vehicle
+                    </button>
+                </div>
+                <div class="dash-grid-3" id="ownerVehicles"></div>
+            </section>
+
+            <!-- ============ AVAILABILITY ============ -->
+            <section data-dash-section="availability" hidden>
+                <div class="dash-page-head">
+                    <div>
+                        <h1>Availability</h1>
+                        <p>Control when each vehicle can be booked.</p>
+                    </div>
+                </div>
+                <div class="panel">
+                    <div class="panel-head">
+                        <div class="panel-title"><i data-lucide="calendar-range"></i> Weekly schedule</div>
+                        <button class="btn btn-secondary btn-sm" id="applyAllDays">Apply to all days</button>
+                    </div>
+                    <div class="panel-body" id="availabilityPanel"></div>
+                </div>
+            </section>
+
+            <!-- ============ MAINTENANCE ============ -->
+            <section data-dash-section="maintenance" hidden>
+                <div class="dash-page-head">
+                    <div>
+                        <h1>Vehicle maintenance</h1>
+                        <p>Health scores, service history and upcoming work.</p>
+                    </div>
+                </div>
+                <div id="ownerMaintenance"></div>
+            </section>
+
+            <!-- ============ EARNINGS ============ -->
+            
+
+            <!-- ============ PAYOUTS ============ -->
+            <section data-dash-section="payouts" hidden>
+                <div class="dash-page-head">
+                    <div>
+                        <h1>Payouts</h1>
+                        <p>Weekly transfers to your registered bank account.</p>
+                    </div>
+                </div>
+                <div class="dash-split">
+                    <div class="panel">
+                        <div class="panel-head">
+                            <div class="panel-title"><i data-lucide="banknote"></i> Payout history</div>
+                        </div>
+                        <div class="panel-body flush" id="payoutList"></div>
+                    </div>
+                    <div class="panel">
+                        <div class="panel-head">
+                            <div class="panel-title"><i data-lucide="landmark"></i> Bank account</div>
+                        </div>
+                        <div class="panel-body" id="bankPanel"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============ RATINGS ============ -->
+            <section data-dash-section="ratings" hidden>
+                <div class="dash-page-head">
+                    <div>
+                        <h1>Ratings &amp; reviews</h1>
+                        <p>What customers say after driving your vehicles.</p>
+                    </div>
+                </div>
+                <div id="ratingsSection"></div>
+            </section>
+
+            <!-- ============ DOCUMENTS ============ -->
+            <section data-dash-section="documents" hidden>
+                <div class="dash-page-head">
+                    <div>
+                        <h1>Documents</h1>
+                        <p>Registration, insurance and inspection certificates.</p>
+                    </div>
+                    <button class="btn btn-primary" id="uploadDoc">
+                        <i data-lucide="upload"></i> Upload
+                    </button>
+                </div>
+                <div class="dash-grid-2" id="documentsGrid"></div>
+            </section>
+
+            <!-- ============ SETTINGS ============ -->
+            <section data-dash-section="settings" hidden>
+                <div class="dash-page-head">
+                    <div>
+                        <h1>Settings</h1>
+                        <p>Pricing rules, notifications and payout preferences.</p>
+                    </div>
+                </div>
+                <div class="dash-grid-2" id="ownerSettings"></div>
+            </section>
+
+        </div>
+    </div>
+</div>
+
+<script src="assets/vendor/lucide.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script type="module" src="js/driver.js"></script>
+
+</body>
+</html>

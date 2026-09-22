@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>My Bookings | Admin Console | Stackly</title>
+    <meta name="description" content="EVRide platform administration — users, fleet, bookings, charging network, payments and live operations.">
+    <meta name="theme-color" content="#050B10">
+    <meta name="robots" content="noindex">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/vehicles.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <link rel="icon" href="assets/images/favicon.png" type="image/png">
+</head>
+<body class="dash-body">
+<div class="preloader" id="preloader" role="status" aria-live="polite" aria-label="Loading">
+    <div class="preloader-inner">
+        <img src="assets/images/stackly-whitish_blue-logo.webp" alt="Stackly"
+             class="preloader-logo" width="320" height="132">
+        <div class="preloader-bar"></div>
+    </div>
+</div>
+
+
+<div class="dash-layout">
+    <div id="sidebarSlot"></div>
+
+    <div class="dash-main">
+        <div id="topbarSlot"></div>
+
+        <div class="dash-content">
+
+<section data-dash-section="bookings">
+                <div class="dash-page-head">
+                    <div>
+                        <h1>Bookings</h1>
+                        <p>Every reservation on the platform.</p>
+                    </div>
+                </div>
+                <div class="dash-grid-4" id="bookingStats"></div>
+                <div class="panel">
+                    <div class="panel-head">
+                        <div class="segment" id="adminBookingFilter">
+                            <button class="active" data-abf="all">All</button>
+                            <button data-abf="active">Active</button>
+                            <button data-abf="upcoming">Upcoming</button>
+                            <button data-abf="completed">Completed</button>
+                            <button data-abf="cancelled">Cancelled</button>
+                        </div>
+                    </div>
+                    <div class="panel-body flush">
+                        <div class="table-wrap" style="border:none;border-radius:0">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Booking</th><th>Vehicle</th><th>Pickup</th>
+                                        <th>Dates</th><th>Days</th><th>Amount</th>
+                                        <th>Payment</th><th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="adminBookingsTable"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+</div>
+
+<script src="assets/vendor/lucide.min.js"></script>
+<script type="module" src="js/admin.js"></script>
+
+</body>
+</html>

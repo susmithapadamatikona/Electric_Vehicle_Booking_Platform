@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Secure Payment | EVRide</title>
+    <meta name="description" content="Complete your EV booking with secure, encrypted payment. Card, UPI, net banking and wallets accepted.">
+    <meta name="theme-color" content="#050B10">
+    <meta name="robots" content="noindex">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/vehicles.css">
+    <link rel="stylesheet" href="css/booking.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <link rel="icon" href="assets/images/favicon.png" type="image/png">
+</head>
+<body>
+<div class="preloader" id="preloader" role="status" aria-live="polite" aria-label="Loading">
+    <div class="preloader-inner">
+        <img src="assets/images/stackly-whitish_blue-logo.webp" alt="Stackly"
+             class="preloader-logo" width="320" height="132">
+        <div class="preloader-bar"></div>
+    </div>
+</div>
+
+
+<div id="navSlot"></div>
+
+<main id="main">
+
+    <div class="stepper-wrap">
+        <div class="container">
+            <div class="stepper">
+                <div class="step-node done"><span class="step-dot"><i data-lucide="check"></i></span>
+                    <span class="step-node-label"><small>Step 1</small><strong>Vehicle</strong></span></div>
+                <span class="stepper-line filled"></span>
+                <div class="step-node done"><span class="step-dot"><i data-lucide="check"></i></span>
+                    <span class="step-node-label"><small>Step 2</small><strong>Schedule</strong></span></div>
+                <span class="stepper-line filled"></span>
+                <div class="step-node done"><span class="step-dot"><i data-lucide="check"></i></span>
+                    <span class="step-node-label"><small>Step 3</small><strong>Details</strong></span></div>
+                <span class="stepper-line filled"></span>
+                <div class="step-node done"><span class="step-dot"><i data-lucide="check"></i></span>
+                    <span class="step-node-label"><small>Step 4</small><strong>Review</strong></span></div>
+                <span class="stepper-line filled"></span>
+                <div class="step-node active"><span class="step-dot">5</span>
+                    <span class="step-node-label"><small>Step 5</small><strong>Payment</strong></span></div>
+            </div>
+
+            <div class="stepper-mobile">
+                <div class="stepper-mobile-text">
+                    <strong>Secure Payment</strong>
+                    <span>Final step</span>
+                </div>
+                <div class="bar" style="width:120px"><div class="bar-fill" style="width:100%"></div></div>
+            </div>
+        </div>
+    </div>
+
+    <section class="section" style="padding-top:var(--s-8)">
+        <div class="container">
+            <div class="booking-layout">
+
+                <div class="booking-panel">
+                    <div class="booking-panel-head">
+                        <div class="flex items-center justify-between gap-4 flex-wrap">
+                            <div>
+                                <h2>Secure payment</h2>
+                                <p>Your details are encrypted end to end. We never store full card numbers.</p>
+                            </div>
+                            <span class="badge badge-green">
+                                <i data-lucide="lock" style="width:12px;height:12px"></i> 256-bit SSL
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="booking-panel-body">
+
+                        <!-- Method selector -->
+                        <div class="bk-section">
+                            <div class="bk-section-title"><i data-lucide="wallet"></i> Choose a payment method</div>
+                            <div class="pay-methods" id="payMethods">
+                                <button type="button" class="pay-method selected" data-method="card">
+                                    <span class="pay-method-icon"><i data-lucide="credit-card"></i></span>
+                                    <strong>Card</strong>
+                                    <span>Credit or debit</span>
+                                </button>
+                                <button type="button" class="pay-method" data-method="upi">
+                                    <span class="pay-method-icon"><i data-lucide="smartphone"></i></span>
+                                    <strong>UPI</strong>
+                                    <span>Instant transfer</span>
+                                </button>
+                                <button type="button" class="pay-method" data-method="netbanking">
+                                    <span class="pay-method-icon"><i data-lucide="building-2"></i></span>
+                                    <strong>Net Banking</strong>
+                                    <span>50+ banks</span>
+                                </button>
+                                <button type="button" class="pay-method" data-method="wallet">
+                                    <span class="pay-method-icon"><i data-lucide="wallet"></i></span>
+                                    <strong>Wallet</strong>
+                                    <span>Paytm, PhonePe</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- CARD -->
+                        <div class="pay-pane active" data-pane="card">
+                            <div class="card-preview" id="cardPreview">
+                                <div class="card-preview-top">
+                                    <span class="card-chip"></span>
+                                    <span class="card-brand" id="cardBrand">EVRide PAY</span>
+                                </div>
+                                <div class="card-number" id="cardNumberDisplay">•••• •••• •••• ••••</div>
+                                <div class="card-preview-bottom">
+                                    <div class="card-field">
+                                        <small>Card holder</small>
+                                        <strong id="cardHolderDisplay">YOUR NAME</strong>
+                                    </div>
+                                    <div class="card-field">
+                                        <small>Expires</small>
+                                        <strong id="cardExpiryDisplay">MM/YY</strong>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bk-section">
+                                <div class="field mb-4">
+                                    <label class="label" for="cardHolder">Card holder name <span class="req">*</span></label>
+                                    <input type="text" class="input" id="cardHolder" placeholder="Name as printed on the card" autocomplete="cc-name">
+                                    <span class="field-error"><i data-lucide="alert-circle" style="width:12px;height:12px"></i> Enter the card holder name</span>
+                                </div>
+
+                                <div class="field mb-4">
+                                    <label class="label" for="cardNumber">Card number <span class="req">*</span></label>
+                                    <div class="input-icon">
+                                        <i data-lucide="credit-card"></i>
+                                        <input type="text" class="input" id="cardNumber" placeholder="4242 4242 4242 4242"
+                                               inputmode="numeric" maxlength="23" autocomplete="cc-number">
+                                    </div>
+                                    <span class="field-error"><i data-lucide="alert-circle" style="width:12px;height:12px"></i> Enter a valid 16-digit card number</span>
+                                    <span class="field-hint">Test card: 4242 4242 4242 4242 — any future expiry, any CVV.</span>
+                                </div>
+
+                                <div class="bk-grid-2">
+                                    <div class="field">
+                                        <label class="label" for="cardExpiry">Expiry <span class="req">*</span></label>
+                                        <input type="text" class="input" id="cardExpiry" placeholder="MM/YY"
+                                               inputmode="numeric" maxlength="5" autocomplete="cc-exp">
+                                        <span class="field-error"><i data-lucide="alert-circle" style="width:12px;height:12px"></i> Enter a valid future expiry</span>
+                                    </div>
+                                    <div class="field">
+                                        <label class="label" for="cardCvv">CVV <span class="req">*</span></label>
+                                        <div class="input-icon">
+                                            <i data-lucide="shield"></i>
+                                            <input type="password" class="input" id="cardCvv" placeholder="•••"
+                                                   inputmode="numeric" maxlength="4" autocomplete="cc-csc">
+                                        </div>
+                                        <span class="field-error"><i data-lucide="alert-circle" style="width:12px;height:12px"></i> Enter the 3-digit CVV</span>
+                                    </div>
+                                </div>
+
+                                <label class="check mt-4">
+                                    <input type="checkbox" id="saveCard" checked>
+                                    <span>Save this card securely for faster checkout next time</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- UPI -->
+                        <div class="pay-pane" data-pane="upi">
+                            <div class="bk-section">
+                                <div class="field mb-5">
+                                    <label class="label" for="upiId">UPI ID <span class="req">*</span></label>
+                                    <div class="input-icon">
+                                        <i data-lucide="at-sign"></i>
+                                        <input type="text" class="input" id="upiId" placeholder="yourname@okhdfc">
+                                    </div>
+                                    <span class="field-error"><i data-lucide="alert-circle" style="width:12px;height:12px"></i> Enter a valid UPI ID</span>
+                                </div>
+
+                                <div class="divider-text">or pay with an app</div>
+
+                                <div class="bank-grid">
+                                    <button type="button" class="bank-opt" data-upi="gpay">
+                                        <span class="bank-logo">G</span> Google Pay
+                                    </button>
+                                    <button type="button" class="bank-opt" data-upi="phonepe">
+                                        <span class="bank-logo">P</span> PhonePe
+                                    </button>
+                                    <button type="button" class="bank-opt" data-upi="paytm">
+                                        <span class="bank-logo">P</span> Paytm
+                                    </button>
+                                    <button type="button" class="bank-opt" data-upi="bhim">
+                                        <span class="bank-logo">B</span> BHIM
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- NET BANKING -->
+                        <div class="pay-pane" data-pane="netbanking">
+                            <div class="bk-section">
+                                <div class="bk-section-title"><i data-lucide="landmark"></i> Popular banks</div>
+                                <div class="bank-grid" id="bankGrid"></div>
+
+                                <div class="field mt-6">
+                                    <label class="label" for="otherBank">Other banks</label>
+                                    <select class="select" id="otherBank">
+                                        <option value="">Select your bank</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- WALLET -->
+                        <div class="pay-pane" data-pane="wallet">
+                            <div class="bk-section">
+                                <div class="bk-section-title"><i data-lucide="wallet"></i> Choose a wallet</div>
+                                <div class="bank-grid">
+                                    <button type="button" class="bank-opt" data-wallet="paytm">
+                                        <span class="bank-logo">P</span> Paytm Wallet
+                                    </button>
+                                    <button type="button" class="bank-opt" data-wallet="phonepe">
+                                        <span class="bank-logo">P</span> PhonePe
+                                    </button>
+                                    <button type="button" class="bank-opt" data-wallet="amazon">
+                                        <span class="bank-logo">A</span> Amazon Pay
+                                    </button>
+                                    <button type="button" class="bank-opt" data-wallet="mobikwik">
+                                        <span class="bank-logo">M</span> MobiKwik
+                                    </button>
+                                </div>
+
+                                <div class="card-glass mt-6 flex items-center gap-4">
+                                    <div class="stat-icon"><i data-lucide="gift"></i></div>
+                                    <div>
+                                        <strong class="text-primary">EVRide Wallet balance: ₹1,240</strong>
+                                        <p class="text-muted" style="font-size:.82rem;margin:0">
+                                            Applied automatically against your total at checkout.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Security -->
+                        <div class="secure-row">
+                            <span class="secure-item"><i data-lucide="lock"></i> 256-bit SSL encryption</span>
+                            <span class="secure-item"><i data-lucide="shield-check"></i> PCI DSS compliant</span>
+                            <span class="secure-item"><i data-lucide="eye-off"></i> Card details never stored</span>
+                            <span class="secure-item"><i data-lucide="badge-check"></i> 3D Secure verified</span>
+                        </div>
+                    </div>
+
+                    <div class="booking-panel-foot">
+                        <a href="booking-summary.html" class="btn btn-secondary">
+                            <i data-lucide="arrow-left"></i> Back to review
+                        </a>
+                        <button class="btn btn-primary btn-lg" id="payNow">
+                            <i data-lucide="lock"></i> Pay <span id="payAmount">—</span>
+                        </button>
+                    </div>
+                </div>
+
+                <aside class="booking-summary-panel" id="summaryPanel" aria-label="Booking summary"></aside>
+
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<!-- Processing overlay -->
+<div class="pay-processing" id="payProcessing" role="status" aria-live="polite">
+    <div class="pay-processing-box">
+        <div class="pay-processing-ring">
+            <svg viewBox="0 0 100 100" style="width:100%;height:100%">
+                <circle cx="50" cy="50" r="42" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="6"/>
+                <circle cx="50" cy="50" r="42" fill="none" stroke="url(#payGrad)" stroke-width="6"
+                        stroke-linecap="round" stroke-dasharray="264" stroke-dashoffset="198"
+                        class="charge-ring-spark"/>
+                <defs>
+                    <linearGradient id="payGrad" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0" stop-color="#00E676"/>
+                        <stop offset="1" stop-color="#00C8FF"/>
+                    </linearGradient>
+                </defs>
+            </svg>
+        </div>
+        <h3>Processing your payment</h3>
+        <p class="text-secondary mt-2">Please don't close this window.</p>
+
+        <div class="pay-steps">
+            <div class="pay-step" data-pstep="1">
+                <span class="pay-step-icon"><i data-lucide="check"></i></span>
+                Verifying payment details
+            </div>
+            <div class="pay-step" data-pstep="2">
+                <span class="pay-step-icon"><i data-lucide="check"></i></span>
+                Authorising with your bank
+            </div>
+            <div class="pay-step" data-pstep="3">
+                <span class="pay-step-icon"><i data-lucide="check"></i></span>
+                Reserving your vehicle
+            </div>
+            <div class="pay-step" data-pstep="4">
+                <span class="pay-step-icon"><i data-lucide="check"></i></span>
+                Generating booking &amp; invoice
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="footerSlot"></div>
+
+<script src="assets/vendor/lucide.min.js"></script>
+<script type="module" src="js/payment.js"></script>
+
+</body>
+</html>

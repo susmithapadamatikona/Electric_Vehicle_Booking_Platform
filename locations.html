@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Locations &amp; Pickup Points | EVRide</title>
+    <meta name="description" content="Find EVRide hubs, pickup points, airport terminals and depots near you, with live vehicle and charger availability.">
+    <meta name="theme-color" content="#050B10">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/vehicles.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/pages.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <link rel="icon" href="assets/images/favicon.png" type="image/png">
+</head>
+<body>
+<div class="preloader" id="preloader" role="status" aria-live="polite" aria-label="Loading">
+    <div class="preloader-inner">
+        <img src="assets/images/stackly-whitish_blue-logo.webp" alt="Stackly"
+             class="preloader-logo" width="320" height="132">
+        <div class="preloader-bar"></div>
+    </div>
+</div>
+
+
+<div id="navSlot"></div>
+
+<main id="main">
+
+    <header class="page-head">
+        <div class="orb orb-blue" style="width:520px;height:520px;top:-60%;right:-6%" aria-hidden="true"></div>
+        <div class="container">
+            <nav class="crumbs" aria-label="Breadcrumb">
+                <a href="index.html">Home</a>
+                <i data-lucide="chevron-right"></i>
+                <span class="current">Locations</span>
+            </nav>
+            <h1 class="page-head-title">Locations &amp; pickup points</h1>
+            <p class="page-head-sub">
+                Hubs, airport terminals and street pickup points across Bengaluru — each with
+                vehicles ready and chargers on site.
+            </p>
+
+            <div class="flex gap-5 mt-6 flex-wrap items-center">
+                <span class="live-tag">Live availability</span>
+                <span class="text-muted" style="font-size:.85rem">
+                    <strong class="text-green mono" id="locCount">—</strong> locations ·
+                    <strong class="text-primary mono" id="locVehicles">—</strong> vehicles ·
+                    <strong class="text-blue mono" id="locChargers">—</strong> chargers
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <section class="section" style="padding-top:var(--s-10)">
+        <div class="container-wide">
+            <div class="loc-layout">
+
+                <div>
+                    <div class="input-icon mb-4">
+                        <i data-lucide="search"></i>
+                        <input type="search" class="input" id="locSearch"
+                               placeholder="Search by area or location name" aria-label="Search locations">
+                    </div>
+
+                    <div class="flex gap-2 mb-5 flex-wrap" id="locFilters">
+                        <button class="chip active" data-lf="all">All</button>
+                        <button class="chip" data-lf="hub">Hubs</button>
+                        <button class="chip" data-lf="pickup">Pickup points</button>
+                        <button class="chip" data-lf="airport">Airport</button>
+                        <button class="chip" data-lf="depot">Depots</button>
+                    </div>
+
+                    <div class="loc-list" id="locList"></div>
+                </div>
+
+                <div class="map map-lg" id="locMap" style="position:sticky;top:calc(var(--nav-h) + 20px)">
+                    <div class="map-legend">
+                        <h6>Location type</h6>
+                        <ul>
+                            <li><span class="legend-dot available"></span> Hub</li>
+                            <li><span class="legend-dot on_trip"></span> Airport</li>
+                            <li><span class="legend-dot charging"></span> Depot</li>
+                            <li><span class="legend-dot reserved"></span> Pickup point</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Cities we serve -->
+    <section class="section section-alt">
+        <div class="container">
+            <div class="section-head centered" data-reveal>
+                <span class="eyebrow centered">Coverage</span>
+                <h2 class="section-title">Now in 14 cities, growing every quarter</h2>
+                <p class="section-sub">
+                    Bengaluru is our home network with the deepest coverage. Here's where else
+                    you'll find EVRide today.
+                </p>
+            </div>
+
+            <div class="grid grid-4 gap-4" id="cityGrid"></div>
+        </div>
+    </section>
+
+    <!-- Why hubs -->
+    <section class="section">
+        <div class="container">
+            <div class="section-head centered" data-reveal>
+                <span class="eyebrow centered">At every location</span>
+                <h2 class="section-title">What to expect when you arrive</h2>
+            </div>
+
+            <div class="feat-grid">
+                <article class="feat" data-reveal>
+                    <div class="feat-icon"><i data-lucide="battery-charging"></i></div>
+                    <h4>Charged above 80%</h4>
+                    <p>Every vehicle is topped up before handover, so you start with real range, not a courtesy 40%.</p>
+                </article>
+                <article class="feat" data-reveal data-reveal-delay="80">
+                    <div class="feat-icon blue"><i data-lucide="sparkles"></i></div>
+                    <h4>Cleaned and sanitised</h4>
+                    <p>Interior wipe-down and cabin filter check between every single booking.</p>
+                </article>
+                <article class="feat" data-reveal data-reveal-delay="160">
+                    <div class="feat-icon purple"><i data-lucide="key-round"></i></div>
+                    <h4>Keyless collection</h4>
+                    <p>Unlock with your phone. No counter, no queue, no paperwork at pickup.</p>
+                </article>
+                <article class="feat" data-reveal>
+                    <div class="feat-icon"><i data-lucide="zap"></i></div>
+                    <h4>Chargers on site</h4>
+                    <p>Every hub has AC and DC charging, so you can top up before you set off.</p>
+                </article>
+                <article class="feat" data-reveal data-reveal-delay="80">
+                    <div class="feat-icon blue"><i data-lucide="shield-check"></i></div>
+                    <h4>Secure parking</h4>
+                    <p>CCTV-monitored bays with attendant cover at all hub locations.</p>
+                </article>
+                <article class="feat" data-reveal data-reveal-delay="160">
+                    <div class="feat-icon purple"><i data-lucide="headset"></i></div>
+                    <h4>Staff on hand</h4>
+                    <p>Hubs are staffed during operating hours if you'd rather deal with a person.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" style="padding-top:0">
+        <div class="container">
+            <div class="cta-band" data-reveal="zoom">
+                <div class="cta-inner">
+                    <h2 class="cta-title">Can't get to a hub?</h2>
+                    <p class="cta-sub">
+                        We'll deliver your EV to your home, office or hotel for ₹599 — and collect
+                        it when you're done.
+                    </p>
+                    <div class="cta-actions">
+                        <a href="explore-evs.html" class="btn btn-primary btn-lg">
+                            <i data-lucide="truck"></i> Book with delivery
+                        </a>
+                        <a href="contact.html" class="btn btn-secondary btn-lg">Talk to us</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<div id="footerSlot"></div>
+
+<script src="assets/vendor/lucide.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script type="module" src="js/locations.js"></script>
+
+</body>
+</html>

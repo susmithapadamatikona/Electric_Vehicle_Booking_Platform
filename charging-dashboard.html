@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Live Charging Session | EVRide</title>
+    <meta name="description" content="Monitor your EV charging session in real time — battery percentage, power draw, energy added, cost and time remaining.">
+    <meta name="theme-color" content="#050B10">
+    <meta name="robots" content="noindex">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/vehicles.css">
+    <link rel="stylesheet" href="css/charging.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <link rel="icon" href="assets/images/favicon.png" type="image/png">
+</head>
+<body>
+<div class="preloader" id="preloader" role="status" aria-live="polite" aria-label="Loading">
+    <div class="preloader-inner">
+        <img src="assets/images/stackly-whitish_blue-logo.webp" alt="Stackly"
+             class="preloader-logo" width="320" height="132">
+        <div class="preloader-bar"></div>
+    </div>
+</div>
+
+
+<div id="navSlot"></div>
+
+<main id="main">
+
+    <div class="container" style="padding-top:calc(var(--nav-h) + var(--s-8));padding-bottom:var(--s-16)">
+
+        <div class="flex items-center justify-between gap-4 mb-8 flex-wrap">
+            <div>
+                <nav class="crumbs mb-3" aria-label="Breadcrumb">
+                    <a href="index.html">Home</a>
+                    <i data-lucide="chevron-right"></i>
+                    <a href="charging-stations.html">Charging</a>
+                    <i data-lucide="chevron-right"></i>
+                    <span class="current">Live Session</span>
+                </nav>
+                <h1 style="font-size:clamp(1.7rem,3.2vw,2.3rem)">Live charging session</h1>
+            </div>
+            <span class="live-tag" id="liveTag">Live · updates every 2s</span>
+        </div>
+
+        <div id="chargeContent">
+            <!-- Populated by JS -->
+        </div>
+
+    </div>
+
+</main>
+
+<div id="footerSlot"></div>
+
+<!-- Start session modal -->
+<div class="modal-backdrop" id="startModal">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="startTitle">
+        <div class="modal-head">
+            <div>
+                <h4 class="modal-title" id="startTitle">Start a charging session</h4>
+                <p class="modal-sub">Simulate plugging in at a EVRide station</p>
+            </div>
+            <button class="modal-close" data-modal-close aria-label="Close"><i data-lucide="x"></i></button>
+        </div>
+        <div class="modal-body">
+            <div class="field mb-5">
+                <label class="label" for="startVehicle">Vehicle</label>
+                <select class="select" id="startVehicle"></select>
+            </div>
+            <div class="field mb-5">
+                <label class="label" for="startStation">Charging station</label>
+                <select class="select" id="startStation"></select>
+            </div>
+            <div class="field">
+                <label class="label">Charge to</label>
+                <div class="range-vals mb-2">
+                    <span>50%</span>
+                    <span id="startSocLabel">80%</span>
+                </div>
+                <input type="range" class="range" id="startSoc" min="50" max="100" step="5" value="80">
+            </div>
+        </div>
+        <div class="modal-foot">
+            <button class="btn btn-secondary" data-modal-close>Cancel</button>
+            <button class="btn btn-primary" id="confirmStart">
+                <i data-lucide="zap"></i> Start charging
+            </button>
+        </div>
+    </div>
+</div>
+
+<script src="assets/vendor/lucide.min.js"></script>
+<script type="module" src="js/charge-session.js"></script>
+
+</body>
+</html>

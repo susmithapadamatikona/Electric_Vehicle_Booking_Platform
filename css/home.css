@@ -1,0 +1,1625 @@
+/* ==========================================================================
+   EVRide — home.css
+   Homepage: hero, live search, categories, how-it-works, charging network,
+   sustainability, app promo, testimonials, CTA.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. HERO — full-bleed night city, car integrated into the scene
+   -------------------------------------------------------------------------- */
+.hero {
+    position: relative;
+    min-height: 760px;
+    display: flex;
+    align-items: center;
+    padding-top: var(--s-12);
+    padding-bottom: 190px;
+    overflow: hidden;
+    isolation: isolate;
+    background: #060D14;
+}
+
+/* Photographic backdrop */
+.hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: -3;
+    overflow: hidden;
+}
+
+.hero-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 58%;
+    /* The asset is already graded to night in assets/images/hero/, so this
+       only nudges it — a second heavy filter here would crush it to black. */
+    filter: saturate(1.06) contrast(1.03);
+    transform: scale(1.03);
+}
+
+/* Teal wash + left-side darkening so the headline always has contrast */
+.hero-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(90deg,
+            rgba(5, 13, 20, 0.90) 0%,
+            rgba(5, 13, 20, 0.74) 28%,
+            rgba(6, 18, 26, 0.34) 54%,
+            rgba(6, 22, 30, 0.16) 76%,
+            rgba(5, 13, 20, 0.40) 100%),
+        linear-gradient(180deg,
+            rgba(5, 11, 16, 0.70) 0%,
+            rgba(5, 11, 16, 0.04) 36%,
+            rgba(5, 11, 16, 0.42) 78%,
+            rgba(5, 11, 16, 0.96) 100%);
+}
+
+/* Faint grid, as on the rest of the platform */
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.016) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.016) 1px, transparent 1px);
+    background-size: 68px 68px;
+    mask-image: radial-gradient(ellipse 90% 80% at 45% 50%, #000 10%, transparent 76%);
+    -webkit-mask-image: radial-gradient(ellipse 90% 80% at 45% 50%, #000 10%, transparent 76%);
+    pointer-events: none;
+}
+
+/* Bottom fade so the search panel sits on solid ground */
+.hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 240px;
+    background: linear-gradient(180deg, transparent, var(--primary-bg) 88%);
+    pointer-events: none;
+    z-index: -1;
+}
+
+.hero-orb-1 {
+    width: 620px;
+    height: 620px;
+    top: -18%;
+    right: -6%;
+    background: rgba(0, 230, 118, 0.16);
+    z-index: -1;
+}
+
+.hero-orb-2 {
+    width: 520px;
+    height: 520px;
+    bottom: -14%;
+    left: -12%;
+    background: rgba(0, 200, 255, 0.12);
+    z-index: -1;
+}
+
+.hero-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+    gap: var(--s-10);
+    align-items: center;
+    position: relative;
+    z-index: 2;
+    width: 100%;
+}
+
+/* ---- Copy column ---- */
+.hero-copy {
+    max-width: 600px;
+}
+
+.hero-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 6px 14px 6px 6px;
+    border-radius: var(--r-full);
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--s-6);
+}
+
+.hero-pill strong {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 11px;
+    border-radius: var(--r-full);
+    background: var(--electric-gradient);
+    color: #04231A;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+}
+
+.hero-pill i, .hero-pill svg { width: 12px; height: 12px; }
+
+.hero-title {
+    font-size: clamp(2.9rem, 5.8vw, 5rem);
+    line-height: 1.0;
+    letter-spacing: -0.048em;
+    margin-bottom: var(--s-6);
+    text-shadow: 0 2px 34px rgba(0, 0, 0, 0.55);
+}
+
+.hero-title .line { display: block; }
+
+.hero-sub {
+    font-size: clamp(0.98rem, 1.25vw, 1.1rem);
+    line-height: 1.75;
+    color: var(--text-secondary);
+    max-width: 480px;
+    margin-bottom: var(--s-8);
+    text-shadow: 0 1px 18px rgba(0, 0, 0, 0.5);
+}
+
+.hero-actions {
+    display: flex;
+    gap: var(--s-3);
+    flex-wrap: wrap;
+    margin-bottom: var(--s-10);
+}
+
+/* Glass secondary reads better over a photo than a flat fill */
+.hero-actions .btn-secondary {
+    background: rgba(255, 255, 255, 0.07);
+    border-color: rgba(255, 255, 255, 0.22);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+}
+
+.hero-metrics {
+    display: flex;
+    gap: var(--s-8);
+    flex-wrap: wrap;
+}
+
+.hero-metric-v {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    letter-spacing: -0.04em;
+    line-height: 1.1;
+    display: flex;
+    align-items: baseline;
+    gap: 2px;
+    text-shadow: 0 2px 16px rgba(0, 0, 0, 0.5);
+}
+
+.hero-metric-v .unit { color: var(--primary); }
+
+.hero-metric-k {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-top: 3px;
+}
+
+/* --------------------------------------------------------------------------
+   2. HERO VISUAL — badges float over the night-city backdrop
+   -------------------------------------------------------------------------- */
+/* Without the car this column only carries two small badges, so the stage
+   no longer needs car-sized height reserved for it. */
+.hero-visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ---- Live vehicle card ----
+   Replaces the loose battery ring + price badges that used to float in this
+   column: they were positioned against a car image that has been removed, so
+   they hovered over empty backdrop with nothing to relate to. */
+.hero-card {
+    width: min(100%, 420px);
+    border-radius: var(--r-xl);
+    overflow: hidden;
+    background: rgba(12, 24, 32, 0.72);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: var(--shadow-xl);
+}
+
+.hero-card-media {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    background: var(--card-bg);
+}
+
+.hero-card-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.hero-card-live {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 11px;
+    border-radius: var(--r-full);
+    background: rgba(5, 13, 20, 0.72);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 230, 118, 0.35);
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--primary);
+}
+
+.hero-card-live .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--primary);
+    animation: blink 1.6s var(--ease) infinite;   /* shared with .live-tag */
+}
+
+.hero-card-body { padding: var(--s-5); }
+
+.hero-card-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-4);
+    margin-bottom: var(--s-5);
+}
+
+.hero-card-name {
+    font-size: 1.08rem;
+    margin-bottom: 2px;
+}
+
+.hero-card-meta {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+}
+
+/* ---- Battery ring (now inside the card) ---- */
+.hero-battery-ring {
+    position: relative;
+    width: 62px;
+    height: 62px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+}
+
+.hero-battery-ring svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.hero-battery-ring .ring-track {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.12);
+    stroke-width: 7;
+}
+
+.hero-battery-ring .ring-fill {
+    fill: none;
+    stroke: url(#heroBatteryGrad);
+    stroke-width: 7;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 900ms var(--ease-out);
+}
+
+.hero-battery-val {
+    position: relative;
+    z-index: 1;
+    font-family: var(--font-display);
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: -0.03em;
+    line-height: 1;
+}
+
+/* ---- Price + CTA row ---- */
+.hero-card-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-4);
+    padding-top: var(--s-4);
+    border-top: 1px solid var(--border);
+}
+
+.hero-price-tag { line-height: 1.2; }
+
+.hero-price-tag small {
+    display: block;
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 2px;
+}
+
+.hero-price-tag strong {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    color: var(--primary);
+    letter-spacing: -0.03em;
+}
+
+.hero-price-tag span {
+    font-size: 0.76rem;
+    color: var(--text-muted);
+}
+
+/* --------------------------------------------------------------------------
+   3. LIVE BOOKING SEARCH PANEL
+   -------------------------------------------------------------------------- */
+.search-panel-wrap {
+    position: relative;
+    z-index: 10;
+    margin-top: -130px;
+}
+
+.search-panel {
+    background: rgba(16, 31, 39, 0.92);
+    backdrop-filter: blur(26px) saturate(150%);
+    -webkit-backdrop-filter: blur(26px) saturate(150%);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--r-2xl);
+    box-shadow: var(--shadow-xl), 0 0 90px rgba(0, 230, 118, 0.06);
+    overflow: hidden;
+}
+
+/* Collapsed tab strip: hides the mode switcher without removing it, so the
+   search bar matches the reference while Ride/Charging/Subscribe stay live. */
+.search-panel-tabs.is-compact { display: none; }
+
+.search-panel-tabs {
+    display: flex;
+    gap: var(--s-1);
+    padding: var(--s-4) var(--s-6) 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.sp-tab {
+    padding: 12px 22px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all var(--t-base) var(--ease);
+    white-space: nowrap;
+}
+
+.sp-tab i, .sp-tab svg { width: 15px; height: 15px; }
+.sp-tab:hover { color: var(--text-secondary); }
+.sp-tab.active { color: var(--primary); border-bottom-color: var(--primary); }
+
+.search-panel-body { padding: var(--s-6); }
+
+.search-fields {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    margin-bottom: var(--s-5);
+}
+
+.sf {
+    background: var(--card-bg);
+    padding: 14px 18px;
+    position: relative;
+    transition: background var(--t-base) var(--ease);
+    min-width: 0;
+}
+
+.sf:hover, .sf:focus-within { background: var(--card-light); }
+
+.sf-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 7px;
+}
+
+.sf-label i, .sf-label svg { width: 12px; height: 12px; color: var(--primary); }
+
+.sf input,
+.sf select {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    font-family: var(--font-body);
+}
+
+.sf input::placeholder { color: var(--text-muted); font-weight: 400; }
+
+.sf select {
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+    padding-right: 16px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2371828B' stroke-width='3' stroke-linecap='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0 center;
+}
+
+.sf select option { background: var(--card-bg); }
+
+.sf.invalid { background: rgba(239, 68, 68, 0.07); }
+.sf.invalid .sf-label { color: #FF8A8A; }
+
+/* Location autocomplete */
+.sf-suggest {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    background: rgba(16, 31, 39, 0.98);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    box-shadow: var(--shadow-lg);
+    z-index: 30;
+    max-height: 250px;
+    overflow-y: auto;
+    display: none;
+}
+
+.sf-suggest.show { display: block; }
+
+.sf-suggest button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 11px 15px;
+    text-align: left;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    transition: background var(--t-fast) var(--ease);
+}
+
+.sf-suggest button:hover { background: var(--glass); color: var(--primary); }
+.sf-suggest i, .sf-suggest svg { width: 14px; height: 14px; color: var(--text-muted); flex-shrink: 0; }
+.sf-suggest small { display: block; font-size: 0.72rem; color: var(--text-muted); }
+
+/* Search actions row */
+.search-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-5);
+    flex-wrap: wrap;
+}
+
+.search-quick {
+    display: flex;
+    align-items: center;
+    gap: var(--s-2);
+    flex-wrap: wrap;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+}
+
+.search-live {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.83rem;
+    color: var(--text-secondary);
+}
+
+.search-live strong { color: var(--primary); font-family: var(--font-mono); }
+
+/* Inline results that appear beneath the panel */
+.search-results-inline {
+    display: none;
+    padding: var(--s-6);
+    border-top: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.015);
+}
+
+.search-results-inline.show { display: block; animation: fadeInUp 500ms var(--ease-out); }
+
+.sri-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-4);
+    margin-bottom: var(--s-5);
+    flex-wrap: wrap;
+}
+
+.sri-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    gap: var(--s-4);
+}
+
+/* --------------------------------------------------------------------------
+   4. BRAND MARQUEE
+   -------------------------------------------------------------------------- */
+.brand-strip {
+    padding-block: var(--s-12);
+    border-block: 1px solid var(--border-faint);
+}
+
+.brand-strip-label {
+    text-align: center;
+    font-size: 0.76rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: var(--s-8);
+}
+
+.brand-item {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+    opacity: 0.5;
+    transition: all var(--t-base) var(--ease);
+}
+
+.brand-item:hover { opacity: 1; color: var(--text-primary); }
+
+/* --------------------------------------------------------------------------
+   5. CATEGORY CARDS
+   -------------------------------------------------------------------------- */
+.cat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(258px, 1fr));
+    gap: var(--s-5);
+}
+
+.cat-card {
+    position: relative;
+    padding: var(--s-6);
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    transition: all var(--t-base) var(--ease-out);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-4);
+    min-height: 236px;
+}
+
+.cat-card::before {
+    content: '';
+    position: absolute;
+    top: -40%;
+    right: -30%;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0, 230, 118, 0.14), transparent 68%);
+    opacity: 0;
+    transition: opacity var(--t-slow) var(--ease);
+}
+
+.cat-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(0, 230, 118, 0.34);
+    box-shadow: var(--shadow-lg);
+}
+
+.cat-card:hover::before { opacity: 1; }
+
+.cat-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: var(--r-md);
+    display: grid;
+    place-items: center;
+    background: linear-gradient(140deg, rgba(0, 230, 118, 0.14), rgba(0, 200, 255, 0.08));
+    border: 1px solid rgba(0, 230, 118, 0.2);
+    color: var(--primary);
+    position: relative;
+    z-index: 1;
+    transition: all var(--t-base) var(--ease-spring);
+}
+
+.cat-card:hover .cat-icon {
+    background: var(--electric-gradient);
+    border-color: transparent;
+    color: #04231A;
+    transform: scale(1.07) rotate(-4deg);
+}
+
+.cat-icon i, .cat-icon svg { width: 23px; height: 23px; }
+
+.cat-name {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+    position: relative;
+    z-index: 1;
+}
+
+.cat-desc {
+    font-size: 0.83rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    position: relative;
+    z-index: 1;
+}
+
+.cat-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-3);
+    margin-top: auto;
+    padding-top: var(--s-4);
+    border-top: 1px solid var(--border-faint);
+    position: relative;
+    z-index: 1;
+}
+
+.cat-count {
+    font-size: 0.79rem;
+    color: var(--text-muted);
+}
+
+.cat-count strong { color: var(--primary); }
+
+.cat-from { font-size: 0.79rem; color: var(--text-muted); }
+.cat-from strong {
+    display: block;
+    font-size: 1.02rem;
+    color: var(--text-primary);
+    font-family: var(--font-display);
+}
+
+/* --------------------------------------------------------------------------
+   6. HOW IT WORKS
+   -------------------------------------------------------------------------- */
+.steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--s-6);
+    position: relative;
+}
+
+/* Connecting dashed line behind the step numbers */
+.steps::before {
+    content: '';
+    position: absolute;
+    top: 42px;
+    left: 12%;
+    right: 12%;
+    height: 2px;
+    background-image: linear-gradient(90deg, var(--primary) 50%, transparent 50%);
+    background-size: 14px 2px;
+    opacity: 0.28;
+    z-index: 0;
+}
+
+.step {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 0 var(--s-2);
+}
+
+.step-num {
+    width: 84px;
+    height: 84px;
+    margin: 0 auto var(--s-5);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    position: relative;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    transition: all var(--t-slow) var(--ease-spring);
+}
+
+.step:hover .step-num {
+    border-color: var(--primary);
+    box-shadow: var(--glow-primary);
+    transform: translateY(-5px);
+}
+
+.step-num i, .step-num svg {
+    width: 30px;
+    height: 30px;
+    color: var(--primary);
+    transition: transform var(--t-base) var(--ease-spring);
+}
+
+.step:hover .step-num i,
+.step:hover .step-num svg { transform: scale(1.12); }
+
+.step-badge {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: var(--electric-gradient);
+    color: #04231A;
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    font-weight: 700;
+    border: 3px solid var(--primary-bg);
+}
+
+.step-title { font-size: 1.12rem; margin-bottom: var(--s-2); }
+
+.step-desc {
+    font-size: 0.87rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    max-width: 250px;
+    margin-inline: auto;
+}
+
+/* --------------------------------------------------------------------------
+   7. LIVE AVAILABILITY BAND
+   -------------------------------------------------------------------------- */
+.live-band {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    margin-bottom: var(--s-8);
+}
+
+.live-cell {
+    background: var(--card-bg);
+    padding: var(--s-5);
+    text-align: center;
+    position: relative;
+    transition: background var(--t-base) var(--ease);
+}
+
+.live-cell:hover { background: var(--card-light); }
+
+.live-cell-v {
+    font-family: var(--font-display);
+    font-size: 2.1rem;
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    line-height: 1.1;
+    margin-bottom: 5px;
+    font-variant-numeric: tabular-nums;
+}
+
+.live-cell-k {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+}
+
+.live-cell-k .status-dot { width: 6px; height: 6px; }
+
+.live-cell.c-available   .live-cell-v { color: var(--primary); }
+.live-cell.c-on_trip     .live-cell-v { color: var(--electric-blue); }
+.live-cell.c-charging    .live-cell-v { color: #B49BFF; }
+.live-cell.c-reserved    .live-cell-v { color: var(--warning); }
+.live-cell.c-maintenance .live-cell-v { color: #FF8A8A; }
+
+/* --------------------------------------------------------------------------
+   8. CHARGING NETWORK SECTION
+   -------------------------------------------------------------------------- */
+.charge-split {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: var(--s-12);
+    align-items: center;
+}
+
+.charge-features {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-5);
+    margin-block: var(--s-8);
+}
+
+.charge-feature {
+    display: flex;
+    gap: var(--s-4);
+    align-items: flex-start;
+}
+
+.charge-feature-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: var(--r-md);
+    display: grid;
+    place-items: center;
+    background: rgba(0, 200, 255, 0.1);
+    border: 1px solid rgba(0, 200, 255, 0.2);
+    color: var(--electric-blue);
+    flex-shrink: 0;
+}
+
+.charge-feature-icon i, .charge-feature-icon svg { width: 20px; height: 20px; }
+
+.charge-feature h5 { font-size: 1rem; margin-bottom: 5px; }
+.charge-feature p { font-size: 0.87rem; color: var(--text-secondary); line-height: 1.7; }
+
+/* Station preview cards */
+.station-preview {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+}
+
+.station-card {
+    display: flex;
+    align-items: center;
+    gap: var(--s-4);
+    padding: var(--s-4) var(--s-5);
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    transition: all var(--t-base) var(--ease);
+}
+
+.station-card:hover {
+    border-color: rgba(0, 200, 255, 0.35);
+    transform: translateX(4px);
+}
+
+.station-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: var(--r-md);
+    display: grid;
+    place-items: center;
+    background: rgba(0, 200, 255, 0.1);
+    color: var(--electric-blue);
+    flex-shrink: 0;
+    position: relative;
+}
+
+.station-icon i, .station-icon svg { width: 20px; height: 20px; }
+
+.station-icon.busy    { background: rgba(245, 158, 11, 0.1); color: var(--warning); }
+.station-icon.offline { background: rgba(113, 130, 139, 0.12); color: var(--text-muted); }
+
+.station-body { flex: 1; min-width: 0; }
+
+.station-name {
+    font-size: 0.93rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 3px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.station-meta {
+    display: flex;
+    gap: var(--s-4);
+    font-size: 0.77rem;
+    color: var(--text-muted);
+    flex-wrap: wrap;
+}
+
+.station-meta span { display: inline-flex; align-items: center; gap: 4px; }
+.station-meta i, .station-meta svg { width: 12px; height: 12px; }
+
+.station-slots {
+    text-align: right;
+    flex-shrink: 0;
+}
+
+.station-slots strong {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 1.22rem;
+    color: var(--primary);
+    letter-spacing: -0.03em;
+}
+
+.station-slots span { font-size: 0.7rem; color: var(--text-muted); }
+
+/* --------------------------------------------------------------------------
+   9. WHY CHOOSE US / FEATURES
+   -------------------------------------------------------------------------- */
+.feat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    gap: var(--s-5);
+}
+
+.feat {
+    padding: var(--s-6);
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+    position: relative;
+    overflow: hidden;
+    transition: all var(--t-base) var(--ease-out);
+}
+
+.feat:hover {
+    transform: translateY(-4px);
+    border-color: rgba(0, 230, 118, 0.3);
+}
+
+.feat::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--electric-gradient);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--t-slow) var(--ease-out);
+}
+
+.feat:hover::after { transform: scaleX(1); }
+
+.feat-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--r-md);
+    display: grid;
+    place-items: center;
+    background: rgba(0, 230, 118, 0.1);
+    color: var(--primary);
+    margin-bottom: var(--s-4);
+}
+
+.feat-icon i, .feat-icon svg { width: 22px; height: 22px; }
+.feat-icon.blue   { background: rgba(0, 200, 255, 0.1); color: var(--electric-blue); }
+.feat-icon.purple { background: rgba(139, 92, 246, 0.12); color: #B49BFF; }
+
+.feat h4 { font-size: 1.05rem; margin-bottom: var(--s-2); }
+.feat p { font-size: 0.87rem; color: var(--text-secondary); line-height: 1.7; }
+
+/* Smart mobility — larger bento layout */
+.bento {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: minmax(200px, auto);
+    gap: var(--s-5);
+}
+
+.bento-item {
+    padding: var(--s-6);
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: all var(--t-base) var(--ease-out);
+}
+
+.bento-item:hover {
+    border-color: rgba(0, 230, 118, 0.3);
+    transform: translateY(-4px);
+}
+
+.bento-wide { grid-column: span 2; }
+.bento-tall { grid-row: span 2; }
+
+.bento-glow {
+    position: absolute;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    filter: blur(70px);
+    pointer-events: none;
+    opacity: 0.4;
+}
+
+.bento-visual {
+    margin-top: auto;
+    position: relative;
+    z-index: 1;
+}
+
+/* --------------------------------------------------------------------------
+   10. LOCATIONS
+   -------------------------------------------------------------------------- */
+.loc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(238px, 1fr));
+    gap: var(--s-5);
+}
+
+.loc-card {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: var(--s-5);
+    background: linear-gradient(160deg, var(--card-light), var(--card-bg));
+    border: 1px solid var(--border);
+    isolation: isolate;
+    transition: all var(--t-base) var(--ease-out);
+}
+
+/* Photograph sits under the scrim; the scrim is what keeps the name legible. */
+.loc-photo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    transition: transform var(--t-slow) var(--ease-out);
+}
+
+.loc-card:hover .loc-photo { transform: scale(1.06); }
+
+.loc-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+        radial-gradient(circle at 70% 25%, rgba(0, 230, 118, 0.16), transparent 62%),
+        linear-gradient(180deg, rgba(5, 11, 16, 0.18) 0%, rgba(5, 11, 16, 0.55) 46%, rgba(5, 11, 16, 0.94) 100%);
+    transition: opacity var(--t-slow) var(--ease);
+}
+
+.loc-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(0, 230, 118, 0.34);
+    box-shadow: var(--shadow-lg);
+}
+
+.loc-card-top {
+    position: absolute;
+    top: var(--s-5);
+    left: var(--s-5);
+    right: var(--s-5);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    z-index: 2;
+}
+
+.loc-pin {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: rgba(5, 11, 16, 0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--border);
+    color: var(--primary);
+}
+
+.loc-pin i, .loc-pin svg { width: 17px; height: 17px; }
+
+.loc-body { position: relative; z-index: 2; }
+
+.loc-name {
+    font-size: 1.08rem;
+    margin-bottom: 4px;
+}
+
+.loc-area { font-size: 0.8rem; color: var(--text-muted); margin-bottom: var(--s-4); }
+
+.loc-stats {
+    display: flex;
+    gap: var(--s-4);
+    padding-top: var(--s-3);
+    border-top: 1px solid var(--border);
+}
+
+.loc-stat { font-size: 0.75rem; color: var(--text-muted); }
+.loc-stat strong {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+}
+
+/* --------------------------------------------------------------------------
+   11. TESTIMONIALS
+   -------------------------------------------------------------------------- */
+.testi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: var(--s-5);
+}
+
+.testi {
+    padding: var(--s-6);
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-4);
+    position: relative;
+    transition: all var(--t-base) var(--ease-out);
+}
+
+.testi:hover {
+    border-color: rgba(0, 230, 118, 0.3);
+    transform: translateY(-4px);
+}
+
+.testi-quote {
+    position: absolute;
+    top: var(--s-5);
+    right: var(--s-6);
+    font-family: var(--font-display);
+    font-size: 4rem;
+    line-height: 1;
+    color: var(--primary);
+    opacity: 0.1;
+    pointer-events: none;
+}
+
+.testi-text {
+    font-size: 0.92rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    position: relative;
+    z-index: 1;
+    flex: 1;
+}
+
+.testi-foot {
+    display: flex;
+    align-items: center;
+    gap: var(--s-3);
+    padding-top: var(--s-4);
+    border-top: 1px solid var(--border-faint);
+}
+
+.testi-info { flex: 1; min-width: 0; }
+.testi-info strong { display: block; font-size: 0.9rem; color: var(--text-primary); }
+.testi-info span { font-size: 0.76rem; color: var(--text-muted); }
+
+.testi-vehicle {
+    font-size: 0.73rem;
+    color: var(--primary);
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 3px;
+}
+
+.testi-vehicle i, .testi-vehicle svg { width: 12px; height: 12px; }
+
+/* --------------------------------------------------------------------------
+   12. SUSTAINABILITY
+   -------------------------------------------------------------------------- */
+.sustain {
+    position: relative;
+    background:
+        radial-gradient(ellipse 800px 500px at 20% 50%, rgba(0, 230, 118, 0.09), transparent 70%),
+        radial-gradient(ellipse 700px 500px at 82% 40%, rgba(0, 200, 255, 0.07), transparent 70%),
+        var(--secondary-bg);
+    overflow: hidden;
+}
+
+.sustain-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: var(--s-5);
+}
+
+.sustain-card {
+    text-align: center;
+    padding: var(--s-8) var(--s-5);
+    background: rgba(16, 31, 39, 0.6);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+    transition: all var(--t-base) var(--ease-out);
+}
+
+.sustain-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(0, 230, 118, 0.34);
+    box-shadow: var(--shadow-lg);
+}
+
+.sustain-icon {
+    width: 58px;
+    height: 58px;
+    margin: 0 auto var(--s-4);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(140deg, rgba(0, 230, 118, 0.16), rgba(0, 200, 255, 0.08));
+    border: 1px solid rgba(0, 230, 118, 0.24);
+    color: var(--primary);
+}
+
+.sustain-icon i, .sustain-icon svg { width: 26px; height: 26px; }
+
+.sustain-val {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 3.4vw, 2.8rem);
+    font-weight: 600;
+    letter-spacing: -0.045em;
+    line-height: 1.05;
+    margin-bottom: 7px;
+    background: var(--electric-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.sustain-label {
+    font-size: 0.87rem;
+    color: var(--text-primary);
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.sustain-sub { font-size: 0.78rem; color: var(--text-muted); }
+
+/* --------------------------------------------------------------------------
+   13. MOBILE APP PROMO
+   -------------------------------------------------------------------------- */
+.app-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s-12);
+    align-items: center;
+}
+
+.app-features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s-4);
+    margin-block: var(--s-8);
+}
+
+.app-feature {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    font-size: 0.87rem;
+    color: var(--text-secondary);
+}
+
+.app-feature-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: var(--r-sm);
+    display: grid;
+    place-items: center;
+    background: rgba(0, 230, 118, 0.1);
+    color: var(--primary);
+    flex-shrink: 0;
+}
+
+.app-feature-icon i, .app-feature-icon svg { width: 15px; height: 15px; }
+
+/* Phone mockups */
+.phones {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: var(--s-4);
+    min-height: 540px;
+}
+
+.phone {
+    width: 230px;
+    aspect-ratio: 9 / 19.5;
+    border-radius: 34px;
+    background: linear-gradient(160deg, #1C3540, #0B151C);
+    border: 8px solid #182C36;
+    box-shadow: var(--shadow-xl), 0 0 60px rgba(0, 230, 118, 0.08);
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.phone::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 76px;
+    height: 20px;
+    border-radius: var(--r-full);
+    background: #0B151C;
+    z-index: 5;
+}
+
+.phone-back {
+    transform: scale(0.88) translateY(20px);
+    opacity: 0.6;
+    filter: blur(0.5px);
+}
+
+.phone-screen {
+    width: 100%;
+    height: 100%;
+    background: var(--primary-bg);
+    padding: 34px 14px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+    overflow: hidden;
+}
+
+.ps-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 4px;
+}
+
+.ps-title {
+    font-family: var(--font-display);
+    font-size: 0.82rem;
+    color: var(--text-primary);
+}
+
+.ps-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 11px;
+    padding: 11px;
+}
+
+.ps-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.6rem;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+}
+
+.ps-row:last-child { margin-bottom: 0; }
+.ps-row strong { color: var(--text-primary); font-size: 0.68rem; }
+
+/* Real street geometry (Indiranagar) rendered to a dark tile, so the phone
+   mockups read as an actual map instead of an empty placeholder box. */
+.ps-map {
+    flex: 1;
+    border-radius: 11px;
+    background:
+        radial-gradient(circle at 40% 45%, rgba(0, 230, 118, 0.1), transparent 55%),
+        var(--card-bg);
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+    min-height: 110px;
+}
+
+.ps-map::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('../assets/images/backgrounds/app-map.webp');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.92;
+}
+
+/* Route line connecting the two pins on the live-tracking screen. Scoped to
+   the back phone: its pins sit at 30%/62%, which this path is drawn against.
+   The booking screen's map is only 76px tall, where a route would crowd it. */
+.phone-back .ps-map::after {
+    content: '';
+    position: absolute;
+    left: 27%;
+    top: 31%;
+    width: 41%;
+    height: 31%;
+    border-bottom: 2px dashed rgba(0, 230, 118, 0.75);
+    border-right: 2px dashed rgba(0, 230, 118, 0.75);
+    border-bottom-right-radius: 14px;
+}
+
+.ps-pin {
+    position: absolute;
+    z-index: 2;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--primary);
+    box-shadow: 0 0 0 4px rgba(0, 230, 118, 0.22);
+}
+
+/* Thumbnail + text row inside a booking card. */
+.ps-veh {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.ps-thumb {
+    width: 46px;
+    height: 34px;
+    flex-shrink: 0;
+    border-radius: 7px;
+    object-fit: cover;
+    border: 1px solid var(--border);
+}
+
+.ps-veh-text { flex: 1; min-width: 0; }
+
+.ps-veh-text .ps-row span,
+.ps-veh-text .ps-row strong {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ps-btn {
+    padding: 9px;
+    border-radius: 9px;
+    background: var(--electric-gradient);
+    color: #04231A;
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+.ps-ring {
+    width: 88px;
+    height: 88px;
+    margin: 6px auto;
+    position: relative;
+}
+
+/* --------------------------------------------------------------------------
+   14. CTA BAND
+   -------------------------------------------------------------------------- */
+.cta-band {
+    position: relative;
+    padding: var(--s-20) var(--s-10);
+    border-radius: var(--r-2xl);
+    background:
+        radial-gradient(ellipse 700px 400px at 18% 40%, rgba(0, 230, 118, 0.16), transparent 68%),
+        radial-gradient(ellipse 600px 400px at 85% 60%, rgba(0, 200, 255, 0.13), transparent 68%),
+        linear-gradient(140deg, #0E2029, #0B151C);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    text-align: center;
+}
+
+.cta-band::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.022) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.022) 1px, transparent 1px);
+    background-size: 52px 52px;
+    mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, #000, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, #000, transparent 75%);
+}
+
+.cta-inner { position: relative; z-index: 1; max-width: 700px; margin-inline: auto; }
+
+.cta-title { margin-bottom: var(--s-4); }
+
+.cta-sub {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--s-8);
+}
+
+.cta-actions {
+    display: flex;
+    gap: var(--s-3);
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.cta-note {
+    margin-top: var(--s-6);
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--s-5);
+    flex-wrap: wrap;
+}
+
+.cta-note span { display: inline-flex; align-items: center; gap: 6px; }
+.cta-note i, .cta-note svg { width: 14px; height: 14px; color: var(--primary); }
+
+/* --------------------------------------------------------------------------
+   15. FAQ (home variant)
+   -------------------------------------------------------------------------- */
+.faq-split {
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: var(--s-12);
+    align-items: start;
+}
+
+.faq-aside {
+    position: sticky;
+    top: calc(var(--nav-h) + 24px);
+}
+
+.faq-help {
+    margin-top: var(--s-8);
+    padding: var(--s-6);
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+}
+
+.faq-help-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: var(--r-md);
+    display: grid;
+    place-items: center;
+    background: rgba(0, 230, 118, 0.1);
+    color: var(--primary);
+    margin-bottom: var(--s-4);
+}
+
+.faq-help-icon i, .faq-help-icon svg { width: 20px; height: 20px; }

@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>EVRide — Drive Electric. Drive Smarter. | EV Booking &amp; Smart Mobility Platform</title>
+    <meta name="description" content="Book premium electric vehicles by the hour, day or month. Find nearby charging stations, reserve a bay, and track every trip in real time on India's intelligent EV mobility platform.">
+    <meta name="keywords" content="electric vehicle booking, EV rental, EV charging stations, smart mobility, electric car rental Bengaluru, EV fleet management">
+    <meta name="author" content="EVRide Electric Mobility">
+    <meta name="theme-color" content="#050B10">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="EVRide — Drive Electric. Drive Smarter.">
+    <meta property="og:description" content="Book premium EVs, discover nearby charging stations, and experience the future of intelligent mobility.">
+    <meta property="og:site_name" content="EVRide">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/vehicles.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <link rel="icon" href="assets/images/favicon.png" type="image/png">
+</head>
+<body>
+<div class="preloader" id="preloader" role="status" aria-live="polite" aria-label="Loading">
+    <div class="preloader-inner">
+        <img src="assets/images/stackly-whitish_blue-logo.webp" alt="Stackly"
+             class="preloader-logo" width="320" height="132">
+        <div class="preloader-bar"></div>
+    </div>
+</div>
+
+
+<div id="navSlot"></div>
+
+<main id="main">
+
+    <!-- ============================================================
+         HERO
+         ============================================================ -->
+    <section class="hero">
+        <!-- Full-bleed night-city backdrop -->
+        <div class="hero-bg" aria-hidden="true">
+            <img src="assets/images/hero/hero-city.jpg"
+                 alt="" data-fallback="City at night" fetchpriority="high" width="1600" height="747">
+        </div>
+
+        <div class="orb orb-green hero-orb-1 orb-drift" aria-hidden="true"></div>
+        <div class="orb orb-blue hero-orb-2 orb-drift" aria-hidden="true"></div>
+
+        <div class="container-wide">
+            <div class="hero-inner">
+
+                <div class="hero-copy">
+                    <div class="hero-pill anim-up">
+                        <strong><i data-lucide="zap"></i> LIVE</strong>
+                        <span><span id="heroLiveCount">147</span> EVs available near you</span>
+                    </div>
+
+                    <h1 class="hero-title anim-up d-1">
+                        <span class="line">Drive Electric.</span>
+                        <span class="line">Drive <span class="text-gradient">Smarter.</span></span>
+                    </h1>
+
+                    <p class="hero-sub anim-up d-2">
+                        Book premium electric vehicles, discover nearby charging stations,
+                        and experience the future of intelligent mobility.
+                    </p>
+
+                    <div class="hero-actions anim-up d-3">
+                        <a href="404.html" class="btn btn-primary btn-lg">
+                            Explore EVs
+                        </a>
+                        <a href="404.html" class="btn btn-secondary btn-lg">
+                            Find Charging Station
+                        </a>
+                    </div>
+
+                    <div class="hero-metrics anim-up d-4">
+                        <div class="hero-metric">
+                            <div class="hero-metric-v"><span data-count="2400" data-compact="true">0</span><span class="unit">+</span></div>
+                            <div class="hero-metric-k">Charging points</div>
+                        </div>
+                        <div class="hero-metric">
+                            <div class="hero-metric-v"><span data-count="18500" data-compact="true">0</span><span class="unit">+</span></div>
+                            <div class="hero-metric-k">Electric vehicles</div>
+                        </div>
+                        <div class="hero-metric">
+                            <div class="hero-metric-v"><span data-count="94">0</span><span class="unit">K</span></div>
+                            <div class="hero-metric-k">Trips completed</div>
+                        </div>
+                        <div class="hero-metric">
+                            <div class="hero-metric-v">4.9<span class="unit">★</span></div>
+                            <div class="hero-metric-k">Average rating</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-visual">
+                    <!-- Live vehicle card. The battery ring and price were
+                         previously loose badges anchored to a car image that
+                         has since been removed, so they floated over empty
+                         space; this gives those live readouts a home. -->
+                    <article class="hero-card anim-up d-5" aria-label="Featured electric vehicle">
+                        <div class="hero-card-media">
+                            <img id="hlImage" src="assets/images/vehicles/ev-001.webp"
+                                 alt="" loading="eager" decoding="async">
+                            <span class="hero-card-live"><span class="dot"></span> LIVE</span>
+                        </div>
+
+                        <div class="hero-card-body">
+                            <div class="hero-card-head">
+                                <div>
+                                    <h3 class="hero-card-name" id="hlName">Tesla Model 3</h3>
+                                    <p class="hero-card-meta" id="hlMeta">Available now</p>
+                                </div>
+                                <div class="hero-battery-ring" aria-hidden="true">
+                                    <svg viewBox="0 0 96 96">
+                                        <defs>
+                                            <linearGradient id="heroBatteryGrad" x1="0" y1="0" x2="1" y2="1">
+                                                <stop offset="0%" stop-color="#00E676"/>
+                                                <stop offset="100%" stop-color="#00C8FF"/>
+                                            </linearGradient>
+                                        </defs>
+                                        <circle class="ring-track" cx="48" cy="48" r="42"/>
+                                        <circle class="ring-fill" cx="48" cy="48" r="42"
+                                                stroke-dasharray="264" stroke-dashoffset="37" id="hlRing"/>
+                                    </svg>
+                                    <span class="hero-battery-val" id="hlRingVal">86%</span>
+                                </div>
+                            </div>
+
+                            <div class="hero-card-foot">
+                                <div class="hero-price-tag">
+                                    <small>From</small>
+                                    <strong id="hlPrice">₹2,499</strong><span>/day</span>
+                                </div>
+                                <a href="404.html" class="btn btn-primary btn-sm">Book now</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    </section>
+
+    <!-- ============================================================
+         LIVE BOOKING SEARCH
+         ============================================================ -->
+    <section class="search-panel-wrap" aria-label="Search for available electric vehicles">
+        <div class="container-wide">
+            <div class="search-panel" data-reveal="zoom">
+
+                <!-- Mode tabs. The reference design shows only the rental bar,
+                     so the strip is collapsed by default; the other modes stay
+                     reachable and keep working. Remove `is-compact` to show them. -->
+                <div class="search-panel-tabs is-compact" role="tablist">
+                    <button class="sp-tab active" role="tab" aria-selected="true" data-sp-tab="rent">
+                        <i data-lucide="car"></i> Rent an EV
+                    </button>
+                    <button class="sp-tab" role="tab" aria-selected="false" data-sp-tab="ride">
+                        <i data-lucide="navigation"></i> Book a Ride
+                    </button>
+                    <button class="sp-tab" role="tab" aria-selected="false" data-sp-tab="charge">
+                        <i data-lucide="zap"></i> Find Charging
+                    </button>
+                    <button class="sp-tab" role="tab" aria-selected="false" data-sp-tab="subscribe">
+                        <i data-lucide="calendar-range"></i> Subscribe Monthly
+                    </button>
+                </div>
+
+                <div class="search-panel-body">
+                    <form id="heroSearch" novalidate>
+                        <div class="search-fields">
+                            <div class="sf" data-field="pickupLocation">
+                                <label class="sf-label" for="spPickup"><i data-lucide="map-pin"></i> Pickup Location</label>
+                                <input type="text" id="spPickup" name="pickupLocation" placeholder="Where from?" autocomplete="off" required>
+                                <div class="sf-suggest" data-suggest="spPickup"></div>
+                            </div>
+
+                            <div class="sf" data-field="dropLocation">
+                                <label class="sf-label" for="spDrop"><i data-lucide="flag"></i> Drop-off Location</label>
+                                <input type="text" id="spDrop" name="dropLocation" placeholder="Same as pickup" autocomplete="off">
+                                <div class="sf-suggest" data-suggest="spDrop"></div>
+                            </div>
+
+                            <div class="sf" data-field="pickupDate">
+                                <label class="sf-label" for="spPickupDate"><i data-lucide="calendar"></i> Pickup Date</label>
+                                <input type="date" id="spPickupDate" name="pickupDate" required>
+                            </div>
+
+                            <div class="sf" data-field="pickupTime">
+                                <label class="sf-label" for="spPickupTime"><i data-lucide="clock"></i> Pickup Time</label>
+                                <input type="time" id="spPickupTime" name="pickupTime" value="09:00" required>
+                            </div>
+
+                            <div class="sf" data-field="returnDate">
+                                <label class="sf-label" for="spReturnDate"><i data-lucide="calendar-check"></i> Return Date</label>
+                                <input type="date" id="spReturnDate" name="returnDate" required>
+                            </div>
+
+                            <div class="sf" data-field="returnTime">
+                                <label class="sf-label" for="spReturnTime"><i data-lucide="clock-4"></i> Return Time</label>
+                                <input type="time" id="spReturnTime" name="returnTime" value="18:00" required>
+                            </div>
+
+                            <div class="sf" data-field="vehicleType">
+                                <label class="sf-label" for="spType"><i data-lucide="layers"></i> Vehicle Type</label>
+                                <select id="spType" name="vehicleType">
+                                    <option value="">All types</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="search-actions">
+                            <div class="search-quick">
+                                <span>Quick picks:</span>
+                                <button type="button" class="chip" data-quick="today">Today</button>
+                                <button type="button" class="chip" data-quick="tomorrow">Tomorrow</button>
+                                <button type="button" class="chip" data-quick="weekend">This weekend</button>
+                                <button type="button" class="chip" data-quick="week">Full week</a>
+                            </div>
+
+                            <div class="flex items-center gap-5">
+                                <span class="search-live">
+                                    <span class="status-dot available" style="width:7px;height:7px;border-radius:50%;background:var(--primary);display:inline-block"></span>
+                                    <strong id="spAvailCount">—</strong> EVs available now
+                                </span>
+                                <a href="404.html" class="btn btn-primary btn-lg" id="spSubmit">
+                                    <i data-lucide="search"></i> Search Available EVs
+                                </a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="search-results-inline" id="spResults" aria-live="polite">
+                    <div class="sri-head">
+                        <div>
+                            <h4 id="spResultsTitle">Available vehicles</h4>
+                            <p class="text-muted" style="font-size:.85rem" id="spResultsSub"></p>
+                        </div>
+                        <a href="explore-evs.html" class="btn-link">View all results <i data-lucide="arrow-right"></i></a>
+                    </div>
+                    <div class="sri-grid" id="spResultsGrid"></div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         BRAND STRIP
+         ============================================================ -->
+    <section class="brand-strip">
+        <div class="container">
+            <p class="brand-strip-label">Premium electric vehicles from the world's leading manufacturers</p>
+            <div class="marquee">
+                <div class="marquee-track" id="brandTrack" aria-hidden="true"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         POPULAR EVs
+         ============================================================ -->
+    <section class="section" id="popular">
+        <div class="container">
+            <div class="section-head spread" data-reveal>
+                <div class="section-head-text">
+                    <span class="eyebrow">Most Booked</span>
+                    <h2 class="section-title">Popular electric vehicles</h2>
+                    <p class="section-sub">
+                        Live battery, real range and current location on every card — updated
+                        continuously so what you see is what you get at pickup.
+                    </p>
+                </div>
+                <a href="404.html" class="btn btn-secondary">
+                    Browse all vehicles <i data-lucide="arrow-right"></i>
+                </a>
+            </div>
+
+            <div class="v-grid" id="popularGrid"></div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         CATEGORIES
+         ============================================================ -->
+    <section class="section section-alt" id="categories">
+        <div class="container">
+            <div class="section-head centered" data-reveal>
+                <span class="eyebrow centered">Browse by Category</span>
+                <h2 class="section-title">Find the electric vehicle that fits your day</h2>
+                <p class="section-sub">
+                    From compact city runabouts to flagship luxury saloons — every category
+                    is fully electric, fully charged and ready when you are.
+                </p>
+            </div>
+
+            <div class="cat-grid" id="catGrid"></div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         HOW IT WORKS
+         ============================================================ -->
+    <section class="section" id="how-it-works">
+        <div class="container">
+            <div class="section-head centered" data-reveal>
+                <span class="eyebrow centered">How It Works</span>
+                <h2 class="section-title">Four steps from search to silent drive</h2>
+                <p class="section-sub">
+                    No paperwork queues, no fuel stops, no surprises. The whole journey lives
+                    in one connected system.
+                </p>
+            </div>
+
+            <div class="steps">
+                <div class="step" data-reveal data-reveal-delay="0">
+                    <div class="step-num">
+                        <i data-lucide="search"></i>
+                        <span class="step-badge">01</span>
+                    </div>
+                    <h3 class="step-title">Search an EV</h3>
+                    <p class="step-desc">
+                        Enter your location and dates. See every available vehicle with live
+                        battery level and true remaining range.
+                    </p>
+                </div>
+
+                <div class="step" data-reveal data-reveal-delay="120">
+                    <div class="step-num">
+                        <i data-lucide="calendar-check"></i>
+                        <span class="step-badge">02</span>
+                    </div>
+                    <h3 class="step-title">Choose Your Trip</h3>
+                    <p class="step-desc">
+                        Pick up at a hub or have the car delivered to your door. Add insurance,
+                        a charging package or an extra driver.
+                    </p>
+                </div>
+
+                <div class="step" data-reveal data-reveal-delay="240">
+                    <div class="step-num">
+                        <i data-lucide="credit-card"></i>
+                        <span class="step-badge">03</span>
+                    </div>
+                    <h3 class="step-title">Book &amp; Pay</h3>
+                    <p class="step-desc">
+                        Confirm in seconds with UPI, card or wallet. Your booking ID and digital
+                        key arrive instantly.
+                    </p>
+                </div>
+
+                <div class="step" data-reveal data-reveal-delay="360">
+                    <div class="step-num">
+                        <i data-lucide="zap"></i>
+                        <span class="step-badge">04</span>
+                    </div>
+                    <h3 class="step-title">Drive Electric</h3>
+                    <p class="step-desc">
+                        Unlock with your phone, track the trip live, and charge along the way
+                        at 2,400+ connected points.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         LIVE AVAILABILITY
+         ============================================================ -->
+    <section class="section section-alt grid-bg" id="live">
+        <div class="container">
+            <div class="section-head spread" data-reveal>
+                <div class="section-head-text">
+                    <span class="eyebrow blue"><span class="live-tag">Live</span></span>
+                    <h2 class="section-title">Real-time fleet status</h2>
+                    <p class="section-sub">
+                        Every vehicle in the EVRide network reports its state continuously.
+                        This is the fleet right now, not a cached snapshot.
+                    </p>
+                </div>
+                <div class="text-muted" style="font-size:.82rem">
+                    Last updated <strong class="text-primary mono" id="liveClock">—</strong>
+                </div>
+            </div>
+
+            <div class="live-band" id="liveBand"></div>
+
+            <div class="v-grid" id="liveGrid"></div>
+
+            <div class="text-center mt-12">
+                <a href="explore-evs.html" class="btn btn-secondary btn-lg">
+                    <i data-lucide="layout-grid"></i> See all available EVs
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         CHARGING NETWORK
+         ============================================================ -->
+    <section class="section" id="charging">
+        <div class="container">
+            <div class="charge-split">
+                <div data-reveal="left">
+                    <span class="eyebrow blue">Charging Network</span>
+                    <h2 class="section-title">Never plan a trip around a charger again</h2>
+                    <p class="section-sub">
+                        2,400+ charging points across EVRide and partner networks, with live
+                        availability, reservable bays and one transparent price per kWh.
+                    </p>
+
+                    <div class="charge-features">
+                        <div class="charge-feature">
+                            <div class="charge-feature-icon"><i data-lucide="gauge-circle"></i></div>
+                            <div>
+                                <h5>Up to 350 kW hyperhubs</h5>
+                                <p>Add 300 km of range in under twenty minutes at our flagship locations.</p>
+                            </div>
+                        </div>
+                        <div class="charge-feature">
+                            <div class="charge-feature-icon"><i data-lucide="calendar-clock"></i></div>
+                            <div>
+                                <h5>Reserve a bay in advance</h5>
+                                <p>Hold your slot up to seven days ahead. Arrive, plug in, no queue.</p>
+                            </div>
+                        </div>
+                        <div class="charge-feature">
+                            <div class="charge-feature-icon"><i data-lucide="activity"></i></div>
+                            <div>
+                                <h5>Live availability and pricing</h5>
+                                <p>See free bays, connector types and price per kWh before you set off.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-3 flex-wrap">
+                        <a href="charging-stations.html" class="btn btn-primary">
+                            <i data-lucide="map-pin"></i> Find Stations
+                        </a>
+                        <a href="404.html" class="btn btn-secondary">
+                            Reserve a Slot
+                        </a>
+                    </div>
+                </div>
+
+                <div data-reveal="right">
+                    <div class="card" style="padding:var(--s-5)">
+                        <div class="card-head">
+                            <div>
+                                <div class="card-title">Nearby stations</div>
+                                <div class="card-sub">Sorted by distance from Indiranagar</div>
+                            </div>
+                            <span class="live-tag">Live</span>
+                        </div>
+                        <div class="station-preview" id="stationPreview"></div>
+                        <a href="404.html" class="btn btn-secondary btn-sm btn-block mt-4">
+                            View all 12 stations <i data-lucide="arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         WHY CHOOSE US
+         ============================================================ -->
+    <section class="section section-alt">
+        <div class="container">
+            <div class="section-head centered" data-reveal>
+                <span class="eyebrow centered">Why EVRide</span>
+                <h2 class="section-title">Built for people who actually drive</h2>
+                <p class="section-sub">
+                    Every decision in the platform comes from a real friction point in electric
+                    mobility — and removes it.
+                </p>
+            </div>
+
+            <div class="feat-grid">
+                <article class="feat" data-reveal>
+                    <div class="feat-icon"><i data-lucide="battery-charging"></i></div>
+                    <h4>Honest live range</h4>
+                    <p>We show real remaining kilometres based on current charge, recent driving and temperature — not an optimistic lab figure.</p>
+                </article>
+
+                <article class="feat" data-reveal data-reveal-delay="80">
+                    <div class="feat-icon blue"><i data-lucide="navigation"></i></div>
+                    <h4>Live trip tracking</h4>
+                    <p>Watch your vehicle approach, follow the route in real time, and share a live link with whoever is waiting for you.</p>
+                </article>
+
+                <article class="feat" data-reveal data-reveal-delay="160">
+                    <div class="feat-icon purple"><i data-lucide="shield-check"></i></div>
+                    <h4>Insurance included</h4>
+                    <p>Third-party and collision cover on every booking as standard. Premium Protection drops your excess to zero.</p>
+                </article>
+
+                <article class="feat" data-reveal>
+                    <div class="feat-icon"><i data-lucide="truck"></i></div>
+                    <h4>Doorstep delivery</h4>
+                    <p>Have your EV delivered to your home, office or hotel — charged above 80% and sanitised before every handover.</p>
+                </article>
+
+                <article class="feat" data-reveal data-reveal-delay="80">
+                    <div class="feat-icon blue"><i data-lucide="wallet"></i></div>
+                    <h4>Transparent pricing</h4>
+                    <p>One price with taxes shown upfront. No fuel surcharge, no hidden cleaning fee, no fine print at the counter.</p>
+                </article>
+
+                <article class="feat" data-reveal data-reveal-delay="160">
+                    <div class="feat-icon purple"><i data-lucide="life-buoy"></i></div>
+                    <h4>24/7 roadside support</h4>
+                    <p>One tap reaches a human who can already see your vehicle's location and state of charge. Mobile charging included.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SMART MOBILITY FEATURES (BENTO)
+         ============================================================ -->
+    <section class="section">
+        <div class="container">
+            <div class="section-head centered" data-reveal>
+                <span class="eyebrow centered">Smart Mobility</span>
+                <h2 class="section-title">One intelligent system behind every trip</h2>
+                <p class="section-sub">
+                    Booking, charging, tracking and fleet operations share a single real-time
+                    backbone — so nothing falls between the cracks.
+                </p>
+            </div>
+
+            <div class="bento">
+                <article class="bento-item bento-wide" data-reveal>
+                    <div class="bento-glow orb-green" style="top:-40%;right:-10%"></div>
+                    <div style="position:relative;z-index:1">
+                        <div class="feat-icon"><i data-lucide="radar"></i></div>
+                        <h4>Live fleet telemetry</h4>
+                        <p style="font-size:.9rem;color:var(--text-secondary);line-height:1.7;max-width:460px">
+                            Battery, location, speed, health score and utilisation stream from every
+                            vehicle continuously. Operations teams see problems before customers do.
+                        </p>
+                    </div>
+                    <div class="bento-visual">
+                        <div class="live-band" style="margin:var(--s-5) 0 0" id="bentoBand"></div>
+                    </div>
+                </article>
+
+                <article class="bento-item" data-reveal data-reveal-delay="80">
+                    <div class="feat-icon blue"><i data-lucide="route"></i></div>
+                    <h4>Route &amp; charge planning</h4>
+                    <p style="font-size:.88rem;color:var(--text-secondary);line-height:1.7">
+                        Enter a destination and we insert the charging stops automatically, sized
+                        to your battery and the traffic ahead.
+                    </p>
+                </article>
+
+                <article class="bento-item" data-reveal>
+                    <div class="feat-icon purple"><i data-lucide="key-round"></i></div>
+                    <h4>Digital key</h4>
+                    <p style="font-size:.88rem;color:var(--text-secondary);line-height:1.7">
+                        Unlock, lock and start from your phone. Share temporary access with an
+                        additional driver for the duration of the booking.
+                    </p>
+                </article>
+
+                <article class="bento-item bento-wide" data-reveal data-reveal-delay="80">
+                    <div class="bento-glow orb-blue" style="bottom:-40%;left:-10%"></div>
+                    <div style="position:relative;z-index:1">
+                        <div class="feat-icon blue"><i data-lucide="bar-chart-3"></i></div>
+                        <h4>Analytics that drive decisions</h4>
+                        <p style="font-size:.9rem;color:var(--text-secondary);line-height:1.7;max-width:460px">
+                            Utilisation, revenue per vehicle, charging spend and CO₂ avoided —
+                            broken down by vehicle, location and time, exportable in one click.
+                        </p>
+                    </div>
+                    <div class="bento-visual flex gap-3 mt-6 flex-wrap">
+                        <a href="404.html" class="btn btn-secondary btn-sm">Open analytics</a>
+                        <a href="404.html" class="btn btn-ghost btn-sm">Admin console <i data-lucide="arrow-right"></i></a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         POPULAR LOCATIONS
+         ============================================================ -->
+    <section class="section section-alt">
+        <div class="container">
+            <div class="section-head spread" data-reveal>
+                <div class="section-head-text">
+                    <span class="eyebrow">Locations</span>
+                    <h2 class="section-title">Pick up anywhere in the city</h2>
+                    <p class="section-sub">
+                        Hubs, pickup points, airport terminals and depots — with vehicles and
+                        chargers at each one.
+                    </p>
+                </div>
+                <a href="404.html" class="btn btn-secondary">
+                    All locations <i data-lucide="arrow-right"></i>
+                </a>
+            </div>
+
+            <div class="loc-grid" id="locGrid"></div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         TESTIMONIALS
+         ============================================================ -->
+    <section class="section">
+        <div class="container">
+            <div class="section-head centered" data-reveal>
+                <span class="eyebrow centered">Customer Reviews</span>
+                <h2 class="section-title">4.9 out of 5, across 12,400 trips</h2>
+                <p class="section-sub">
+                    What people say after they've actually driven with us.
+                </p>
+            </div>
+
+            <div class="testi-grid" id="testiGrid"></div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SUSTAINABILITY
+         ============================================================ -->
+    <section class="section sustain">
+        <div class="container">
+            <div class="section-head centered" data-reveal>
+                <span class="eyebrow centered">Environmental Impact</span>
+                <h2 class="section-title">Every trip leaves less behind</h2>
+                <p class="section-sub">
+                    The cumulative impact of the EVRide community since launch — measured, not estimated.
+                </p>
+            </div>
+
+            <div class="sustain-grid">
+                <div class="sustain-card" data-reveal>
+                    <div class="sustain-icon"><i data-lucide="cloud-off"></i></div>
+                    <div class="sustain-val"><span data-count="1.8" data-decimals="1">0</span>M kg</div>
+                    <div class="sustain-label">CO₂ emissions avoided</div>
+                    <div class="sustain-sub">vs. equivalent petrol trips</div>
+                </div>
+
+                <div class="sustain-card" data-reveal data-reveal-delay="80">
+                    <div class="sustain-icon"><i data-lucide="fuel"></i></div>
+                    <div class="sustain-val"><span data-count="620">0</span>K L</div>
+                    <div class="sustain-label">Litres of fuel avoided</div>
+                    <div class="sustain-sub">Never pumped, never burned</div>
+                </div>
+
+                <div class="sustain-card" data-reveal data-reveal-delay="160">
+                    <div class="sustain-icon"><i data-lucide="route"></i></div>
+                    <div class="sustain-val"><span data-count="245">0</span>K</div>
+                    <div class="sustain-label">Electric trips completed</div>
+                    <div class="sustain-sub">Across 14 Indian cities</div>
+                </div>
+
+                <div class="sustain-card" data-reveal data-reveal-delay="240">
+                    <div class="sustain-icon"><i data-lucide="trees"></i></div>
+                    <div class="sustain-val"><span data-count="84">0</span>K</div>
+                    <div class="sustain-label">Trees equivalent</div>
+                    <div class="sustain-sub">Annual carbon absorption</div>
+                </div>
+
+                <div class="sustain-card" data-reveal data-reveal-delay="320">
+                    <div class="sustain-icon"><i data-lucide="sun"></i></div>
+                    <div class="sustain-val"><span data-count="72">0</span>%</div>
+                    <div class="sustain-label">Renewable energy</div>
+                    <div class="sustain-sub">Powering the EVRide network</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         MOBILE APP
+         ============================================================ -->
+    <section class="section section-alt">
+        <div class="container">
+            <div class="app-split">
+                <div data-reveal="left">
+                    <span class="eyebrow">Mobile App</span>
+                    <h2 class="section-title">Your EV journey, right in your pocket.</h2>
+                    <p class="section-sub">
+                        Book, unlock, track and charge from one app. Everything the web platform
+                        does, plus a digital key and offline trip records.
+                    </p>
+
+                    <div class="app-features">
+                        <div class="app-feature">
+                            <span class="app-feature-icon"><i data-lucide="key-round"></i></span>
+                            Digital key &amp; unlock
+                        </div>
+                        <div class="app-feature">
+                            <span class="app-feature-icon"><i data-lucide="navigation"></i></span>
+                            Live trip tracking
+                        </div>
+                        <div class="app-feature">
+                            <span class="app-feature-icon"><i data-lucide="zap"></i></span>
+                            One-tap charging
+                        </div>
+                        <div class="app-feature">
+                            <span class="app-feature-icon"><i data-lucide="bell"></i></span>
+                            Real-time alerts
+                        </div>
+                        <div class="app-feature">
+                            <span class="app-feature-icon"><i data-lucide="wallet"></i></span>
+                            Saved payments
+                        </div>
+                        <div class="app-feature">
+                            <span class="app-feature-icon"><i data-lucide="life-buoy"></i></span>
+                            SOS &amp; roadside help
+                        </div>
+                    </div>
+
+                    <div class="app-btns">
+                        <a href="404.html" class="app-btn">
+                            <i data-lucide="apple"></i>
+                            <span class="app-btn-text"><small>Download on the</small><strong>App Store</strong></span>
+                        </a>
+                        <a href="404.html" class="app-btn">
+                            <i data-lucide="play"></i>
+                            <span class="app-btn-text"><small>Get it on</small><strong>Google Play</strong></span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="phones" data-reveal="right">
+                    <!-- Back phone: live tracking -->
+                    <div class="phone phone-back" aria-hidden="true">
+                        <div class="phone-screen">
+                            <div class="ps-head">
+                                <span class="ps-title">Live Trip</span>
+                                <span class="live-tag" style="font-size:.5rem;padding:2px 6px">Live</span>
+                            </div>
+                            <div class="ps-map">
+                                <span class="ps-pin" style="top:30%;left:26%"></span>
+                                <span class="ps-pin" style="top:62%;left:68%;background:var(--electric-blue);box-shadow:0 0 0 4px rgba(0,200,255,.22)"></span>
+                            </div>
+                            <div class="ps-card">
+                                <div class="ps-row"><span>ETA</span><strong>8 min</strong></div>
+                                <div class="ps-row"><span>Battery</span><strong>74%</strong></div>
+                                <div class="ps-row"><span>Speed</span><strong>42 km/h</strong></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Front phone: booking -->
+                    <div class="phone" aria-label="EVRide mobile app booking screen">
+                        <div class="phone-screen">
+                            <div class="ps-head">
+                                <span class="ps-title">Book an EV</span>
+                                <i data-lucide="sliders-horizontal" style="width:12px;height:12px;color:var(--text-muted)"></i>
+                            </div>
+
+                            <div class="ps-card">
+                                <div class="ps-veh">
+                                    <img class="ps-thumb" src="assets/images/vehicles/ev-001.webp" alt="" loading="lazy" decoding="async">
+                                    <div class="ps-veh-text">
+                                        <div class="ps-row"><span>Tesla Model 3</span><strong>₹4,200</strong></div>
+                                        <div class="bar bar-sm" style="margin:6px 0"><div class="bar-fill green" style="width:86%"></div></div>
+                                        <div class="ps-row" style="margin-bottom:0"><span>86% · 412 km</span><span style="color:var(--primary)">Available</span></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="ps-card">
+                                <div class="ps-veh">
+                                    <img class="ps-thumb" src="assets/images/vehicles/ev-007.webp" alt="" loading="lazy" decoding="async">
+                                    <div class="ps-veh-text">
+                                        <div class="ps-row"><span>Kia EV6</span><strong>₹3,600</strong></div>
+                                        <div class="bar bar-sm" style="margin:6px 0"><div class="bar-fill green" style="width:71%"></div></div>
+                                        <div class="ps-row" style="margin-bottom:0"><span>71% · 502 km</span><span style="color:var(--primary)">Available</span></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="ps-map" style="min-height:76px">
+                                <span class="ps-pin" style="top:38%;left:30%"></span>
+                                <span class="ps-pin" style="top:58%;left:62%"></span>
+                            </div>
+
+                            <div class="ps-btn">Book Now</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         FAQ
+         ============================================================ -->
+    <section class="section">
+        <div class="container">
+            <div class="faq-split">
+                <div class="faq-aside" data-reveal="left">
+                    <span class="eyebrow">FAQ</span>
+                    <h2 class="section-title">Questions, answered</h2>
+                    <p class="section-sub">
+                        The things people ask most before their first electric booking.
+                    </p>
+
+                    <div class="faq-help">
+                        <div class="faq-help-icon"><i data-lucide="message-circle"></i></div>
+                        <h5 style="margin-bottom:6px">Still need help?</h5>
+                        <p style="font-size:.86rem;color:var(--text-secondary);line-height:1.7;margin-bottom:16px">
+                            Our support team answers in under two minutes, 24 hours a day.
+                        </p>
+                        <div class="flex gap-2 flex-wrap">
+                            <a href="404.html" class="btn btn-primary btn-sm">Contact support</a>
+                            <a href="404.html" class="btn btn-secondary btn-sm">All FAQs</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion" id="homeFaq" data-reveal="right"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         CTA
+         ============================================================ -->
+    <section class="section">
+        <div class="container">
+            <div class="cta-band" data-reveal="zoom">
+                <div class="cta-inner">
+                    <span class="eyebrow centered">Ready when you are</span>
+                    <h2 class="cta-title">Your first electric drive is 40% off</h2>
+                    <p class="cta-sub">
+                        Use code <strong class="text-green mono">EVRIDEFIRST</strong> at checkout and
+                        start with a full charge on us. No deposit for first-time members.
+                    </p>
+                    <div class="cta-actions">
+                        <a href="explore-evs.html" class="btn btn-primary btn-lg">
+                            <i data-lucide="zap"></i> Book Your First EV
+                        </a>
+                        <a href="404.html" class="btn btn-secondary btn-lg">
+                            Create Free Account
+                        </a>
+                    </div>
+                    <div class="cta-note">
+                        <span><i data-lucide="check"></i> No booking fee</span>
+                        <span><i data-lucide="check"></i> Free cancellation up to 24h</span>
+                        <span><i data-lucide="check"></i> Insurance included</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<div id="footerSlot"></div>
+
+<script src="assets/vendor/lucide.min.js"></script>
+<script type="module" src="js/home.js"></script>
+
+</body>
+</html>

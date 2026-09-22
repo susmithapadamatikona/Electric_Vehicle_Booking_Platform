@@ -1,0 +1,492 @@
+/* ==========================================================================
+   EVRide — animations.css
+   Motion library. Kept deliberately restrained: entrances, live-data feedback
+   and micro-interactions only. Nothing loops in the user's peripheral vision
+   except genuine live indicators.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. ENTRANCES
+   -------------------------------------------------------------------------- */
+@keyframes fadeIn      { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fadeInUp    { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
+@keyframes fadeInDown  { from { opacity: 0; transform: translateY(-26px); } to { opacity: 1; transform: none; } }
+@keyframes fadeInLeft  { from { opacity: 0; transform: translateX(-32px); } to { opacity: 1; transform: none; } }
+@keyframes fadeInRight { from { opacity: 0; transform: translateX(32px); } to { opacity: 1; transform: none; } }
+@keyframes zoomIn      { from { opacity: 0; transform: scale(0.92); } to { opacity: 1; transform: scale(1); } }
+@keyframes slideUpBig  { from { opacity: 0; transform: translateY(54px); } to { opacity: 1; transform: none; } }
+
+.anim-fade       { animation: fadeIn 700ms var(--ease-out) both; }
+.anim-up         { animation: fadeInUp 750ms var(--ease-out) both; }
+.anim-down       { animation: fadeInDown 750ms var(--ease-out) both; }
+.anim-left       { animation: fadeInLeft 800ms var(--ease-out) both; }
+.anim-right      { animation: fadeInRight 800ms var(--ease-out) both; }
+.anim-zoom       { animation: zoomIn 700ms var(--ease-out) both; }
+
+.d-1 { animation-delay: 90ms; }
+.d-2 { animation-delay: 180ms; }
+.d-3 { animation-delay: 280ms; }
+.d-4 { animation-delay: 380ms; }
+.d-5 { animation-delay: 480ms; }
+.d-6 { animation-delay: 600ms; }
+.d-7 { animation-delay: 720ms; }
+.d-8 { animation-delay: 860ms; }
+
+/* --------------------------------------------------------------------------
+   2. VEHICLE / HERO MOTION
+   -------------------------------------------------------------------------- */
+
+/* Car drives in from the right, settles */
+@keyframes driveIn {
+    0%   { opacity: 0; transform: translateX(110px) scale(0.94); }
+    60%  { opacity: 1; transform: translateX(-12px) scale(1.01); }
+    100% { opacity: 1; transform: translateX(0) scale(1); }
+}
+
+.anim-drive-in { animation: driveIn 1400ms var(--ease-out) both; }
+
+/* Gentle hover float for the hero vehicle */
+@keyframes floatEV {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-14px); }
+}
+
+.float-ev { animation: floatEV 6s ease-in-out infinite; }
+
+/* Floating cards drift at a different phase so they don't move in lockstep */
+@keyframes floatCard {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-10px); }
+}
+
+.float-card  { animation: floatCard 5s ease-in-out infinite; }
+.float-card.delay { animation-delay: 2.2s; }
+
+/* Glowing road sweep under the hero vehicle */
+@keyframes roadSweep {
+    0%   { transform: translateX(-100%) scaleX(0.6); opacity: 0; }
+    40%  { opacity: 1; }
+    100% { transform: translateX(100%) scaleX(1.3); opacity: 0; }
+}
+
+.road-sweep::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 55%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--primary), var(--electric-blue), transparent);
+    filter: blur(1px);
+    animation: roadSweep 3.4s var(--ease) infinite;
+}
+
+/* --------------------------------------------------------------------------
+   3. GRADIENT & GLOW MOTION
+   -------------------------------------------------------------------------- */
+@keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50%      { background-position: 100% 50%; }
+}
+
+.gradient-motion {
+    background-size: 200% 200%;
+    animation: gradientShift 9s ease infinite;
+}
+
+@keyframes glowPulse {
+    0%, 100% { box-shadow: 0 0 22px rgba(0, 230, 118, 0.2); }
+    50%      { box-shadow: 0 0 44px rgba(0, 230, 118, 0.42); }
+}
+
+.glow-pulse { animation: glowPulse 3.2s ease-in-out infinite; }
+
+@keyframes orbDrift {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33%      { transform: translate(28px, -22px) scale(1.06); }
+    66%      { transform: translate(-22px, 18px) scale(0.96); }
+}
+
+.orb-drift { animation: orbDrift 18s ease-in-out infinite; }
+
+/* --------------------------------------------------------------------------
+   4. BATTERY & CHARGING
+   -------------------------------------------------------------------------- */
+
+/* Charging ring — the stroke-dashoffset is set inline by JS; this animates
+   the subtle rotating highlight on top of it. */
+@keyframes ringSpin { to { transform: rotate(360deg); } }
+
+.charge-ring-spark {
+    animation: ringSpin 2.6s linear infinite;
+    transform-origin: center;
+}
+
+@keyframes chargeFlow {
+    0%   { stroke-dashoffset: 40; }
+    100% { stroke-dashoffset: 0; }
+}
+
+.charge-flow {
+    stroke-dasharray: 8 12;
+    animation: chargeFlow 900ms linear infinite;
+}
+
+@keyframes boltPulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%      { opacity: 0.55; transform: scale(1.12); }
+}
+
+.bolt-pulse { animation: boltPulse 1.7s ease-in-out infinite; }
+
+/* Energy particles rising along a charging cable */
+@keyframes energyRise {
+    0%   { transform: translateY(0) scale(0.6); opacity: 0; }
+    20%  { opacity: 1; }
+    100% { transform: translateY(-46px) scale(1.1); opacity: 0; }
+}
+
+.energy-dot {
+    animation: energyRise 1.6s ease-out infinite;
+}
+
+.energy-dot:nth-child(2) { animation-delay: 0.35s; }
+.energy-dot:nth-child(3) { animation-delay: 0.7s; }
+.energy-dot:nth-child(4) { animation-delay: 1.05s; }
+
+/* --------------------------------------------------------------------------
+   5. LIVE DATA FEEDBACK
+   -------------------------------------------------------------------------- */
+
+/* A value that just changed gets a brief green wash so the eye catches it */
+@keyframes valueFlash {
+    0%   { background: rgba(0, 230, 118, 0.22); }
+    100% { background: transparent; }
+}
+
+.flash,
+.value-flash {
+    animation: valueFlash 900ms var(--ease);
+    border-radius: 6px;
+}
+
+@keyframes countTick {
+    0%   { transform: translateY(0); }
+    40%  { transform: translateY(-4px); opacity: 0.4; }
+    100% { transform: translateY(0); }
+}
+
+.count-tick { animation: countTick 320ms var(--ease); }
+
+/* Live radar sweep, used behind "searching nearby EVs" states */
+@keyframes radarSweep { to { transform: rotate(360deg); } }
+
+.radar {
+    position: relative;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.radar::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: conic-gradient(from 0deg, transparent 0deg, rgba(0, 230, 118, 0.3) 40deg, transparent 80deg);
+    animation: radarSweep 2.6s linear infinite;
+}
+
+/* Expanding ripple rings (map markers, live pickup points) */
+@keyframes rippleOut {
+    0%   { transform: scale(0.5); opacity: 0.7; }
+    100% { transform: scale(2.4); opacity: 0; }
+}
+
+.ripple-ring {
+    position: absolute;
+    inset: 0;
+    border: 2px solid var(--primary);
+    border-radius: 50%;
+    animation: rippleOut 2.2s var(--ease) infinite;
+}
+
+.ripple-ring:nth-child(2) { animation-delay: 0.7s; }
+.ripple-ring:nth-child(3) { animation-delay: 1.4s; }
+
+/* --------------------------------------------------------------------------
+   6. BUTTON MICRO-INTERACTIONS
+   -------------------------------------------------------------------------- */
+@keyframes rippleExpand {
+    to { transform: scale(4); opacity: 0; }
+}
+
+.ripple {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    margin: -6px 0 0 -6px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    pointer-events: none;
+    animation: rippleExpand 620ms var(--ease-out) forwards;
+    z-index: 2;
+}
+
+@keyframes nudgeRight {
+    0%, 100% { transform: translateX(0); }
+    50%      { transform: translateX(4px); }
+}
+
+.btn:hover .nudge { animation: nudgeRight 700ms ease-in-out infinite; }
+
+/* --------------------------------------------------------------------------
+   7. 3D CARD HOVER
+   -------------------------------------------------------------------------- */
+.tilt {
+    transform-style: preserve-3d;
+    transition: transform var(--t-slow) var(--ease-out);
+}
+
+.tilt:hover {
+    transform: perspective(900px) rotateX(2.5deg) rotateY(-2.5deg) translateY(-6px);
+}
+
+.tilt-inner {
+    transform: translateZ(28px);
+}
+
+/* --------------------------------------------------------------------------
+   8. PROGRESS & STEPPER
+   -------------------------------------------------------------------------- */
+@keyframes stepPop {
+    0%   { transform: scale(0.6); opacity: 0; }
+    60%  { transform: scale(1.12); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.step-pop { animation: stepPop 480ms var(--ease-spring) both; }
+
+@keyframes drawLine {
+    from { transform: scaleX(0); }
+    to   { transform: scaleX(1); }
+}
+
+.draw-line {
+    transform-origin: left center;
+    animation: drawLine 900ms var(--ease-out) both;
+}
+
+/* --------------------------------------------------------------------------
+   9. MODALS / TOASTS (entrances defined here, used by style.css classes)
+   -------------------------------------------------------------------------- */
+@keyframes modalPop {
+    from { opacity: 0; transform: translateY(20px) scale(0.96); }
+    to   { opacity: 1; transform: none; }
+}
+
+@keyframes successPop {
+    0%   { transform: scale(0); opacity: 0; }
+    55%  { transform: scale(1.18); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.success-pop { animation: successPop 620ms var(--ease-spring) both; }
+
+@keyframes checkDraw {
+    to { stroke-dashoffset: 0; }
+}
+
+.check-draw {
+    stroke-dasharray: 60;
+    stroke-dashoffset: 60;
+    animation: checkDraw 600ms var(--ease-out) 320ms forwards;
+}
+
+@keyframes confettiFall {
+    0%   { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(420px) rotate(560deg); opacity: 0; }
+}
+
+.confetti {
+    position: absolute;
+    width: 8px;
+    height: 14px;
+    border-radius: 2px;
+    animation: confettiFall 2.8s var(--ease) forwards;
+}
+
+/* --------------------------------------------------------------------------
+   10. LOADING
+   -------------------------------------------------------------------------- */
+@keyframes dotBounce {
+    0%, 80%, 100% { transform: scale(0.7); opacity: 0.4; }
+    40%           { transform: scale(1); opacity: 1; }
+}
+
+.dots { display: inline-flex; gap: 5px; align-items: center; }
+
+.dots span {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--primary);
+    animation: dotBounce 1.3s ease-in-out infinite;
+}
+
+.dots span:nth-child(2) { animation-delay: 0.16s; }
+.dots span:nth-child(3) { animation-delay: 0.32s; }
+
+@keyframes progressIndeterminate {
+    0%   { transform: translateX(-100%) scaleX(0.3); }
+    50%  { transform: translateX(20%) scaleX(0.6); }
+    100% { transform: translateX(100%) scaleX(0.3); }
+}
+
+.bar-indeterminate .bar-fill {
+    width: 100% !important;
+    animation: progressIndeterminate 1.4s var(--ease) infinite;
+}
+
+/* --------------------------------------------------------------------------
+   11. MARQUEE (brand strip)
+   -------------------------------------------------------------------------- */
+@keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+}
+
+.marquee {
+    display: flex;
+    overflow: hidden;
+    mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+
+.marquee-track {
+    display: flex;
+    gap: var(--s-16);
+    align-items: center;
+    flex-shrink: 0;
+    padding-right: var(--s-16);
+    animation: marquee 34s linear infinite;
+}
+
+.marquee:hover .marquee-track { animation-play-state: paused; }
+
+/* --------------------------------------------------------------------------
+   12. PAGE TRANSITION
+   -------------------------------------------------------------------------- */
+@keyframes pageIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: none; }
+}
+
+body.is-ready main { animation: pageIn 480ms var(--ease-out) both; }
+
+/* --------------------------------------------------------------------------
+   13. ATTENTION (emergency / alerts) — used sparingly
+   -------------------------------------------------------------------------- */
+@keyframes alertPulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+    70%      { box-shadow: 0 0 0 14px rgba(239, 68, 68, 0); }
+}
+
+.alert-pulse { animation: alertPulse 2s ease-out infinite; }
+
+@keyframes shake {
+    0%, 100%      { transform: translateX(0); }
+    20%, 60%      { transform: translateX(-5px); }
+    40%, 80%      { transform: translateX(5px); }
+}
+
+.shake { animation: shake 420ms var(--ease); }
+
+/* --------------------------------------------------------------------------
+   14. REDUCED MOTION
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+    .float-ev, .float-card, .glow-pulse, .orb-drift, .gradient-motion,
+    .marquee-track, .radar::after, .ripple-ring, .charge-ring-spark,
+    .energy-dot, .bolt-pulse, .road-sweep::after, .alert-pulse {
+        animation: none !important;
+    }
+
+    .tilt:hover { transform: translateY(-4px); }
+}
+
+/* --------------------------------------------------------------------------
+   15. PAGE PRELOADER
+   Covers the gap between first paint and boot(): scripts are ES modules, so
+   they are deferred and the nav/footer inject after the page first renders.
+   Without this the user sees unstyled slots flash on every navigation.
+
+   The overlay is painted by CSS from the moment the stylesheet parses and is
+   removed once boot() sets .is-ready — with a hard timeout in JS so a script
+   error can never leave the site hidden behind it.
+   -------------------------------------------------------------------------- */
+.preloader {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-preloader);
+    display: grid;
+    place-items: center;
+    gap: 22px;
+    background: var(--primary-bg);
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 420ms var(--ease-out), visibility 0s linear 420ms;
+}
+
+body.is-ready .preloader {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.preloader-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.preloader-logo {
+    height: 46px;
+    width: auto;
+    animation: preloaderPulse 1.6s var(--ease) infinite;
+}
+
+/* Indeterminate bar — the real duration is unknown, so it sweeps rather
+   than pretending to report progress. */
+.preloader-bar {
+    width: 132px;
+    height: 3px;
+    border-radius: var(--r-full);
+    background: rgba(255, 255, 255, 0.10);
+    overflow: hidden;
+    position: relative;
+}
+
+.preloader-bar::after {
+    content: '';
+    position: absolute;
+    inset-block: 0;
+    width: 42%;
+    border-radius: inherit;
+    background: var(--electric-gradient);
+    animation: preloaderSweep 1.15s var(--ease) infinite;
+}
+
+@keyframes preloaderPulse {
+    0%, 100% { opacity: 1; }
+    50%      { opacity: 0.55; }
+}
+
+@keyframes preloaderSweep {
+    0%   { transform: translateX(-110%); }
+    100% { transform: translateX(345%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .preloader-logo { animation: none; }
+    .preloader-bar::after { animation-duration: 2.4s; }
+}
