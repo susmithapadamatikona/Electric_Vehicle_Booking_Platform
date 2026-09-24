@@ -25,7 +25,7 @@ function logoHTML(href = 'index.html') {
 
 const NAV_ITEMS = [
     { label: 'Home', href: 'index.html', nav: 'index.html' },
-    { label: 'Explore EVs', href: '404.html', nav: 'explore-evs.html,ev-details.html' },
+    { label: 'Explore EVs', href: 'explore-evs.html', nav: 'explore-evs.html,ev-details.html' },
     { label: 'Charging', href: '404.html', nav: 'charging-stations.html,charging-details.html,charging-reservation.html,charging-dashboard.html' },
     { label: 'Offers', href: '404.html', nav: 'offers.html' },
     { label: 'About', href: '404.html', nav: 'about.html,corporate.html,faq.html,support.html' },
@@ -80,7 +80,7 @@ function navHTML() {
         </div>
         <div class="drawer-body">
             <a href="index.html" class="drawer-link">Home</a>
-            <a href="404.html" class="drawer-link">Explore EVs</a>
+            <a href="explore-evs.html" class="drawer-link">Explore EVs</a>
             <a href="charging-stations.html" class="drawer-link">Charging</a>
             <a href="index.html#how-it-works" class="drawer-link">How It Works</a>
             <a href="offers.html" class="drawer-link">Offers</a>
@@ -151,7 +151,7 @@ function footerHTML() {
                 <div class="footer-col">
                     <h6>Platform</h6>
                     <ul>
-                        <li><a href="404.html">Explore EVs</a></li>
+                        <li><a href="explore-evs.html">Explore EVs</a></li>
                         <li><a href="404.html">Book an EV</a></li>
                         <li><a href="404.html">Charging Network</a></li>
                         <li><a href="404.html">Locations</a></li>
